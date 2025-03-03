@@ -5,22 +5,39 @@
 @tailwind utilities;
 
 :root {
-  --background: #00010b;
-  --foreground: #ededed;
+  --background: #ffffff;
+  --foreground: #171717;
   --appTheme: #18cb96;
 }
 
-/* @media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --appTheme: #18cb96;
   }
-} */
+}
+
 
 body {
   color: var(--foreground);
-  background: var(--background);
+  background: var(--background) !important;
   font-family: Onest, sans-serif !important;
-  font-size: 16px !important;
+  font-size: 16px;
   font-weight: 400 !important;
+}
+
+
+.clients Swiper {
+  aspect-ratio: 3/2;
+  object-fit: contain;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for Firefox */
+.scrollbar-hide {
+  scrollbar-width: none;
 }
