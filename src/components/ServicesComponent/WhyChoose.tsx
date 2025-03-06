@@ -14,15 +14,15 @@ export default function WhyChoose() {
         <div className="container mx-auto px-4 md:px-8 lg:px-16 pt-12 ">
             <Heading btnText="Why Choose" headOne="Why " headTwo="Choose "
                 headThree="DeveloperTag" />
-            <div className="bg-black min-h-screen flex flex-wrap justify-center gap-6 p-8">
+            <div className=" min-h-screen flex flex-wrap justify-center gap-6 p-8">
                 {(serData?.items ?? []).map((data, index) => (
-                    <div
+                    <div data-aos="slide-up"
                         key={index}
-                        className="bg-gray-900 text-white rounded-xl shadow-xl p-6 w-80 md:w-[300px] flex flex-col gap-3"
+                        className="bg-[#4E15BF] text-white rounded-xl shadow-xl p-6 w-80 md:w-[300px] flex flex-col gap-3"
                     >
-                        <div className="bg-gray-800 p-3 rounded-md w-fit">{data.icon}</div>
+                        <div className="bg-gray-100 text-[#4E15BF]  p-3 border rounded-lg w-fit">{data.icon}</div>
                         <h3 className="text-xl font-semibold">{data.title}</h3>
-                        <p className="text-gray-400">{data.content}</p>
+                        <p className="text-gray-200">{data.content}</p>
                     </div>
                 ))}
             </div>

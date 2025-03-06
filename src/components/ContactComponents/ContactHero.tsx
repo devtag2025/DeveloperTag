@@ -6,7 +6,7 @@ import { Spotlight } from '../ui/spotlight-new'
 
 function ContactHero() {
     return (
-        <div className="h-auto min-h-screen flex flex-col justify-center items-center rounded-md overflow-hidden relative mx-auto py-10 md:py-16 lg:py-20 xl:py-24 px-4 sm:px-6 md:px-8 bg-black/[0.96] bg-grid-white/[0.05]">
+        <div className="h-auto min-h-screen flex flex-col justify-center items-center rounded-md overflow-hidden relative mx-auto py-10 md:py-16 lg:py-20 xl:py-24 px-4 sm:px-6 md:px-8 bg-[#4E15BF]/[0.96] bg-grid-white/[0.08]">
             <Spotlight />
 
             <div className="p-4 relative z-10 w-full text-center mt-8">

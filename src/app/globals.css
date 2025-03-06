@@ -7,16 +7,16 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --appTheme: #18cb96;
+  --appTheme: #4E15BF;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
-    --appTheme: #18cb96;
+    --appTheme: #4E15BF;
   }
-}
+} */
 
 
 body {
@@ -25,6 +25,7 @@ body {
   font-family: Onest, sans-serif !important;
   font-size: 16px;
   font-weight: 400 !important;
+  overflow-x: hidden !important;
 }
 
 
@@ -40,4 +41,22 @@ body {
 /* Hide scrollbar for Firefox */
 .scrollbar-hide {
   scrollbar-width: none;
+}
+
+
+/* shimmer button */
+@keyframes shimmer {
+  0% {
+    background-position: 0% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.shimmer-bg {
+  background: linear-gradient(110deg, #4E15BF 45%, #6A28D9 55%, #4E15BF) !important;
+  background-size: 200% 100%;
+  animation: shimmer 2s linear infinite;
 }

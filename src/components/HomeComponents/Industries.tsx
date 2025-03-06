@@ -82,19 +82,19 @@ function Industries() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {/* Accordion Item 1 - Ecommerce */}
                         {industriesData.map((industry, index) => (
-                            <div key={industry.id} className="accordion-item">
+                            <div data-aos="slide-up" key={industry.id} className="accordion-item">
                                 <button
-                                    className="accordion-toggle group inline-flex items-center justify-between text-left text-lg font-normal leading-8 text-white w-full transition duration-500 hover:text-cyan-600"
+                                    className="accordion-toggle group inline-flex items-center justify-between text-left text-lg font-normal leading-8 text-[#4E15BF] w-full transition duration-500 hover:text-[#4E15BF]"
                                     onClick={() => toggleAccordion(index)}
                                 >
                                     <div className="flex items-center">
-                                        <industry.icon className="mr-3 text-cyan-500" size={24} />
-                                        <h5>{industry.name}</h5>
+                                        <industry.icon className="mr-3 text-[#4E15BF]" size={24} />
+                                        <h5 className='text-[#4E15BF]'>{industry.name}</h5>
                                     </div>
                                     {openIndex === index ? (
-                                        <Minus className="w-6 h-6 text-gray-900 transition duration-500 group-hover:text-cyan-600" />
+                                        <Minus className="w-6 h-6 text-[#4E15BF] transition duration-500 group-hover:text-[#4E15BF]" />
                                     ) : (
-                                        <Plus className="w-6 h-6 text-white transition duration-500 group-hover:text-cyan-600" />
+                                        <Plus className="w-6 h-6 text-[#4E15BF] transition duration-500 group-hover:text-[#4E15BF]" />
                                     )}
                                 </button>
                                 {openIndex === index && (
@@ -102,7 +102,7 @@ function Industries() {
                                         className="accordion-content w-full overflow-hidden pr-4 mt-2"
                                         aria-labelledby={`accordion-heading-${index}`}
                                     >
-                                        <p className="text-base text-white font-normal leading-6">
+                                        <p className="text-base text-black font-normal leading-6">
                                             {industry.content}
                                         </p>
                                     </div>

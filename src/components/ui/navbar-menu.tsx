@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { Menu as MenuIcon, X as CloseIcon } from "lucide-react"; // Mobile menu icons
@@ -29,33 +29,32 @@ export const MenuItem = ({
         <div onMouseEnter={() => setActive(item)} className="relative">
             <motion.p
                 transition={{ duration: 0.3 }}
-                className="cursor-pointer text-black hover:opacity-[0.9] dark:text-white"
+                className="cursor-pointer text-gray-800 dark:text-white font-medium text-lg hover:text-blue-500"
             >
                 {item}
             </motion.p>
             {active !== null && (
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.85, y: 10 }}
-                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                    transition={transition}
-                >
+                <AnimatePresence>
                     {active === item && children && (
-                        <div className="absolute top-[calc(100%_+_1.2rem)] left-1/2 transform -translate-x-1/2 pt-4">
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9, y: 10 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.9, y: 10 }}
+                            transition={transition}
+                            className="absolute top-full  transform -translate-x-1/2 pt-4"
+                        >
                             <motion.div
                                 transition={transition}
                                 layoutId="active"
-                                className="bg-white dark:bg-black backdrop-blur-sm rounded-2xl overflow-hidden border border-black/[0.2] dark:border-white/[0.2] shadow-xl"
+                                className="bg-white dark:bg-gray-900 backdrop-blur-md rounded-2xl overflow-hidden border border-gray-300 dark:border-gray-600 shadow-lg"
                             >
-                                <motion.div
-                                    layout
-                                    className="w-max h-full p-4"
-                                >
+                                <motion.div className="w-max h-full p-4">
                                     {children}
                                 </motion.div>
                             </motion.div>
-                        </div>
+                        </motion.div>
                     )}
-                </motion.div>
+                </AnimatePresence>
             )}
         </div>
     );
@@ -73,41 +72,54 @@ export const Menu = ({
     return (
         <nav
             onMouseLeave={() => setActive(null)}
-            className=" flex items-center justify-between bg-white dark:bg-black 
-            border border-transparent dark:border-white/[0.2] shadow-input 
-            px-6 py-4 md:px-8 md:py-4 w-full max-w-none fixed top-4 left-1/2 
-            -translate-x-1/2 rounded-full"
-
+            className="fixed top-4 left-1/2 -translate-x-1/2 flex items-center justify-between 
+            bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 shadow-lg 
+            px-6 py-2 md:px-8 md:py-3 w-full max-w-5xl rounded-full transition-all z-50"
         >
             {/* Logo */}
-            <Link href="/">
+            <Link href="/" className="flex items-center">
                 <Image
                     src="/assets/logo.jfif"
                     alt="Logo"
                     width={50}
                     height={50}
-                    className="cursor-pointer rounded-full mr-8"
+                    className="cursor-pointer rounded-full"
                 />
-
             </Link>
 
             {/* Mobile Menu Toggle */}
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="md:hidden text-black dark:text-white"
+                className="md:hidden text-gray-800 dark:text-white"
             >
                 {isOpen ? <CloseIcon size={28} /> : <MenuIcon size={28} />}
             </button>
 
-            {/* Menu Items */}
-            <div
-                className={`${isOpen ? "flex" : "hidden"} 
-                md:flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 
-                absolute md:relative top-14 md:top-auto  w-full md:w-auto 
-                bg-white dark:bg-black md:bg-transparent p-4 md:p-0 rounded-lg shadow-lg md:shadow-none transition-all `}
-            >
-                {children}
-            </div>
+            {/* Desktop Menu */}
+            <div className="hidden md:flex space-x-8">{children}</div>
+
+            {/* Mobile Fullscreen Menu */}
+            <AnimatePresence>
+                {isOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, x: "100%" }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: "100%" }}
+                        transition={{ duration: 0.3 }}
+                        className="fixed top-0 right-0 w-3/4 sm:w-1/2 h-full bg-white dark:bg-gray-900 
+                        shadow-xl z-50 flex flex-col items-center pt-16 px-6 space-y-6 md:hidden"
+                    >
+                        <button
+                            onClick={() => setIsOpen(false)}
+                            className="absolute top-6 right-6 text-gray-800 dark:text-white"
+                        >
+                            <CloseIcon size={28} />
+                        </button>
+
+                        {children}
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </nav>
     );
 };
@@ -116,7 +128,7 @@ export const HoveredLink = ({ children, ...rest }: any) => {
     return (
         <Link
             {...rest}
-            className="text-neutral-700 dark:text-neutral-200 hover:text-black"
+            className="text-gray-700 dark:text-gray-200 hover:text-blue-500 transition-colors"
         >
             {children}
         </Link>

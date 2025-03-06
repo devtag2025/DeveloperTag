@@ -4,11 +4,11 @@ import { motion } from "motion/react";
 
 export function WorldMapDemo() {
     return (
-        <div className=" dark:bg-black bg-white w-full">
+        <div data-aos="fade-up" className=" dark:bg-black bg-white w-full">
             <div className="max-w-7xl mx-auto text-center">
                 <p className="font-bold text-xl md:text-4xl dark:text-white text-black">
                     Remote{" "}
-                    <span className="text-neutral-400">
+                    <span className="text-[#4E15BF]">
                         {"Connectivity".split("").map((word, idx) => (
                             <motion.span
                                 key={idx}
@@ -22,7 +22,7 @@ export function WorldMapDemo() {
                         ))}
                     </span>
                 </p>
-                <p className="text-sm md:text-lg text-neutral-500 max-w-2xl mx-auto py-4">
+                <p className="text-sm md:text-lg text-neutral-800 max-w-2xl mx-auto py-4">
                     Break free from traditional boundaries. Work from anywhere, at the
                     comfort of your own studio apartment. Perfect for Nomads and
                     Travellers.

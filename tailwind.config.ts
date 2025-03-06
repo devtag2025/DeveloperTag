@@ -18,6 +18,10 @@ export default {
 	theme: {
 		extend: {
 			colors: {
+				appTheme: '#4E15BF',
+				shimmerStart: '#4E15BF',
+				shimmerMiddle: '#6A28D9',
+				shimmerEnd: '#4E15BF',
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				card: {
@@ -74,7 +78,7 @@ export default {
 				},
 				shimmer: {
 					from: {
-						backgroundPosition: '0 0'
+						backgroundPosition: '200 0'
 					},
 					to: {
 						backgroundPosition: '-200% 0'

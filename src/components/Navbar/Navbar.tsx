@@ -1,51 +1,139 @@
-"use client";
-import React, { useState } from "react";
-import { HoveredLink, Menu, MenuItem, } from "../ui/navbar-menu";
-import { cn } from "@/utils/cn";
-import Link from "next/link";
+"use client"
 
+import { useState, useEffect } from "react"
+import { Bars3Icon, XMarkIcon, ChevronDownIcon } from "@heroicons/react/24/outline"
+import Link from "next/link"
+import Image from "next/image"
+import "./Navbar.css"
+import Logo from "../../../public/assets/logo.png"
+import Logo2 from "../../../public/assets/logo2.png"
 
-export function Navbar({ className }: { className?: string }) {
-    const [active, setActive] = useState<string | null>(null);
+// Navigation Links
+const navigation = [
+    { name: "Home", href: "/" },
+    { name: "About Us", href: "/about-us" },
+    {
+        name: "Services",
+        href: "#",
+        dropdown: true,
+        items: [
+            { name: "Web Development", href: "/service/web-development" },
+            { name: "App Development", href: "/service/app-development" },
+            { name: "UI/UX Design", href: "/service/ui-ux-design" },
+            { name: "AI/ML Solutions", href: "/service/ai-development" },
+        ],
+    },
+    { name: "Portfolio", href: "/portfolio" },
+    { name: "Contact", href: "/contact-us" },
+]
+
+export default function Navbar() {
+    const [scrolled, setScrolled] = useState(false);
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 10);
+        };
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
     return (
-        <div className="flex mx-16 bg-white">
-            <div
-                className={cn(
-                    "fixed top-10  mx-16 z-50 flex justify-center items-center space-x-6",
-                    className
-                )}
-            >
-                {/* Logo */}
-
-                <Menu setActive={setActive}>
-
-                    <Link href={"/"}>
-                        <MenuItem setActive={setActive} active={active} item="Home"></MenuItem>
+        <nav
+            className={`navbar fixed w-full z-50 transition-all duration-300 ${mobileMenuOpen || scrolled ? "bg-white shadow-md" : "bg-transparent"
+                }`}
+        >
+            <div className="max-w-7xl mx-auto px-6 lg:px-40">
+                <div className="flex items-center justify-between h-20">
+                    {/* Logo */}
+                    <Link href="/" className="flex items-center">
+                        <Image
+                            src={scrolled || mobileMenuOpen ? Logo2 : Logo}
+                            alt="Logo"
+                            width={50}
+                            height={50}
+                            className="navlogo h-12 w-auto"
+                            priority
+                        />
                     </Link>
 
-                    <MenuItem setActive={setActive} active={active} item="Service">
-                        <div className="flex flex-col space-y-4 text-sm text-center">
-                            <HoveredLink href="/service/web-development">Web Development</HoveredLink>
-                            <HoveredLink href="/service/app-development">App Development</HoveredLink>
-                            <HoveredLink href="/service/ui-ux-design">UI/UX</HoveredLink>
-                            <HoveredLink href="/service/ai-development">AI/ML</HoveredLink>
-                        </div>
-                    </MenuItem>
+                    {/* Desktop Menu */}
+                    <div className="hidden sm:flex space-x-8">
+                        {navigation.map((item) =>
+                            item.dropdown ? (
+                                <div key={item.name} className="relative group">
+                                    <button
+                                        className={`flex items-center px-3 py-2 font-medium transition-colors duration-200 ${scrolled || mobileMenuOpen ? "text-[#4E15BF]" : "text-white"
+                                            } group-hover:text-[#4E15BF]`}
+                                    >
+                                        {item.name}
+                                        <ChevronDownIcon className="ml-1 h-4 w-4" />
+                                    </button>
+                                    {/* Dropdown Menu */}
+                                    <div className="absolute left-1/2 -translate-x-1/2 mt-2 w-56 bg-white shadow-lg rounded-md ring-1 ring-gray-200 hidden group-hover:block transition-all duration-300">
+                                        {item.items.map((subItem) => (
+                                            <Link
+                                                key={subItem.name}
+                                                href={subItem.href}
+                                                className="block px-4 py-2 text-gray-700 hover:bg-purple-100 hover:text-[#4E15BF]"
+                                            >
+                                                {subItem.name}
+                                            </Link>
+                                        ))}
+                                    </div>
+                                </div>
+                            ) : (
+                                <Link
+                                    key={item.name}
+                                    href={item.href}
+                                    className={`px-3 py-2 font-medium transition-colors duration-200 ${scrolled || mobileMenuOpen ? "text-[#4E15BF]" : "text-white"
+                                        } hover:text-purple-500`}
+                                >
+                                    {item.name}
+                                </Link>
+                            )
+                        )}
+                    </div>
 
-                    <Link href={"/about-us"}>
-                        <MenuItem setActive={setActive} active={active} item="About Us"></MenuItem>
-                    </Link>
-                    <Link href={"/portfolio"}>
-                        <MenuItem setActive={setActive} active={active} item="Portfolio"></MenuItem>
-                    </Link>
-
-
-                    <Link href={"/contact-us"}>
-                        <MenuItem setActive={setActive} active={active} item="Contact"></MenuItem>
-                    </Link>
-                </Menu>
+                    {/* Mobile Menu Button */}
+                    <button
+                        className={`sm:hidden p-2 rounded-md ${mobileMenuOpen ? "text-[#4E15BF]" : "text-white"
+                            }`}
+                        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                    >
+                        {mobileMenuOpen ? <XMarkIcon className="h-6 w-6" /> : <Bars3Icon className="h-6 w-6" />}
+                    </button>
+                </div>
             </div>
-        </div>
 
+            {/* Mobile Menu */}
+            {mobileMenuOpen && (
+                <div className="sm:hidden bg-white shadow-md rounded-b-lg px-4 pb-3">
+                    {navigation.map((item) =>
+                        item.dropdown ? (
+                            <div key={item.name} className="mt-2">
+                                <button className="w-full flex justify-between px-4 py-2 text-gray-800 hover:bg-gray-100">
+                                    {item.name}
+                                    <ChevronDownIcon className="h-5 w-5" />
+                                </button>
+                                <div className="pl-6">
+                                    {item.items.map((subItem) => (
+                                        <Link key={subItem.name} href={subItem.href} className="block py-2 text-gray-600 hover:text-purple-600">
+                                            {subItem.name}
+                                        </Link>
+                                    ))}
+                                </div>
+                            </div>
+                        ) : (
+                            <Link key={item.name} href={item.href} className="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+                                {item.name}
+                            </Link>
+                        )
+                    )}
+                </div>
+            )}
+        </nav>
     );
 }
+

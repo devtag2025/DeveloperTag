@@ -23,7 +23,7 @@ export function NewsLetter() {
         console.log("submitted");
     };
     return (
-        <div className="h-[20rem] flex flex-col justify-center  items-center px-4 mb-6 border border-x-0 border-gray-900">
+        <div className="h-[20rem] flex flex-col justify-center  items-center px-4 mb-6 border border-x-0 border-gray-400 bg-white">
 
             <Heading btnText=" Join Our Newsletter" headOne="Be the " headTwo="First "
                 headThree="to Know" />

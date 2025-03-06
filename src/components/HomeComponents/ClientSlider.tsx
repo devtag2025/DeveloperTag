@@ -11,10 +11,13 @@ import Link from "next/link";
 const images = [
     { src: "/assets/client/img.png" },
     { src: "/assets/client/img2.png" },
-    { src: "/assets/client/img3.png" },
+    { src: "/assets/client/img7.png" },
+    // { src: "/assets/client/img3.png" },
+    { src: "/assets/client/img.png" },
     { src: "/assets/client/img4.png" },
-    { src: "/assets/client/img5.png" },
-    { src: "/assets/client/img6.png" },
+    // { src: "/assets/client/img5.png" },
+    { src: "/assets/client/img2.png" },
+    // { src: "/assets/client/img6.png" },
     { src: "/assets/client/img7.png" },
 ];
 

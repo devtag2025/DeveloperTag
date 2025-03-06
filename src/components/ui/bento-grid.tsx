@@ -34,20 +34,21 @@ export const BentoGridItem = ({
 }) => {
     return (
         <div
+            data-aos="fade-up"
             className={cn(
-                "row-span-1 rounded-xl group/bento hover:shadow-xl transition duration-200 shadow-input dark:shadow-none p-4 dark:bg-black dark:border-white/[0.2] bg-white border border-transparent justify-between flex flex-col space-y-4",
+                "row-span-1 rounded-xl group/bento shadow-md hover:shadow-[0_2px_10px_rgba(78,21,191,0.2)] transition duration-200  dark:shadow-none  p-4 dark:bg-black dark:border-white/[0.2] bg-white border border-transparent justify-between flex flex-col space-y-4",
                 className
             )}
         >
             {header}
             <div className="group-hover/bento:translate-x-2 transition duration-200">
                 {icon}
-                <p className=" text-xl sm:text-xl md:text-2xl  font-normal text-neutral-600  dark:text-neutral-300">
+                <p className=" text-xl sm:text-xl md:text-2xl  font-normal text-neutral-800  dark:text-neutral-300">
                     {description}
                 </p>
                 <h3
                     className="text-sm sm:text-base md:text-base font-bold mb-2 mt-2"
-                    style={{ color: "var(--appTheme)" }}
+                    style={{ color: "#4E15BF" }}
                 >
                     {title}
                 </h3>

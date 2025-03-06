@@ -7,7 +7,7 @@ export function Testimonial() {
     console.log(testimonials); // Debugging: Ensure the array is correctly passed
 
     return (
-        <div className="w-full h-[40rem] flex flex-col antialiased bg-white dark:bg-black dark:bg-grid-white/[0.05] items-center justify-center relative overflow-x-hidden">
+        <div data-aos="fade-in" className="w-full h-[40rem] flex flex-col antialiased bg-white dark:bg-black dark:bg-grid-white/[0.05] items-center justify-center relative overflow-x-hidden">
             <InfiniteMovingCards
                 items={testimonials}
                 direction="right"

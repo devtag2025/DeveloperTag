@@ -10,7 +10,7 @@ function PortfolioSection() {
             <Heading btnText="OUR WORKS" headOne="Our " headTwo="Team Work "
                 headThree="and Talent" />
 
-            <div className="w-full max-w-6xl mx-auto p-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div data-aos="fade-up" className="w-full max-w-6xl mx-auto p-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {portfolioData.map((project, index) => (
                     project.item.previewImage && (
                         <PortfolioCard
