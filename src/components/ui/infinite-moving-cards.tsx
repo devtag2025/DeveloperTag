@@ -24,27 +24,7 @@ export const InfiniteMovingCards = ({
     const scrollerRef = React.useRef<HTMLUListElement>(null);
     const [start, setStart] = useState(false);
 
-    // ✅ Wrap addAnimation in useCallback to stabilize the function reference
-    const addAnimation = useCallback(() => {
-        if (containerRef.current && scrollerRef.current) {
-            if (!start) setStart(true); // Ensure animation starts only once
 
-            const scrollerContent = Array.from(scrollerRef.current.children);
-
-            // Avoid infinite duplication by checking for existing duplicated items
-            if (scrollerContent.length < items.length * 2) {
-                scrollerContent.forEach((item) => {
-                    const duplicatedItem = item.cloneNode(true);
-                    if (scrollerRef.current) {
-                        scrollerRef.current.appendChild(duplicatedItem);
-                    }
-                });
-            }
-
-            getDirection();
-            getSpeed();
-        }
-    }, [items.length, start]); // ✅ Dependencies
 
     const getDirection = useCallback(() => {
         if (containerRef.current) {
@@ -69,9 +49,36 @@ export const InfiniteMovingCards = ({
         }
     }, [speed]); // ✅ Dependencies
 
+
+
+    // ✅ Wrap addAnimation in useCallback to stabilize the function reference
+    const addAnimation = useCallback(() => {
+        if (containerRef.current && scrollerRef.current) {
+            if (!start) setStart(true); // Ensure animation starts only once
+
+            const scrollerContent = Array.from(scrollerRef.current.children);
+
+            // Avoid infinite duplication by checking for existing duplicated items
+            if (scrollerContent.length < items.length * 2) {
+                scrollerContent.forEach((item) => {
+                    const duplicatedItem = item.cloneNode(true);
+                    if (scrollerRef.current) {
+                        scrollerRef.current.appendChild(duplicatedItem);
+                    }
+                });
+            }
+
+            getDirection();
+            getSpeed();
+        }
+    }, [items.length, start, getDirection, getSpeed]); // ✅ Added getDirection and getSpeed
+
+
     useEffect(() => {
         addAnimation();
     }, [addAnimation]); // ✅ Fix: addAnimation added to the dependency array
+
+
 
     return (
         <div

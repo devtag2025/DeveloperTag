@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useMotionValueEvent, useScroll, motion } from "framer-motion";
 import { cn } from "@/utils/cn";
 
@@ -39,17 +39,22 @@ export const StickyScroll: React.FC<StickyScrollProps> = ({ content, contentClas
     });
 
     const backgroundColors = ["var(--slate-900)", "var(--black)", "var(--neutral-900)"];
-    const linearGradients = [
-        "linear-gradient(to bottom right, var(--cyan-500), var(--emerald-500))",
-        "linear-gradient(to bottom right, var(--pink-500), var(--indigo-500))",
-        "linear-gradient(to bottom right, var(--orange-500), var(--yellow-500))",
-    ];
+
+    // ✅ Memoized linearGradients using useMemo to prevent recreation on every render
+    const linearGradients = useMemo(
+        () => [
+            "linear-gradient(to bottom right, var(--cyan-500), var(--emerald-500))",
+            "linear-gradient(to bottom right, var(--pink-500), var(--indigo-500))",
+            "linear-gradient(to bottom right, var(--orange-500), var(--yellow-500))",
+        ],
+        []
+    );
 
     const [backgroundGradient, setBackgroundGradient] = useState(linearGradients[0]);
 
     useEffect(() => {
         setBackgroundGradient(linearGradients[activeCard % linearGradients.length]);
-    }, [activeCard, linearGradients]); // ✅ Added missing dependency
+    }, [activeCard, linearGradients]); // ✅ Now linearGradients is stable and won't trigger extra renders.
 
     return (
         <motion.div
