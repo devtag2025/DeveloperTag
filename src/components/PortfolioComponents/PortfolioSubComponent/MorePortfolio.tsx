@@ -1,12 +1,11 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Autoplay } from "swiper/modules";
 import Heading from "@/common/Heading";
-import pic from "../../../public/test.png";
 import { portfolioData } from "@/db/PortfolioData";
 import { PortfolioCard } from "../PortfolioCard";
 

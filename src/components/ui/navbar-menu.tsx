@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Link from "next/link";
+import Link, { LinkProps } from "next/link";
 import Image from "next/image";
 import { Menu as MenuIcon, X as CloseIcon } from "lucide-react"; // Mobile menu icons
 
@@ -124,7 +124,11 @@ export const Menu = ({
     );
 };
 
-export const HoveredLink = ({ children, ...rest }: any) => {
+
+export const HoveredLink = ({
+    children,
+    ...rest
+}: LinkProps & React.AnchorHTMLAttributes<HTMLAnchorElement>) => { // ✅ Proper type definition
     return (
         <Link
             {...rest}
@@ -134,3 +138,4 @@ export const HoveredLink = ({ children, ...rest }: any) => {
         </Link>
     );
 };
+

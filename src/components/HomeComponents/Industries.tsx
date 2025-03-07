@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import "./FAQ.css";
 import Heading from '@/common/Heading';
 import {
-    ShoppingBag, Heart, Plane, Utensils, Phone, GraduationCap, Clock, Gamepad, Rocket, Banknote,
+    ShoppingBag, Heart, Plane, Utensils, GraduationCap, Clock, Gamepad, Rocket, Banknote,
     Minus, Plus
 } from 'lucide-react';
 
@@ -68,11 +68,12 @@ function Industries() {
 
 
 
-    const [openIndex, setOpenIndex] = useState(null);
+    const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-    const toggleAccordion = (index: any) => {
+    const toggleAccordion = (index: number) => {
         setOpenIndex(openIndex === index ? null : index);
     };
+
 
     return (
         <div className='container mx-auto px-4 md:px-8 lg:px-16 py-12'>

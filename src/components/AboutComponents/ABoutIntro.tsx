@@ -1,22 +1,23 @@
-"use client"
-import React from 'react'
-import abt from "../../../public/pic.jpg"
+"use client";
+import React from 'react';
+import abt from "../../../public/pic.jpg";
 import Image from 'next/image';
 
 function AboutIntro() {
     return (
-        <section className="py-24 relative xl:mr-0 lg:mr-5 mr-0" >
-            <div className="w-full max-w-7xl px-4 md:px-5 lg:px-5 mx-auto" id='about'>
+        <section className="py-24 relative xl:mr-0 lg:mr-5 mr-0">
+            <div className="w-full max-w-7xl px-4 md:px-5 lg:px-5 mx-auto" id="about">
                 <div className="w-full justify-start items-center xl:gap-12 gap-10 grid lg:grid-cols-2 grid-cols-1">
                     <div className="w-full flex-col justify-center lg:items-start items-center gap-10 inline-flex">
                         <div className="w-full flex-col justify-center items-start gap-8 flex">
                             <div className="flex-col justify-start lg:items-start items-center gap-4 flex">
                                 <div className="w-full flex-col justify-start lg:items-start items-center gap-3 flex">
                                     <h1 data-aos="fade-right" className="my-8 text-4xl font-bold text-black">
-                                        What is  <span style={{ color: "#4E15BF" }}>DeveloperTag?</span> an introduction
+                                        What is <span style={{ color: "#4E15BF" }}>DeveloperTag?</span> an introduction
                                     </h1>
+                                    {/* ✅ Fixed by using &rsquo; for apostrophes */}
                                     <p data-aos="fade-in" className="text-black text-base font-light leading-relaxed lg:text-start text-center">
-                                        At DeveloperTag, we’re a team of passionate developers, designers, and tech enthusiasts dedicated to building cutting-edge digital solutions. With 50+ successful collaborations, we specialize in software development, mobile apps, e-commerce platforms, and intuitive design, delivering solutions that set new industry benchmarks. Our mission is to lead in software development and consulting by constantly innovating, experimenting, and staying ahead of trends. Whether you're a startup, mid-sized business, or enterprise, we believe in partnerships that drive mutual success—helping you build, scale, and thrive in the digital world. Let’s create something amazing together!
+                                        At DeveloperTag, we&rsquo;re a team of passionate developers, designers, and tech enthusiasts dedicated to building cutting-edge digital solutions. With 50+ successful collaborations, we specialize in software development, mobile apps, e-commerce platforms, and intuitive design, delivering solutions that set new industry benchmarks. Our mission is to lead in software development and consulting by constantly innovating, experimenting, and staying ahead of trends. Whether you&rsquo;re a startup, mid-sized business, or enterprise, we believe in partnerships that drive mutual success—helping you build, scale, and thrive in the digital world. Let&rsquo;s create something amazing together!
                                     </p>
                                 </div>
                             </div>
@@ -50,13 +51,10 @@ function AboutIntro() {
                                     </div>
                                 </div>
                             </div>
-
-
                         </div>
-
                     </div>
                     <div className="w-full lg:justify-start justify-center items-start flex">
-                        <div className="sm:w-[564px] w-full sm:h-[646px] h-full  rounded-3xl sm:border border-gray-500 relative">
+                        <div className="sm:w-[564px] w-full sm:h-[646px] h-full rounded-3xl sm:border border-gray-500 relative">
                             <Image
                                 className="sm:mt-5 sm:ml-5 w-full h-full rounded-3xl object-cover"
                                 src={abt}
@@ -66,13 +64,12 @@ function AboutIntro() {
                                 height={500} // Adjust height as needed
                                 layout="responsive" // Ensures responsiveness
                             />
-
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-    )
+    );
 }
 
 export default AboutIntro;

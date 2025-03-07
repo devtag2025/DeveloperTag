@@ -20,7 +20,7 @@ function PortfolioSubSection() {
     }
 
 
-    const { title, tagLine, projectScope, techStack, previewImage, websiteDemo, mobileDemo, adminPanelImage } = project.item;
+    const { title, projectScope, techStack, previewImage, mobileDemo, adminPanelImage } = project.item;
 
     return (
         <div className="container  mx-auto  py-12">

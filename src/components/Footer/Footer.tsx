@@ -2,7 +2,7 @@
 import ShimmerButton from '@/common/ShimmerButton';
 import Link from 'next/link';
 import React from 'react';
-import { FaFacebook, FaTwitter, FaLinkedin, FaInstagram, FaYoutube } from 'react-icons/fa';
+import { FaFacebook, FaLinkedin, FaInstagram, FaYoutube } from 'react-icons/fa';
 
 function Footer() {
     return (

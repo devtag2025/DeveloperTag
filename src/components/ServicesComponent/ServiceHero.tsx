@@ -1,10 +1,8 @@
 "use client"
-import Link from 'next/link'
 import React from 'react'
 import { Spotlight } from '../ui/spotlight-new'
 import { usePathname } from 'next/navigation';
 import { servicesHeroData } from '@/db/ServiceData';
-import Image from 'next/image';
 import ShimmerButton from '@/common/ShimmerButton';
 
 function ServiceHero() {

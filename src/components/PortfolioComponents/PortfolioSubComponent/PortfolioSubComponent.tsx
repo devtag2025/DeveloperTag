@@ -1,6 +1,5 @@
 "use client"
 import { Spotlight } from '@/components/ui/spotlight-new';
-import Link from 'next/link';
 import React from 'react';
 import { portfolioData } from "@/db/PortfolioData";
 import { usePathname } from 'next/navigation';

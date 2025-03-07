@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import React from 'react';
 import { FaLinkedin } from 'react-icons/fa';
 
@@ -6,7 +6,7 @@ import { FaLinkedin } from 'react-icons/fa';
 interface ProfileCardProps {
     name: string;
     title: string;
-    imageUrl: any;
+    imageUrl: StaticImageData | string; // ✅ Proper Type
     linkedInUrl: string;
 }
 
@@ -16,14 +16,14 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ name, title, imageUrl, linked
     const lastName = nameParts.length > 1 ? nameParts[nameParts.length - 1] : '';
 
     return (
-        <div data-aos="fade-in" className="flex flex-col items-center max-w-xs p-6  rounded-lg ">
+        <div data-aos="fade-in" className="flex flex-col items-center max-w-xs p-6 rounded-lg">
             <div className="w-full mb-6">
                 <Image
                     src={imageUrl || "/api/placeholder/400/400"}
                     alt={name}
                     width={500}
                     height={500}
-                    className="w-full h-auto rounded-md "
+                    className="w-full h-auto rounded-md"
                 />
             </div>
 

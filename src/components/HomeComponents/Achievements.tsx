@@ -1,5 +1,4 @@
-import Heading from "@/common/Heading";
-import Link from "next/link";
+
 
 const Achievements = () => {
     return (

@@ -1,20 +1,20 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
-
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Autoplay } from "swiper/modules";
 import Heading from "@/common/Heading";
 import pic from "../../../public/test.png";
 import ProfileCard from "./TeamCard";
+import { StaticImageData } from "next/image"; // ✅ Import StaticImageData
 
 interface TeamMember {
     id: number;
     name: string;
     title: string;
     linkedIn: string;
-    img: any;
+    img: StaticImageData; // ✅ Use StaticImageData instead of any
 }
 
 function Team() {
@@ -26,9 +26,6 @@ function Team() {
         { id: 5, name: "Daniyal Sohail", title: "MERN STACK DEV", linkedIn: "https://www.linkedin.com/in/daniyalsohail169/", img: pic },
         { id: 6, name: "Daniyal Sohail", title: "MERN STACK DEV", linkedIn: "https://www.linkedin.com/in/daniyalsohail169/", img: pic },
     ];
-
-
-
 
     return (
         <div className="container mx-auto px-4 md:px-8 lg:px-16 py-12">
@@ -49,17 +46,13 @@ function Team() {
                         768: { slidesPerView: 3 },
                         1050: { slidesPerView: 3 },
                     }}
-
-
                 >
-                    {teamData.map((data, index) => (
-                        <SwiperSlide key={index} className="flex justify-center">
+                    {teamData.map((data) => (
+                        <SwiperSlide key={data.id} className="flex justify-center">
                             <ProfileCard name={data.name} title={data.title} imageUrl={data.img} linkedInUrl={data.linkedIn} />
                         </SwiperSlide>
                     ))}
                 </Swiper>
-
-
             </div>
         </div>
     );

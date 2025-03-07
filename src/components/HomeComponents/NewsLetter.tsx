@@ -2,7 +2,6 @@
 
 import Heading from "@/common/Heading";
 import { PlaceholdersAndVanishInput } from "@/components/ui/placeholders-and-vanish-input";
-import Link from "next/link";
 
 export function NewsLetter() {
     const placeholders = [

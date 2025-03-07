@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/utils/cn";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 
 export const InfiniteMovingCards = ({
     items,
@@ -24,11 +24,8 @@ export const InfiniteMovingCards = ({
     const scrollerRef = React.useRef<HTMLUListElement>(null);
     const [start, setStart] = useState(false);
 
-    useEffect(() => {
-        addAnimation();
-    }, []);
-
-    function addAnimation() {
+    // ✅ Wrap addAnimation in useCallback to stabilize the function reference
+    const addAnimation = useCallback(() => {
         if (containerRef.current && scrollerRef.current) {
             if (!start) setStart(true); // Ensure animation starts only once
 
@@ -47,18 +44,18 @@ export const InfiniteMovingCards = ({
             getDirection();
             getSpeed();
         }
-    }
+    }, [items.length, start]); // ✅ Dependencies
 
-    const getDirection = () => {
+    const getDirection = useCallback(() => {
         if (containerRef.current) {
             containerRef.current.style.setProperty(
                 "--animation-direction",
                 direction === "left" ? "forwards" : "reverse"
             );
         }
-    };
+    }, [direction]); // ✅ Dependencies
 
-    const getSpeed = () => {
+    const getSpeed = useCallback(() => {
         if (containerRef.current) {
             const speedMap: Record<string, string> = {
                 fast: "20s",
@@ -70,7 +67,11 @@ export const InfiniteMovingCards = ({
                 speedMap[speed] || "40s" // Default to normal speed
             );
         }
-    };
+    }, [speed]); // ✅ Dependencies
+
+    useEffect(() => {
+        addAnimation();
+    }, [addAnimation]); // ✅ Fix: addAnimation added to the dependency array
 
     return (
         <div
@@ -95,7 +96,6 @@ export const InfiniteMovingCards = ({
                       border-slate-700 px-8 py-6 md:w-[450px] 
                       bg-gradient-to-b from-[#4E15BF] to-[#3B0C91]"
                     >
-
                         <blockquote>
                             <span className="relative z-20 text-sm leading-[1.6] text-gray-100 font-normal">
                                 {item.quote}

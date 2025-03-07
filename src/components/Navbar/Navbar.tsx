@@ -71,17 +71,18 @@ export default function Navbar() {
                                         <ChevronDownIcon className="ml-1 h-4 w-4" />
                                     </button>
                                     {/* Dropdown Menu */}
-                                    <div className="absolute left-1/2 -translate-x-1/2 mt-2 w-56 bg-white shadow-lg rounded-md ring-1 ring-gray-200 hidden group-hover:block transition-all duration-300">
+                                    <div className="absolute left-1/2 -translate-x-1/2 mt-1 w-56 bg-white shadow-xl rounded-xl ring-1 ring-gray-300 opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 group-hover:translate-y-1 transition-all duration-300 ease-in-out">
                                         {item.items.map((subItem) => (
                                             <Link
                                                 key={subItem.name}
                                                 href={subItem.href}
-                                                className="block px-4 py-2 text-gray-700 hover:bg-purple-100 hover:text-[#4E15BF]"
+                                                className="block px-4 py-2 text-gray-700 font-medium hover:bg-gradient-to-r from-purple-100 to-purple-300 hover:text-[#4E15BF]  transition-all duration-200 ease-in-out transform hover:scale-105 rounded-xl"
                                             >
                                                 {subItem.name}
                                             </Link>
                                         ))}
                                     </div>
+
                                 </div>
                             ) : (
                                 <Link

@@ -1,4 +1,3 @@
-import { IconH1 } from "@tabler/icons-react";
 
 interface HeadingProps {
     btnText: string;
