@@ -1,3 +1,4 @@
+import ShimmerButton from "@/common/ShimmerButton";
 
 
 const Achievements = () => {
@@ -16,8 +17,16 @@ const Achievements = () => {
                     data-aos="slide-up"
                     className="text-base sm:text-lg md:text-xl text-gray-800 mt-4 sm:mt-6 text-center md:text-left px-4"
                 >
-                    We take pride in empowering businesses worldwide with innovative solutions.
-                    Devsinc brings an unwavering commitment to excellence, backed by a global presence.
+                    We’re not just developers. We’re builders of dreams, partners in growth, and problem-solvers with a passion for tech. With 500+ projects under our belt and 100+ happy clients worldwide, we’ve spent the last decade helping businesses like yours go from concept to code—and beyond.
+                    .
+                </p>
+                <p
+                    data-aos="slide-up"
+                    className="text-base sm:text-lg md:text-xl text-gray-800 mt-4 sm:mt-6 text-center md:text-left px-4"
+                >
+                    Whether it’s designing pixel-perfect websites, developing high-impact mobile apps, or engineering complex ERP and CRM systems, our team fuses creativity with cutting-edge tech to bring your vision to life.
+
+                    .
                 </p>
 
 
@@ -41,6 +50,15 @@ const Achievements = () => {
                 <div data-aos="fade-left" className="text-center">
                     <h1 className="text-5xl font-bold text-[#4E15BF]">15+</h1>
                     <p className="text-gray-800 font-semibold mt-2 text-2xl">Years of Enablement Experience</p>
+                </div>
+                <div data-aos="fade-left" className="text-center">
+                    <p className="text-gray-800 font-semibold mt-2 text-2xl">Ready to turn your idea into impact?
+                    </p>
+                </div>
+                <div data-aos="fade-left" className="text-center">
+                    <div className="sm:mb-6 mt-8 sm:flex sm:justify-center">
+                        <ShimmerButton btnText={"Get a quote"} />
+                    </div>
                 </div>
             </div>
         </div>

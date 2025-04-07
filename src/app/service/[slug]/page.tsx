@@ -1,13 +1,13 @@
-import { ChooseTeam } from '@/components/ServicesComponent/ChooseTeam'
-import ServiceBox from '@/components/ServicesComponent/ServiceBox'
-import ServiceHero from '@/components/ServicesComponent/ServiceHero'
-import WhyChoose from '@/components/ServicesComponent/WhyChoose'
+import { ChooseTeam } from '@/components/ServicesSubComponent/ChooseTeam'
+import ServiceBox from '@/components/ServicesSubComponent/ServiceBox'
+import ServiceSubHero from '@/components/ServicesSubComponent/ServiceSubHero'
+import WhyChoose from '@/components/ServicesSubComponent/WhyChoose'
 import React from 'react'
 
 function page() {
     return (
         <main className="min-h-screen antialiased bg-grid-white/[0.02]">
-            <ServiceHero />
+            <ServiceSubHero />
             <WhyChoose />
             <ServiceBox />
             <ChooseTeam />

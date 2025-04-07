@@ -1,4 +1,5 @@
 import { Code, LayoutDashboard, Paintbrush, Brain, Lightbulb } from "lucide-react";
+import img from "../../public/assets/portfolio/qservMain.svg"
 
 export const servicesHeroData = [
     {
@@ -230,4 +231,51 @@ export const serviceWhyChoose = [
         ],
     },
 ];
+
+
+export const allServices = [
+    {
+        title: "Website Development",
+        tagline:
+            "Custom, responsive websites and web applications that are fast, secure, and SEO-friendly. From elegant marketing sites to complex web portals, we ensure your online presence is modern, engaging, and scalable.",
+        img: img, // replace with actual image
+    },
+    {
+        title: "Mobile App Development",
+        tagline:
+            "Intuitive iOS and Android applications built for performance and great user experience. We develop both native and cross-platform mobile apps that engage your users and expand your reach on any device.",
+        img: img,
+    },
+    {
+        title: "Desktop Software Development",
+        tagline:
+            "High-performance desktop applications for Windows, Mac, or Linux, tailored to your specific requirements. From productivity tools to specialized enterprise software, we build desktop solutions that are robust.",
+        img: img,
+    },
+    {
+        title: "CRM Solutions",
+        tagline:
+            "Custom Customer Relationship Management systems to help you stay organized and nurture customer relationships. We design CRMs that integrate with your business processes, giving your team a central platform to track leads, sales, and support with ease.",
+        img: img,
+    },
+    {
+        title: "ERP Systems",
+        tagline:
+            "End-to-end Enterprise Resource Planning solutions that streamline your operations. We develop ERP systems that tie together key business functions – like inventory, accounting, and HR – into one cohesive platform for better data visibility and efficiency.",
+        img: img,
+    },
+    {
+        title: "SaaS Platforms",
+        tagline:
+            "Scalable Software-as-a-Service applications ready for the cloud. We build multi-tenant SaaS platforms from the ground up, handling subscription management, security, and performance, so you can serve users globally with confidence.",
+        img: img,
+    },
+    {
+        title: "Blockchain Applications",
+        tagline:
+            "Next-generation software leveraging blockchain technology for security and transparency. Our team develops decentralized apps (DApps), smart contracts, and blockchain integrations that bring innovation to industries like finance, supply chain, and more.",
+        img: img,
+    },
+];
+
 

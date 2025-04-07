@@ -17,7 +17,14 @@ function AboutIntro() {
                                     </h1>
                                     {/* ✅ Fixed by using &rsquo; for apostrophes */}
                                     <p data-aos="fade-in" className="text-black text-base font-light leading-relaxed lg:text-start text-center">
-                                        At DeveloperTag, we&rsquo;re a team of passionate developers, designers, and tech enthusiasts dedicated to building cutting-edge digital solutions. With 50+ successful collaborations, we specialize in software development, mobile apps, e-commerce platforms, and intuitive design, delivering solutions that set new industry benchmarks. Our mission is to lead in software development and consulting by constantly innovating, experimenting, and staying ahead of trends. Whether you&rsquo;re a startup, mid-sized business, or enterprise, we believe in partnerships that drive mutual success—helping you build, scale, and thrive in the digital world. Let&rsquo;s create something amazing together!
+                                        What started as a spark of ambition in 2016 became a full-blown movement by 2024.
+                                        Our founder believed in two things: empowering developers and transforming the local tech landscape. That belief fueled the birth of DeveloperTag in July 2024—not just as a company, but as a community-driven mission.
+
+                                    </p>
+                                    <p data-aos="fade-in" className="text-black text-base font-light leading-relaxed lg:text-start text-center">
+                                        That November, the journey became a shared one. A like-minded friend joined with the same passion and vision, and together, they shaped DeveloperTag into a space where talent thrives, clients come first, and innovation never stops.
+                                        We’re not here for the “usual”—we’re here to make things that matter. Expect transparency, true collaboration, and a partner as committed to your success as you are.
+
                                     </p>
                                 </div>
                             </div>

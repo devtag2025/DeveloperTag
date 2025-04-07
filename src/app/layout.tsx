@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar/Navbar"
 import { NewsLetter } from "@/components/HomeComponents/NewsLetter";
 import Footer from "@/components/Footer/Footer";
 import AOSInitializer from "@/common/AOSInitializer";
+import { DataProvider } from "@/store/contextStore"
 
 
 const geistSans = Geist({
@@ -34,14 +35,16 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <AOSInitializer />
-        <div className="relative w-full flex item-center justify-center">
-          <Navbar />
-        </div>
-        {children}
+        <DataProvider>
+          <AOSInitializer />
+          <div className="relative w-full flex item-center justify-center">
+            <Navbar />
+          </div>
+          {children}
 
-        <NewsLetter />
-        <Footer />
+          <NewsLetter />
+          <Footer />
+        </DataProvider>
       </body>
     </html>
   );
