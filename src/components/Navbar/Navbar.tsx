@@ -69,16 +69,16 @@ export default function Navbar() {
                             {navigation.map((item) =>
                                 item.dropdown ? (
                                     <div key={item.name} className="relative group">
-                                        <button className={`flex items-center px-4 py-2 rounded-lg font-medium transition-all duration-300 ${scrolled || mobileMenuOpen
+                                        <Link href={item.href} className={`relative z-20 flex items-center px-4 py-2 rounded-lg font-medium transition-all duration-300 ${scrolled || mobileMenuOpen
                                             ? "text-[#13a87c] hover:text-[#13a87c] hover:bg-gray-50"
                                             : "text-[#13a87c] hover:text-[#18CB96] hover:bg-white/10"
                                             }`}>
                                             {item.name}
                                             <ChevronDownIcon className="ml-1 h-4 w-4 transition-transform group-hover:rotate-180" />
-                                        </button>
+                                        </Link>
 
                                         {/* Modern Dropdown */}
-                                        <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-1">
+                                        <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 opacity-0 invisible pointer-events-none group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto transition-all duration-300 transform group-hover:translate-y-1 z-10">
                                             <div className="bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden">
                                                 <div className="py-2">
                                                     {item.items.map((subItem) => (

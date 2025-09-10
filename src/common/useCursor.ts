@@ -41,7 +41,7 @@ const useCanvasCursor = () => {
             }
         },
         update: function () {
-            const e = this.spring;
+            let e = this.spring;
             let t = this.nodes[0];
             t.vx += (pos.x - t.x) * e;
             t.vy += (pos.y - t.y) * e;
