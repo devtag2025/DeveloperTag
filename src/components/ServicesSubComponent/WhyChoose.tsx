@@ -12,7 +12,7 @@ export default function WhyChoose() {
 
     return (
         <div className="container mx-auto px-4 md:px-8 lg:px-16 pt-12 ">
-            <Heading btnText="Why Choose" headOne="Why " headTwo="Choose "
+            <Heading headOne="Why " headTwo="Choose "
                 headThree="DeveloperTag" />
             <div className=" min-h-screen flex flex-wrap justify-center gap-6 p-8">
                 {(serData?.items ?? []).map((data, index) => (

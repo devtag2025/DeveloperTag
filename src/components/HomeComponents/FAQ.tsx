@@ -13,7 +13,7 @@
 
 //     return (
 //         <div className='container mx-auto px-4 md:px-8 lg:px-16 py-12'>
-//             <Heading btnText={"FAQ"} headOne='Frequently' headTwo='asked' headThree='questions' />
+//             <Heading headOne='Frequently' headTwo='asked' headThree='questions' />
 //             <div className="accordionCont">
 //                 <div className="mx-auto max-w-7xl ">
 

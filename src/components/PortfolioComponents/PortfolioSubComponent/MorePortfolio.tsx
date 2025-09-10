@@ -13,7 +13,7 @@ function MorePortfolio() {
 
     return (
         <div className="container mx-auto px-4 md:px-8 lg:px-16 py-12">
-            <Heading btnText="EXPLORE MORE" headOne="More" headTwo="Projects" headThree="" />
+            <Heading headOne="More" headTwo="Projects" headThree="" />
 
             <div className="w-full max-w-6xl mx-auto p-4 ">
                 <Swiper

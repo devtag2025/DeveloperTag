@@ -7,7 +7,7 @@ import { portfolioData } from '@/db/PortfolioData'
 function PortfolioSection() {
     return (
         <div className="container mx-auto px-4 md:px-8 lg:px-16 py-12">
-            <Heading btnText="OUR WORKS" headOne="Our " headTwo="Team Work "
+            <Heading headOne="Our " headTwo="Team Work "
                 headThree="and Talent" />
 
             <div data-aos="fade-up" className="w-full max-w-6xl mx-auto p-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

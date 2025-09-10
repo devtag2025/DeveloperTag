@@ -7,7 +7,7 @@ import Heading from "@/common/Heading";
 export function WhatWeValue() {
     return (
         <div className="container mx-auto px-4 md:px-8 lg:px-16 py-12">
-            <Heading btnText="Our Values" headOne="What " headTwo="We"
+            <Heading headOne="What " headTwo="We"
                 headThree="Value" />
             <ul className="grid grid-cols-1 grid-rows-none gap-4 md:grid-cols-12 md:grid-rows-3 lg:gap-4 xl:max-h-[34rem] xl:grid-rows-2">
                 <GridItem

@@ -95,7 +95,6 @@ export function NewsLetter() {
                 {/* Header */}
                 <div className="text-center mb-12">
                     <Heading
-                        btnText="Join Our Newsletter"
                         headOne="Stay Ahead with "
                         headTwo="Expert "
                         headThree="Insights"

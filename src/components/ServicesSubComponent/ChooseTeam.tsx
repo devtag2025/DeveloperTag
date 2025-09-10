@@ -7,7 +7,7 @@ import Heading from "@/common/Heading";
 export function ChooseTeam() {
     return (
         <div className="container mx-auto px-4 md:px-8 lg:px-16 py-12">
-            <Heading btnText="Choose Team" headOne="Choose Your Own " headTwo="Team From Our"
+            <Heading headOne="Choose Your Own " headTwo="Team From Our"
                 headThree="Available Options" />
             <ul className="grid grid-cols-1 grid-rows-none gap-4 md:grid-cols-12 md:grid-rows-3 lg:gap-4 xl:max-h-[34rem] xl:grid-rows-2">
                 <GridItem
