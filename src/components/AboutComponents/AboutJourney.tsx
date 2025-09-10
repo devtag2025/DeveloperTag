@@ -105,7 +105,7 @@ const content = [
 export function AboutJourney() {
     return (
         <div className="py-10 scrollbar-hide">
-            <Heading btnText="OUR STORY" headOne="How we" headTwo="Did" headThree="This" />
+            <Heading headOne="How we" headTwo="Did" headThree="This" />
             <StickyScroll content={content} />
         </div>
     );
