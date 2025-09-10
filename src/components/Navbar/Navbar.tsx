@@ -78,7 +78,7 @@ export default function Navbar() {
                                         </Link>
 
                                         {/* Modern Dropdown */}
-                                        <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 opacity-0 invisible pointer-events-none group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto transition-all duration-300 transform group-hover:translate-y-1 z-10">
+                                        <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-64 opacity-0 invisible pointer-events-none group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto transition-all duration-300 transform group-hover:translate-y-1 z-10">
                                             <div className="bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden">
                                                 <div className="py-2">
                                                     {item.items.map((subItem) => (
