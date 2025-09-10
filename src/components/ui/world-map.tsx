@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import DottedMap from "dotted-map";
 import Image from "next/image";
 import { useTheme } from "next-themes";
@@ -25,7 +25,7 @@ export function WorldMap({
 
     const svgMap = map.getSVG({
         radius: 0.22,
-        color: theme === "dark" ? "#FFFFFF40" : "#4E15BF",
+        color: theme === "dark" ? "#FFFFFF40" : "#13a87c",
         shape: "circle",
         backgroundColor: theme === "dark" ? "black" : "white",
     });

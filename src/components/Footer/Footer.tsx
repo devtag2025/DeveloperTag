@@ -6,93 +6,118 @@ import { FaFacebook, FaLinkedin, FaInstagram, FaYoutube } from 'react-icons/fa';
 
 function Footer() {
     return (
-        <footer className="w-full ">
+        <footer className="w-full bg-gray-50 border-t border-gray-200">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 {/* Grid */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-8 py-10 max-sm:max-w-sm max-sm:mx-auto gap-y-8">
-                    <div className="col-span-full mb-10 lg:col-span-2 lg:mb-0">
-                        <Link href="https://pagedone.io/" className="flex justify-center lg:justify-start">
-                            Logo here
+                <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-6 md:gap-8 py-12 max-sm:max-w-sm max-sm:mx-auto">
+                    <div className="col-span-full mb-6 lg:col-span-2 lg:mb-0">
+                        <Link href="/" className="flex justify-center lg:justify-start mb-6">
+                            <div className="flex items-center space-x-3">
+                                <div className="w-10 h-10 bg-gradient-to-r from-[#13a87c] to-[#18CB96] rounded-lg flex items-center justify-center">
+                                    <span className="text-white font-bold text-lg">DT</span>
+                                </div>
+                                <span className="text-2xl font-bold text-gray-900">DeveloperTag</span>
+                            </div>
                         </Link>
-                        <p className="py-8 text-sm text-black lg:max-w-xs text-center lg:text-left">
+                        <p className="text-sm text-gray-600 lg:max-w-xs text-center lg:text-left mb-6 leading-relaxed">
                             Trusted in more than 100 countries & 5 million customers. Have any query?
                         </p>
-                        <div className=" sm:mb-6 mt-8 sm:flex  inline-block ">
+                        <div className="flex justify-center lg:justify-start">
                             <ShimmerButton btnText={"Get A Quote"} />
                         </div>
                     </div>
+
                     {/* Company Info */}
-                    <div className="lg:mx-auto text-left">
-                        <h4 data-aos="fade-up" className="text-lg text-black font-medium mb-7">Company Info</h4>
-                        <ul className="text-sm transition-all duration-500">
-                            <li data-aos="fade-up" className="mb-6">
-                                <Link href="javascript:;" className="text-black hover:text-gray-700">Features</Link>
+                    <div className="lg:mx-auto text-center lg:text-left">
+                        <h4 className="text-lg text-gray-900 font-semibold mb-6">Company</h4>
+                        <ul className="text-sm space-y-4">
+                            <li>
+                                <Link href="/about-us" className="text-gray-600 hover:text-[#13a87c] transition-colors">About</Link>
                             </li>
-                            <li data-aos="fade-up" className="mb-6">
-                                <Link href="javascript:;" className="text-black hover:text-gray-700">About</Link>
+                            <li>
+                                <Link href="/portfolio" className="text-gray-600 hover:text-[#13a87c] transition-colors">Portfolio</Link>
                             </li>
-                            <li data-aos="fade-up" className="mb-6">
-                                <Link href="javascript:;" className="text-black hover:text-gray-700">Careers</Link>
+                            <li>
+                                <Link href="/careers" className="text-gray-600 hover:text-[#13a87c] transition-colors">Careers</Link>
                             </li>
-                            <li data-aos="fade-up" className="mb-6">
-                                <Link href="javascript:;" className="text-black hover:text-gray-700">Contact</Link>
+                            <li>
+                                <Link href="/contact-us" className="text-gray-600 hover:text-[#13a87c] transition-colors">Contact</Link>
                             </li>
                         </ul>
                     </div>
+
+                    {/* Services */}
+                    <div className="lg:mx-auto text-center lg:text-left">
+                        <h4 className="text-lg text-gray-900 font-semibold mb-6">Services</h4>
+                        <ul className="text-sm space-y-4">
+                            <li>
+                                <Link href="/service/web-development" className="text-gray-600 hover:text-[#13a87c] transition-colors">Web Development</Link>
+                            </li>
+                            <li>
+                                <Link href="/service/app-development" className="text-gray-600 hover:text-[#13a87c] transition-colors">App Development</Link>
+                            </li>
+                            <li>
+                                <Link href="/service/ui-ux-design" className="text-gray-600 hover:text-[#13a87c] transition-colors">UI/UX Design</Link>
+                            </li>
+                            <li>
+                                <Link href="/service/ai-development" className="text-gray-600 hover:text-[#13a87c] transition-colors">AI Solutions</Link>
+                            </li>
+                        </ul>
+                    </div>
+
                     {/* Resources */}
-                    <div className="lg:mx-auto text-left">
-                        <h4 data-aos="fade-up" className="text-lg text-black font-medium mb-7">Resources</h4>
-                        <ul className="text-sm transition-all duration-500">
-                            <li data-aos="fade-up" className="mb-6">
-                                <Link href="javascript:;" className="text-black hover:text-gray-700">Document</Link>
+                    <div className="lg:mx-auto text-center lg:text-left">
+                        <h4 className="text-lg text-gray-900 font-semibold mb-6">Resources</h4>
+                        <ul className="text-sm space-y-4">
+                            <li>
+                                <Link href="/documentation" className="text-gray-600 hover:text-[#13a87c] transition-colors">Documentation</Link>
                             </li>
-                            <li data-aos="fade-up" className="mb-6">
-                                <Link href="javascript:;" className="text-black hover:text-gray-700">API</Link>
+                            <li>
+                                <Link href="/api" className="text-gray-600 hover:text-[#13a87c] transition-colors">API</Link>
                             </li>
-                            <li data-aos="fade-up" className="mb-6">
-                                <Link href="javascript:;" className="text-black hover:text-gray-700">Resources</Link>
+                            <li>
+                                <Link href="/support" className="text-gray-600 hover:text-[#13a87c] transition-colors">Support</Link>
                             </li>
                         </ul>
                     </div>
+
                     {/* Legal */}
-                    <div className="lg:mx-auto text-left">
-                        <h4 data-aos="fade-up" className="text-lg text-black font-medium mb-7">Legal</h4>
-                        <ul className="text-sm transition-all duration-500">
-                            <li data-aos="fade-up" className="mb-6">
-                                <Link href="javascript:;" className="text-black hover:text-gray-700">Terms of Service</Link>
+                    <div className="lg:mx-auto text-center lg:text-left">
+                        <h4 className="text-lg text-gray-900 font-semibold mb-6">Legal</h4>
+                        <ul className="text-sm space-y-4">
+                            <li>
+                                <Link href="/terms-of-service" className="text-gray-600 hover:text-[#13a87c] transition-colors">Terms of Service</Link>
                             </li>
-                            <li data-aos="fade-up" className="mb-6">
-                                <Link href="javascript:;" className="text-black hover:text-gray-700">Privacy Policy</Link>
+                            <li>
+                                <Link href="/privacy-policy" className="text-gray-600 hover:text-[#13a87c] transition-colors">Privacy Policy</Link>
                             </li>
                         </ul>
                     </div>
                 </div>
+
                 {/* Footer Bottom */}
-                <div className="py-7 border-t border-gray-200">
-                    <div className="flex items-center justify-center flex-col lg:justify-between lg:flex-row">
-                        <span className="text-sm text-black">
-                            © <Link href="https://pagedone.io/" className="hover:underline"></Link> 2025 DeveloperTag, All rights reserved.
+                <div className="py-6 border-t border-gray-200">
+                    <div className="flex items-center justify-center flex-col lg:justify-between lg:flex-row space-y-4 lg:space-y-0">
+                        <span className="text-sm text-gray-600">
+                            © 2025 DeveloperTag, All rights reserved.
                         </span>
-                        <div className="flex mt-4 space-x-4 sm:justify-center lg:mt-0">
-                            <Link href="javascript:;" className="w-9 h-9 rounded-full bg-[#4E15BF] flex justify-center items-center ">
-                                <FaFacebook size={22} color="white" />
+                        <div className="flex space-x-4">
+                            <Link href="#" className="w-9 h-9 rounded-full bg-[#13a87c] flex justify-center items-center hover:bg-[#0f8a6b] transition-colors">
+                                <FaFacebook size={18} color="white" />
                             </Link>
-                            <Link href="javascript:;" className="w-9 h-9 rounded-full bg-[#4E15BF] flex justify-center items-center ">
-                                <FaYoutube size={22} color="white" />
+                            <Link href="#" className="w-9 h-9 rounded-full bg-[#13a87c] flex justify-center items-center hover:bg-[#0f8a6b] transition-colors">
+                                <FaYoutube size={18} color="white" />
                             </Link>
-                            <Link href="javascript:;" className="w-9 h-9 rounded-full bg-[#4E15BF] flex justify-center items-center ">
-                                <FaLinkedin size={22} color="white" />
+                            <Link href="#" className="w-9 h-9 rounded-full bg-[#13a87c] flex justify-center items-center hover:bg-[#0f8a6b] transition-colors">
+                                <FaLinkedin size={18} color="white" />
                             </Link>
-                            <Link href="javascript:;" className="w-9 h-9 rounded-full bg-[#4E15BF] flex justify-center items-center ">
-                                <FaInstagram size={22} color="white" />
+                            <Link href="#" className="w-9 h-9 rounded-full bg-[#13a87c] flex justify-center items-center hover:bg-[#0f8a6b] transition-colors">
+                                <FaInstagram size={18} color="white" />
                             </Link>
                         </div>
                     </div>
-
                 </div>
-
             </div>
-
         </footer>
     );
 }

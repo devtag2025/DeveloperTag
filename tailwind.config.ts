@@ -14,14 +14,15 @@ export default {
 		"./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
 		"./src/components/**/*.{js,ts,jsx,tsx,mdx}",
 		"./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+		"./src/common/**/*.{js,ts,jsx,tsx,mdx}",
 	],
 	theme: {
 		extend: {
 			colors: {
-				appTheme: '#4E15BF',
-				shimmerStart: '#4E15BF',
+				appTheme: '#13a87c',
+				shimmerStart: '#13a87c',
 				shimmerMiddle: '#6A28D9',
-				shimmerEnd: '#4E15BF',
+				shimmerEnd: '#13a87c',
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				card: {

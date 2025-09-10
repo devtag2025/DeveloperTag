@@ -1,6 +1,6 @@
 "use client";
 import { WorldMap } from "@/components/ui/world-map";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 
 export function WorldMapDemo() {
     return (
@@ -8,7 +8,7 @@ export function WorldMapDemo() {
             <div className="max-w-7xl mx-auto text-center">
                 <p className="font-bold text-xl md:text-4xl dark:text-white text-black">
                     Remote{" "}
-                    <span className="text-[#4E15BF]">
+                    <span className="text-[#13a87c]">
                         {"Connectivity".split("").map((word, idx) => (
                             <motion.span
                                 key={idx}

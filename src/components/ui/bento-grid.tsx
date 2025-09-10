@@ -48,7 +48,7 @@ export const BentoGridItem = ({
                 </p>
                 <h3
                     className="text-sm sm:text-base md:text-base font-bold mb-2 mt-2"
-                    style={{ color: "#4E15BF" }}
+                    style={{ color: "#13a87c" }}
                 >
                     {title}
                 </h3>

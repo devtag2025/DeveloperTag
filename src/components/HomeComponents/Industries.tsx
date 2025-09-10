@@ -77,7 +77,7 @@ function Industries() {
 
     return (
         <div className='container mx-auto px-4 md:px-8 lg:px-16 py-12'>
-            <Heading btnText={"INDUSTRIES"} headOne='Industries' headTwo='we' headThree='serve' />
+            <Heading headOne='Industries' headTwo='we' headThree='serve' />
             <div className="accordionCont">
                 <div className="mx-auto max-w-7xl">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -85,17 +85,17 @@ function Industries() {
                         {industriesData.map((industry, index) => (
                             <div data-aos="slide-up" key={industry.id} className="accordion-item">
                                 <button
-                                    className="accordion-toggle group inline-flex items-center justify-between text-left text-lg font-normal leading-8 text-[#4E15BF] w-full transition duration-500 hover:text-[#4E15BF]"
+                                    className="accordion-toggle group inline-flex items-center justify-between text-left text-lg font-normal leading-8 text-[#13a87c] w-full transition duration-500 hover:text-[#18CB96]"
                                     onClick={() => toggleAccordion(index)}
                                 >
                                     <div className="flex items-center">
-                                        <industry.icon className="mr-3 text-[#4E15BF]" size={24} />
-                                        <h5 className='text-[#4E15BF]'>{industry.name}</h5>
+                                        <industry.icon className="mr-3 text-[#13a87c]" size={24} />
+                                        <h5 className='text-[#13a87c]'>{industry.name}</h5>
                                     </div>
                                     {openIndex === index ? (
-                                        <Minus className="w-6 h-6 text-[#4E15BF] transition duration-500 group-hover:text-[#4E15BF]" />
+                                        <Minus className="w-6 h-6 text-[#13a87c] transition duration-500 group-hover:text-[#13a87c]" />
                                     ) : (
-                                        <Plus className="w-6 h-6 text-[#4E15BF] transition duration-500 group-hover:text-[#4E15BF]" />
+                                        <Plus className="w-6 h-6 text-[#13a87c] transition duration-500 group-hover:text-[#13a87c]" />
                                     )}
                                 </button>
                                 {openIndex === index && (

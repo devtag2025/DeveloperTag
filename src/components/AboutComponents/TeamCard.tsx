@@ -29,13 +29,13 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ name, title, imageUrl, linked
 
             <div className="text-4xl font-bold mb-2 text-center">
                 <span className="text-black">{firstName} </span>
-                {lastName && <span className="text-[#4E15BF]">{lastName}</span>}
+                {lastName && <span className="text-[#13a87c]">{lastName}</span>}
             </div>
 
             <div className="text-xl text-gray-800 mb-4">{title}</div>
 
             <div className="mt-2">
-                <a href={linkedInUrl} target="_blank" rel="noopener noreferrer" className="text-gray-800 hover:text-[#4E15BF]">
+                <a href={linkedInUrl} target="_blank" rel="noopener noreferrer" className="text-gray-800 hover:text-[#13a87c]">
                     <FaLinkedin size={24} />
                 </a>
             </div>

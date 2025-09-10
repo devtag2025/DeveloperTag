@@ -19,6 +19,7 @@ function AllServices() {
                             title={project.title}
                             tagline={project.tagline}
                             imageUrl={project.img}
+                            themeFlag={true}
                         />
                     )
                 ))}

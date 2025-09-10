@@ -1,10 +1,10 @@
 import ClientsSlider from "@/components/HomeComponents/ClientSlider";
 import HeroSection from "@/components/HomeComponents/HeroSection";
 import { HomeService } from "@/components/HomeComponents/HomeService";
-import { Testimonial } from "@/components/HomeComponents/Testimonial";
 // import FAQ from "@/components/HomeComponents/FAQ";
 import IndustriesWeServe from "@/components/HomeComponents/Industries";
 import Achievements from "@/components/HomeComponents/Achievements";
+import Testimonials from "@/components/HomeComponents/Testimonial";
 
 export default function Home() {
   return (
@@ -12,10 +12,10 @@ export default function Home() {
       <main className="min-h-screen antialiased  bg-grid-white/[0.02]">
         <HeroSection />
         <ClientsSlider />
-        <HomeService />
         <IndustriesWeServe />
+        <HomeService />
         <Achievements />
-        <Testimonial />
+        <Testimonials />
         {/* <FAQ /> */}
 
 

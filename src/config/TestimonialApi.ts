@@ -1,17 +1,19 @@
 import API from "./AxiosConfig";
 
 // Fetch all testimonials
-export const getTestimonials = async (): Promise<any> => {
+type TestimonialsResponse = unknown;
+export const getTestimonials = async (): Promise<TestimonialsResponse> => {
     try {
         const response = await API.get("/testimonials");
         return response.data;
-    } catch (error: any) {
+    } catch (error: unknown) {
+        const err = error as { response?: { data?: { message?: string } }; message?: string };
         console.error(
             "Error fetching testimonials:",
-            error.response?.data || error.message
+            err.response?.data || err.message
         );
         throw new Error(
-            error.response?.data?.message || "Failed to load testimonials."
+            err.response?.data?.message || "Failed to load testimonials."
         );
     }
 };

@@ -18,9 +18,9 @@ export default function WhyChoose() {
                 {(serData?.items ?? []).map((data, index) => (
                     <div data-aos="slide-up"
                         key={index}
-                        className="bg-[#4E15BF] text-white rounded-xl shadow-xl p-6 w-80 md:w-[300px] flex flex-col gap-3"
+                        className="bg-[#13a87c] text-white rounded-xl shadow-xl p-6 w-80 md:w-[300px] flex flex-col gap-3"
                     >
-                        <div className="bg-gray-100 text-[#4E15BF]  p-3 border rounded-lg w-fit">{data.icon}</div>
+                        <div className="bg-gray-100 text-[#13a87c]  p-3 border rounded-lg w-fit">{data.icon}</div>
                         <h3 className="text-xl font-semibold">{data.title}</h3>
                         <p className="text-gray-200">{data.content}</p>
                     </div>

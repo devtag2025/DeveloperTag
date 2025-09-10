@@ -1,46 +1,90 @@
-"use client"
-import React from 'react'
-import { Spotlight } from '../ui/spotlight-new'
-import ShimmerButton from '@/common/ShimmerButton';
-import { usePortfolio, useTestimonial } from '@/store/contextStore';
+import Button from "@/common/Button";
+import { cn } from "@/lib/utils";
+import { Spotlight } from "../ui/spotlight-new";
 
-
-function HeroSection() {
-    const test = useTestimonial()
-    const port = usePortfolio()
-    console.log("Testimonial data issssssss :", test)
-    console.log("Portfolio data issssssss :", port)
+const HeroSection = () => {
     return (
-        <div className="h-auto min-h-screen flex flex-col justify-center items-center rounded-md overflow-hidden relative mx-auto py-10 md:py-16 lg:py-20 xl:py-24 px-4 sm:px-6 md:px-8 bg-[#4E15BF]/[0.96] bg-grid-white/[0.08]">
-            {/* Video background */}
-            <div className="absolute top-0 left-0 w-full h-full z-0">
-                <video autoPlay loop muted className="w-full h-full object-cover">
-                    <source src="/assets/bg.mp4" type="video/mp4" />
-                    Your browser does not support the video tag.
-                </video>
-            </div>
+        <section className="relative w-full bg-white">
 
-            {/* Spotlight */}
-            <Spotlight />
+            <div className="w-full px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 ">
+                <div
+                    className={cn(
+                        "absolute inset-0 w-full h-full top-0",
+                        "bg-[size:80px_80px]",
+                        "bg-[linear-gradient(to_right,rgba(0,0,0,0.1)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.1)_1px,transparent_1px)]",
+                        "opacity-60 z-[1]"
+                    )}
+                />
 
-            <div className="p-4 relative z-10 w-full text-center mt-8">
-                {/* <HeroParallax products={products} /> */}
+                {/* Spotlight positioned absolutely */}
+                <div className="absolute inset-0 z-[2] pointer-events-none">
+                    <Spotlight />
+                </div>
+                <div className="max-w-7xl mx-auto">
+                    {/* Main content container */}
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center mt-12">
 
-                <h1 data-aos="fade-in" className="mt-20 md:mt-0 text-4xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400">
-                    From concept to code—and beyond.
-                </h1>
+                        {/* Left side content */}
+                        <div className="space-y-6 text-center lg:text-left">
+                            {/* Title badge */}
+                            <div className="inline-flex items-center px-4 py-2 rounded-full border border-[#13a87c] bg-[#13a87c]/5">
+                                <span className="text-sm font-medium text-[#13a87c]">
+                                    Welcome To DeveloperTag
+                                </span>
+                            </div>
 
-                <p data-aos="fade-up" className="mt-4 font-normal text-base md:text-lg text-neutral-300 max-w-2xl mx-auto">
-                    Welcome to DeveloperTag—where big ideas meet bold execution
-                </p>
+                            {/* Headline */}
+                            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
+                                Where innovative ideas meet{" "}
+                                <span className="text-[#13a87c]">Expert Development</span>
+                            </h1>
 
-                <div className="sm:mb-6 mt-8 sm:flex sm:justify-center">
-                    <ShimmerButton btnText={"Get a quote"} />
+                            {/* Description */}
+                            <p className="text-lg text-gray-600 leading-relaxed max-w-lg mx-auto lg:mx-0">
+                                Transforming innovative ideas into cutting-edge digital solutions that drive business growth and success.
+                            </p>
+
+                            {/* CTA button */}
+                            <div className="flex justify-center lg:justify-start pt-4">
+                                <Button mailto="daniyalsohaildev@gmail.com" withArrow variant="light">
+                                    Let&apos;s Start
+                                </Button>
+                            </div>
+                        </div>
+
+                        {/* Right side video */}
+                        <div className="relative">
+                            <div className="relative w-full max-w-lg mx-auto lg:max-w-none">
+                                {/* Video container */}
+                                <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-gray-100">
+                                    <video
+                                        autoPlay
+                                        loop
+                                        muted
+                                        playsInline
+                                        className="w-full h-auto object-cover"
+                                        style={{ aspectRatio: '16/10' }}
+                                    >
+                                        <source src="/assets/bg.mp4" type="video/mp4" />
+                                        Your browser does not support the video tag.
+                                    </video>
+
+                                    {/* Video overlay gradient */}
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent pointer-events-none" />
+                                </div>
+
+                                {/* Decorative elements */}
+                                <div className="absolute -top-4 -right-4 w-20 h-20 bg-[#13a87c]/10 rounded-full blur-xl" />
+                                <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-[#18CB96]/10 rounded-full blur-2xl" />
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
-        </div>
-
+        </section>
     );
-}
+};
 
 export default HeroSection;

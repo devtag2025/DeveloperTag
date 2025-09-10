@@ -2,17 +2,19 @@ import API from "./AxiosConfig";
 
 
 // Fetch all portfolios
-export const getPortfolios = async (): Promise<any> => {
+type PortfolioResponse = unknown;
+export const getPortfolios = async (): Promise<PortfolioResponse> => {
     try {
         const response = await API.get("/portfolio");
         return response.data;
-    } catch (error: any) {
+    } catch (error: unknown) {
+        const err = error as { response?: { data?: { message?: string } }; message?: string };
         console.error(
             "Error fetching portfolios:",
-            error.response?.data || error.message
+            err.response?.data || err.message
         );
         throw new Error(
-            error.response?.data?.message || "Failed to load portfolios."
+            err.response?.data?.message || "Failed to load portfolios."
         );
     }
 };

@@ -8,7 +8,7 @@ const AOSInitializer = () => {
         AOS.init();
     }, []);
 
-    return null; // This component doesn't render anything, it just runs AOS
+    return null;
 };
 
 export default AOSInitializer;

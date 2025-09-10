@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar/Navbar"
 import { NewsLetter } from "@/components/HomeComponents/NewsLetter";
 import Footer from "@/components/Footer/Footer";
 import AOSInitializer from "@/common/AOSInitializer";
+import CanvasCursor from "@/common/Cursor";
 import { DataProvider } from "@/store/contextStore"
 
 
@@ -37,6 +38,7 @@ export default function RootLayout({
       >
         <DataProvider>
           <AOSInitializer />
+          <CanvasCursor />
           <div className="relative w-full flex item-center justify-center">
             <Navbar />
           </div>

@@ -12,7 +12,7 @@ export function ContactForm() {
     };
     return (
         <div data-aos="fade-up" className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-black">
-            <h2 className="font-bold text-xl md:text-4xl mb-6" style={{ color: "#4E15BF" }}>
+            <h2 className="font-bold text-xl md:text-4xl mb-6" style={{ color: "#13a87c" }}>
                 Have a question ? Reach us out
             </h2>
 

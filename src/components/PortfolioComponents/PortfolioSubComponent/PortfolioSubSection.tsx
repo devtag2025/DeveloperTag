@@ -28,7 +28,7 @@ function PortfolioSubSection() {
             <div className='flex mb-32  px-4 md:px-8 lg:px-16'>
                 <div >
                     <h1 data-aos="fade-right" className="my-8 text-4xl  text-black">
-                        Project <span style={{ color: "#4E15BF" }}>Scope</span>
+                        Project <span style={{ color: "#13a87c" }}>Scope</span>
                     </h1>
                     <p data-aos="fade-right" className="text-lg text-gray-800  max-w-3xl pr-16">
                         {projectScope.description}
@@ -38,7 +38,7 @@ function PortfolioSubSection() {
                 {/* Tech Stack Section */}
                 <div>
                     <h1 data-aos="fade-left" className="my-8 text-4xl text-center text-black">
-                        Tech <span style={{ color: "#4E15BF" }}>Stack</span>
+                        Tech <span style={{ color: "#13a87c" }}>Stack</span>
                     </h1>
                     <div className="flex flex-col flex-wrap justify-center gap-4">
                         {techStack.map((tech, index) => (
@@ -52,7 +52,7 @@ function PortfolioSubSection() {
             {/* Static Section */}
             <div>
                 <h1 data-aos="fade-in" className="my-32 py-16 text-4xl text-center text-white bg-gray-900">
-                    Tested By <span style={{ color: "#4E15BF" }}>150k+ Concurrent Users</span> Before Deployment
+                    Tested By <span style={{ color: "#13a87c" }}>150k+ Concurrent Users</span> Before Deployment
                 </h1>
             </div>
 
@@ -60,7 +60,7 @@ function PortfolioSubSection() {
             {previewImage && (
                 <div data-aos="fade-in" className="w-full">
                     <h1 data-aos="slide-right" className="my-16 mt-32 text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-center text-black">
-                        Customer <span style={{ color: "#4E15BF" }}>App</span>
+                        Customer <span style={{ color: "#13a87c" }}>App</span>
                     </h1>
                     <Image
                         src={previewImage}
@@ -77,7 +77,7 @@ function PortfolioSubSection() {
             {mobileDemo && (
                 <div data-aos="fade-in">
                     <h1 data-aos="slide-left" className="my-16  text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-center text-black">
-                        Mobile & <span style={{ color: "#4E15BF" }}>App</span> View
+                        Mobile & <span style={{ color: "#13a87c" }}>App</span> View
                     </h1>
                     <Image src={mobileDemo} alt={`${title} Mobile Demo`} width={600} height={400} className="mx-auto rounded-lg shadow-lg" />
                 </div>
@@ -87,7 +87,7 @@ function PortfolioSubSection() {
             {adminPanelImage && (
                 <div data-aos="fade-in">
                     <h1 data-aos="slide-right" className="my-16 mt-32 text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-center text-black">
-                        Admin <span style={{ color: "#4E15BF" }}>Panel</span> View
+                        Admin <span style={{ color: "#13a87c" }}>Panel</span> View
                     </h1>
                     <Image src={adminPanelImage} alt={`${title} Admin Panel`} width={800} height={600}
                         className=" mx-auto rounded-lg shadow-lg" />

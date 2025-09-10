@@ -101,7 +101,7 @@ export const InfiniteMovingCards = ({
                         key={item.name}
                         className="w-[350px] max-w-full relative rounded-2xl border border-b-0 flex-shrink-0 
                       border-slate-700 px-8 py-6 md:w-[450px] 
-                      bg-gradient-to-b from-[#4E15BF] to-[#3B0C91]"
+                      bg-gradient-to-b from-[#13a87c] to-[#0f8a6b]"
                     >
                         <blockquote>
                             <span className="relative z-20 text-sm leading-[1.6] text-gray-100 font-normal">

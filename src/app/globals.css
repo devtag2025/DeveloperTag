@@ -7,14 +7,14 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --appTheme: #4E15BF;
+  --appTheme: #13a87c;
 }
 
 /* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
-    --appTheme: #4E15BF;
+    	--appTheme: #13a87c;
   }
 } */
 
@@ -56,7 +56,7 @@ body {
 }
 
 .shimmer-bg {
-  background: linear-gradient(110deg, #4E15BF 45%, #6A28D9 55%, #4E15BF) !important;
+  background: linear-gradient(110deg, #18CB96 45%, #18CB96 55%, #18CB96) !important;
   background-size: 200% 100%;
   animation: shimmer 2s linear infinite;
 }
