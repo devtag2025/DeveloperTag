@@ -2,6 +2,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { X, CheckCircle, XCircle, Loader2 } from 'lucide-react';
 import gsap from 'gsap';
+import { submitServiceRequest, submitQuestion, CommonForm } from "@/config/FormsApi"
 
 // Define interfaces
 interface ServiceRequestForm {
@@ -61,10 +62,10 @@ const NotificationPopup: React.FC<NotificationPopupProps> = ({ isOpen, type, tit
     const borderColor = type === 'success' ? 'border-[#13a87c]/20' : 'border-red-500/20';
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-70 z-[9999] flex items-center justify-center p-4">
+        <div className="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-sm z-[9999] flex items-center justify-center p-4">
             <div
                 ref={popupRef}
-                className={`bg-white text-gray-900 rounded-xl w-full max-w-md p-6 shadow-2xl border ${borderColor}`}
+                className={`bg-gray-50 text-gray-900 rounded-xl w-full max-w-md p-6 shadow-2xl border ${borderColor}`}
                 style={{ opacity: 0, transform: 'scale(0.9)' }}
             >
                 <div className="flex items-center mb-4">
@@ -179,13 +180,13 @@ const ContactPopup: React.FC<ContactPopupProps> = ({ isOpen, onClose }) => {
         <>
             <div
                 ref={popupOverlayRef}
-                className="fixed inset-0 bg-black z-[999] flex items-center justify-center p-4"
+                className="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-sm z-[999] flex items-center justify-center p-4"
                 onClick={closePopup}
                 style={{ opacity: 0 }}
             >
                 <div
                     ref={popupContentRef}
-                    className="bg-white text-gray-900 rounded-xl w-full max-w-md overflow-hidden shadow-2xl"
+                    className="bg-gray-50 text-gray-900 rounded-xl w-full max-w-md overflow-hidden shadow-2xl"
                     onClick={(e): void => e.stopPropagation()}
                     style={{ opacity: 0, transform: 'scale(0.9)' }}
                 >
@@ -207,7 +208,7 @@ const ContactPopup: React.FC<ContactPopupProps> = ({ isOpen, onClose }) => {
                         />
                     ) : (
                         <div className="px-6 pb-8">
-                            <h2 className="text-2xl font-bold text-center mb-6">How can we help you?</h2>
+                            <h2 className="text-2xl font-bold text-center mb-6">How can I help you?</h2>
 
                             <div className="space-y-4">
                                 <OptionButton
@@ -340,17 +341,16 @@ const RenderSelectedForm: React.FC<RenderSelectedFormProps & { showNotification:
 const ServiceRequestForm: React.FC<FormComponentProps & { showNotification: (type: 'success' | 'error', title: string, message: string) => void }> = ({ onBack, formRef, showNotification }) => {
     const services = [
         'Web Development',
-        'Mobile App Development',
+        'App Development',
+        'Video Editing',
+        'AI Solutions',
         'UI/UX Design',
-        'AI/ML Solutions',
-        'E-commerce Development',
-        'Custom Software Development',
-        'API Development & Integration',
-        'Database Design & Management',
-        'Cloud Solutions & DevOps',
-        'Digital Marketing & SEO',
-        'Maintenance & Support',
-        'Consulting & Strategy'
+        'SEO Optimization',
+        'Content Writing',
+        'Social Media Management',
+        'Graphic Design',
+        'Video Production',
+        'Digital Marketing'
     ];
 
     const [formData, setFormData] = useState({
@@ -371,16 +371,27 @@ const ServiceRequestForm: React.FC<FormComponentProps & { showNotification: (typ
         setIsSubmitting(true);
 
         try {
-            // Simulate API call
-            await new Promise(resolve => setTimeout(resolve, 1500));
+            const contactData: ServiceRequestForm = {
+                name: formData.name,
+                email: formData.email,
+                serviceType: formData.serviceType,
+                description: formData.description
+            };
 
-            showNotification(
-                'success',
-                'Service Request Sent!',
-                'Thank you for your service inquiry! We\'ll send you a detailed proposal within 1-2 hours.'
-            );
-        } catch {
-            showNotification('error', 'Submission Failed', 'Please try again.');
+            const response = await submitServiceRequest(contactData);
+
+            if (response.success) {
+                showNotification(
+                    'success',
+                    'Service Request Sent!',
+                    'Thank you for your service inquiry! We\'ll send you a detailed proposal within 1-2 hours.'
+                );
+            } else {
+                showNotification('error', 'Submission Failed', response.message || 'Please try again.');
+            }
+        } catch (error: unknown) {
+            const errorMessage = (error as { message?: string })?.message || 'An unexpected error occurred. Please try again.';
+            showNotification('error', 'Submission Failed', errorMessage);
         } finally {
             setIsSubmitting(false);
         }
@@ -438,11 +449,11 @@ const ServiceRequestForm: React.FC<FormComponentProps & { showNotification: (typ
                 </div>
 
                 <div>
-                    <label htmlFor="serviceType" className="block text-sm font-medium text-gray-700 mb-1">
+                    <label htmlFor="service" className="block text-sm font-medium text-gray-700 mb-1">
                         Service Needed
                     </label>
                     <select
-                        id="serviceType"
+                        id="service"
                         name="serviceType"
                         required
                         value={formData.serviceType}
@@ -568,16 +579,26 @@ const AskQuestionForm: React.FC<FormComponentProps & { showNotification: (type: 
         setIsSubmitting(true);
 
         try {
-            // Simulate API call
-            await new Promise(resolve => setTimeout(resolve, 1500));
+            const contactData: CommonForm = {
+                name: formData.name,
+                email: formData.email,
+                description: formData.question
+            };
 
-            showNotification(
-                'success',
-                'Question Submitted!',
-                'Thank you for your question! We\'ll get back to you within 24 hours with a detailed answer.'
-            );
-        } catch {
-            showNotification('error', 'Submission Failed', 'Please try again.');
+            const response = await submitQuestion(contactData);
+
+            if (response.success) {
+                showNotification(
+                    'success',
+                    'Question Submitted!',
+                    'Thank you for your question! I\'ll get back to you within 24 hours with a detailed answer.'
+                );
+            } else {
+                showNotification('error', 'Submission Failed', response.message || 'Please try again.');
+            }
+        } catch (error: unknown) {
+            const errorMessage = (error as { message?: string })?.message || 'An unexpected error occurred. Please try again.';
+            showNotification('error', 'Submission Failed', errorMessage);
         } finally {
             setIsSubmitting(false);
         }

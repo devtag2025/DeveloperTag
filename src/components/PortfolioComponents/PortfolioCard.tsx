@@ -9,9 +9,10 @@ interface PortfolioCardProps {
     title: string;
     tagline: string;
     imageUrl: string | StaticImageData;
+    slug: string;
 }
 
-export function PortfolioCard({ title, tagline, imageUrl }: PortfolioCardProps) {
+export function PortfolioCard({ title, tagline, imageUrl, slug }: PortfolioCardProps) {
     return (
         <CardContainer data-aos="fade-up" className="inter-var">
             <CardBody
@@ -48,10 +49,10 @@ export function PortfolioCard({ title, tagline, imageUrl }: PortfolioCardProps) 
                 {/* CTA Button */}
                 <div className="flex justify-between items-center mt-8 relative z-10">
                     <Link
-                        href={"/portfolio/qserv"}
+                        href={`/portfolio/${slug}`}
                         className="px-4 py-2 rounded-xl bg-[#13a87c] text-white text-xs font-bold hover:bg-[#0f8a6b] transition"
                     >
-                        Try now →
+                        View case study →
                     </Link>
                 </div>
             </CardBody>

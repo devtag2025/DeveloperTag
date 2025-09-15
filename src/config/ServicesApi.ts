@@ -1,12 +1,12 @@
-// testimonialApi.ts
+// serviceApi.ts
 
 import API from "./AxiosConfig";
 
-export interface Testimonial {
+export interface Service {
     _id: string;
-    content: string;
-    name: string;
     title: string;
+    description: string;
+    imageUrl: string;
     createdAt: string;
     updatedAt: string;
 }
@@ -20,10 +20,10 @@ export interface PaginationInfo {
     hasPrevPage: boolean;
 }
 
-export interface TestimonialResponse {
+export interface ServiceResponse {
     success: boolean;
     data: {
-        items: Testimonial[];
+        items: Service[];
         pagination: PaginationInfo;
     };
     message: string;
@@ -35,24 +35,24 @@ export interface ApiParams {
     search?: string;
 }
 
-export const getTestimonials = async (params?: ApiParams): Promise<TestimonialResponse> => {
+export const getServices = async (params?: ApiParams): Promise<ServiceResponse> => {
     try {
         const queryParams = new URLSearchParams();
         if (params?.page) queryParams.append('page', params.page.toString());
         if (params?.limit) queryParams.append('limit', params.limit.toString());
         if (params?.search) queryParams.append('search', params.search);
 
-        const url = `/testimonials/all-testimonial${queryParams.toString() ? `?${queryParams.toString()}` : ''}`;
+        const url = `services/${queryParams.toString() ? `?${queryParams.toString()}` : ''}`;
         const response = await API.get(url);
         return response.data;
     } catch (error: unknown) {
         const err = error as { response?: { data?: { message?: string } }; message?: string };
         console.error(
-            "Error fetching testimonials:",
+            "Error fetching services:",
             err.response?.data || err.message
         );
         throw new Error(
-            err.response?.data?.message || "Failed to load testimonials."
+            err.response?.data?.message || "Failed to load services."
         );
     }
-};
+};  

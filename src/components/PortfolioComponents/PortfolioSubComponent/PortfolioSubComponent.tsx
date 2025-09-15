@@ -1,34 +1,70 @@
 "use client"
 import { Spotlight } from '@/components/ui/spotlight-new';
-import React from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
-import { portfolioData } from "@/db/PortfolioData";
 import { usePathname } from 'next/navigation';
 import Button from '@/common/Button';
 import { cn } from "@/lib/utils";
-
-interface PortfolioData {
-    slug: string;
-    item: {
-        title: string;
-        tagLine: string;
-        projectScope: {
-            description: string;
-        };
-        techStack: string[];
-        previewImage: string;
-        websiteDemo: string;
-        mobileDemo: string;
-        adminPanelImage: string;
-    };
-}
+import { getPortfolios, PortfolioItem } from '@/config/PortfolioApi';
 
 function PortfolioSubHero() {
     const pathname = usePathname();
-    const slug = pathname.split("/").pop() ?? "";
-    const portfolioItem = portfolioData.find((data) => data.slug.endsWith(slug)) as PortfolioData | undefined;
+    const slug = useMemo(() => pathname.split("/").pop() ?? "", [pathname]);
 
-    if (!portfolioItem) {
+    const [item, setItem] = useState<PortfolioItem | null>(null);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+        let mounted = true;
+        const fetchAllUntilFound = async () => {
+            setLoading(true);
+            setError(null);
+            setItem(null);
+            try {
+                const normalizedSlug = decodeURIComponent(slug).toLowerCase();
+                let page = 1;
+                const limit = 20;
+                let found: PortfolioItem | undefined;
+                let hasNext = true;
+                let pageGuard = 0;
+                while (!found && hasNext && pageGuard < 50) {
+                    const res = await getPortfolios({ page, limit });
+                    const items = res.data.items || [];
+                    found = items.find((p) => {
+                        const s = (p.slug || "").toLowerCase();
+                        return s === normalizedSlug || s.endsWith(`/${normalizedSlug}`) || s.endsWith(normalizedSlug);
+                    });
+                    hasNext = res.data.pagination?.hasNextPage ?? false;
+                    page += 1;
+                    pageGuard += 1;
+                }
+                if (mounted) {
+                    setItem(found || null);
+                }
+            } catch (e: unknown) {
+                if (mounted) {
+                    setError(e instanceof Error ? e.message : 'Failed to load portfolio');
+                }
+            } finally {
+                if (mounted) setLoading(false);
+            }
+        };
+        fetchAllUntilFound();
+        return () => {
+            mounted = false;
+        };
+    }, [slug]);
+
+    if (loading) {
+        return (
+            <section className="relative w-full bg-white min-h-screen flex items-center justify-center">
+                <div className="text-center text-gray-600">Loading project...</div>
+            </section>
+        );
+    }
+
+    if (error || !item) {
         return (
             <section className="relative w-full bg-white min-h-screen flex items-center justify-center">
                 <div className="text-center">
@@ -74,11 +110,9 @@ function PortfolioSubHero() {
 
                             {/* Project Headline */}
                             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                                {portfolioItem.item.title.split(' ').map((word, index) => {
-                                    // Make the last word or specific keywords green
-                                    const isLastWord = index === portfolioItem.item.title.split(' ').length - 1;
+                                {item.title.split(' ').map((word, index) => {
+                                    const isLastWord = index === item.title.split(' ').length - 1;
                                     const isKeyword = ['App', 'Platform', 'System', 'Solution', 'Website'].includes(word);
-
                                     if (isLastWord || isKeyword) {
                                         return (
                                             <span key={index} className="text-[#13a87c]">
@@ -92,18 +126,18 @@ function PortfolioSubHero() {
 
                             {/* Project Description */}
                             <p className="text-lg text-gray-600 leading-relaxed max-w-lg mx-auto lg:mx-0">
-                                {portfolioItem.item.tagLine}
+                                {item.tagLine}
                             </p>
 
                             {/* Tech stack features */}
-                            {portfolioItem.item.techStack && (
+                            {item.techStack && (
                                 <div className="flex flex-wrap gap-3 justify-center lg:justify-start">
-                                    {portfolioItem.item.techStack.slice(0, 4).map((tech: string, index: number) => (
+                                    {item.techStack.slice(0, 4).map((tech, index) => (
                                         <span
                                             key={index}
                                             className="px-3 py-1 text-sm bg-gray-100 text-gray-700 rounded-full"
                                         >
-                                            {tech}
+                                            {typeof tech === 'string' ? tech : tech.tech}
                                         </span>
                                     ))}
                                 </div>
@@ -124,11 +158,11 @@ function PortfolioSubHero() {
                                 <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-[#13a87c]/10 to-[#18CB96]/20">
 
                                     {/* Project preview image */}
-                                    {portfolioItem.item.previewImage ? (
+                                    {item.previewImage ? (
                                         <div style={{ aspectRatio: '16/10' }} className="relative w-full">
                                             <Image
-                                                src={portfolioItem.item.previewImage}
-                                                alt={portfolioItem.item.title}
+                                                src={item.previewImage}
+                                                alt={item.title}
                                                 fill
                                                 className="object-cover"
                                                 sizes="(max-width: 1024px) 100vw, 600px"
@@ -150,7 +184,7 @@ function PortfolioSubHero() {
                                                     </svg>
                                                 </div>
                                                 <h3 className="text-xl font-semibold mb-2">
-                                                    {portfolioItem.item.title}
+                                                    {item.title}
                                                 </h3>
                                                 <p className="text-white/90 text-sm">
                                                     Portfolio Project

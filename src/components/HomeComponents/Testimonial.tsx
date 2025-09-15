@@ -1,79 +1,35 @@
 'use client'
 import React from 'react'
 import Heading from '@/common/Heading';
+import { useTestimonial } from '@/context/contextStore';
 
 interface Testimonial {
-    id: number;
+    id: string;
     text: string;
     name: string;
     title: string;
 }
 
-const testimonialsRow1: Testimonial[] = [
-    {
-        id: 1,
-        text: "Developer Tag built our entire e-commerce website from scratch using React and Next.js. The performance is incredible - pages load in under 2 seconds and our conversion rate increased by 35%. Their web development skills are top-notch!",
-        name: "Sarah Johnson",
-        title: "CEO, Digital Commerce Solutions"
-    },
-    {
-        id: 2,
-        text: "The custom web application Developer Tag developed for our business transformed our operations. Their full-stack development expertise with Node.js backend and modern frontend frameworks exceeded all expectations.",
-        name: "Michael Chen",
-        title: "Founder, Tech Innovations Inc"
-    },
-    {
-        id: 3,
-        text: "Developer Tag's graphic design team created our complete brand identity - logo, business cards, social media templates, and website graphics. The creative quality and attention to detail is absolutely outstanding.",
-        name: "Emily Rodriguez",
-        title: "Marketing Director, Creative Studios"
-    },
-    {
-        id: 4,
-        text: "Their video editing work is professional Hollywood-level quality. They edited our product launch video, adding stunning effects and transitions that made our brand look premium. Social media engagement tripled!",
-        name: "David Thompson",
-        title: "Content Manager, Media Productions"
-    },
-    {
-        id: 5,
-        text: "Developer Tag redesigned our entire website with modern UI/UX principles. The user experience improved dramatically, and our bounce rate dropped by 60%. Their web development and design skills are exceptional.",
-        name: "Lisa Park",
-        title: "Business Development, Innovation Hub"
-    }
-];
+// API testimonial structure based on your actual response
+interface ApiTestimonial {
+    _id: string;
+    content: string;
+    name: string;
+    title: string;
+    testimonialImg?: string;
+    createdAt: string;
+    updatedAt: string;
+}
 
-const testimonialsRow2: Testimonial[] = [
-    {
-        id: 6,
-        text: "Developer Tag developed our corporate website using modern web technologies. The responsive design works perfectly on all devices, and their attention to detail in both frontend and backend development is remarkable.",
-        name: "Robert Williams",
-        title: "Technical Lead, Software Solutions"
-    },
-    {
-        id: 7,
-        text: "Their graphic design portfolio is incredible! They created stunning posters, banners, and social media graphics for our marketing campaigns. The visual impact helped us stand out in a crowded market.",
-        name: "Amanda Foster",
-        title: "Operations Manager, Tech Ventures"
-    },
-    {
-        id: 8,
-        text: "Developer Tag's video editing transformed our raw footage into cinematic content. They added professional color grading, motion graphics, and sound design that elevated our brand to premium status.",
-        name: "James Anderson",
-        title: "Product Owner, Digital Creations"
-    },
-    {
-        id: 9,
-        text: "They built our web application with perfect architecture and clean code. The database design, API development, and frontend integration were all executed flawlessly. Highly skilled developers!",
-        name: "Maria Garcia",
-        title: "CTO, Innovation Labs"
-    },
-    {
-        id: 10,
-        text: "Developer Tag handled our complete digital presence - website development, graphic design for branding, and video content creation. Their multidisciplinary team delivered cohesive, high-quality results across all services.",
-        name: "Thomas Brown",
-        title: "Managing Director, Enterprise Solutions"
-    }
-];
+// Function to transform API testimonial to component testimonial format
+const transformApiTestimonial = (apiTestimonial: ApiTestimonial): Testimonial => {
+    return {
+        id: apiTestimonial._id,
+        text: apiTestimonial.content,
+        name: apiTestimonial.name,
+        title: apiTestimonial.title
+    };
+};
 
 const TestimonialCard: React.FC<{ testimonial: Testimonial }> = ({ testimonial }) => {
     return (
@@ -90,15 +46,89 @@ const TestimonialCard: React.FC<{ testimonial: Testimonial }> = ({ testimonial }
                 <p className="text-gray-600 text-xs">{testimonial.title}</p>
             </div>
         </div>
-
     );
 };
 
 const Testimonials = () => {
+    const testimonialData = useTestimonial();
+
+    // Show loading state while data is being fetched
+    if (!testimonialData) {
+        return (
+            <div className="section-spacing my-4" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                <div className="container-wrapper">
+                    <div className="text-center mb-16">
+                        <Heading headOne="Our service" headTwo="Clients Who Believe" headThree="In Results" />
+                    </div>
+                    <div className="flex justify-center items-center h-64">
+                        <div className="text-gray-500">Loading testimonials...</div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    // Extract testimonials from API response
+    const apiTestimonials: ApiTestimonial[] = testimonialData?.data?.items || [];
+
+    // Fallback testimonials in case API returns no data
+    const fallbackTestimonials: ApiTestimonial[] = [
+        {
+            _id: "1",
+            content: "Developer Tag built our entire e-commerce website from scratch using React and Next.js. The performance is incredible - pages load in under 2 seconds and our conversion rate increased by 35%. Their web development skills are top-notch!",
+            name: "Sarah Johnson",
+            title: "CEO, Digital Commerce Solutions",
+            createdAt: "2024-01-01T00:00:00.000Z",
+            updatedAt: "2024-01-01T00:00:00.000Z"
+        },
+        {
+            _id: "2",
+            content: "The custom web application Developer Tag developed for our business transformed our operations. Their full-stack development expertise with Node.js backend and modern frontend frameworks exceeded all expectations.",
+            name: "Michael Chen",
+            title: "Founder, Tech Innovations Inc",
+            createdAt: "2024-01-01T00:00:00.000Z",
+            updatedAt: "2024-01-01T00:00:00.000Z"
+        },
+        {
+            _id: "3",
+            content: "Developer Tag's graphic design team created our complete brand identity - logo, business cards, social media templates, and website graphics. The creative quality and attention to detail is absolutely outstanding.",
+            name: "Emily Rodriguez",
+            title: "Marketing Director, Creative Studios",
+            createdAt: "2024-01-01T00:00:00.000Z",
+            updatedAt: "2024-01-01T00:00:00.000Z"
+        },
+        {
+            _id: "4",
+            content: "Their video editing work is professional Hollywood-level quality. They edited our product launch video, adding stunning effects and transitions that made our brand look premium. Social media engagement tripled!",
+            name: "David Thompson",
+            title: "Content Manager, Media Productions",
+            createdAt: "2024-01-01T00:00:00.000Z",
+            updatedAt: "2024-01-01T00:00:00.000Z"
+        },
+        {
+            _id: "5",
+            content: "Developer Tag redesigned our entire website with modern UI/UX principles. The user experience improved dramatically, and our bounce rate dropped by 60%. Their web development and design skills are exceptional.",
+            name: "Lisa Park",
+            title: "Business Development, Innovation Hub",
+            createdAt: "2024-01-01T00:00:00.000Z",
+            updatedAt: "2024-01-01T00:00:00.000Z"
+        }
+    ];
+
+    // Use API data or fallback to static testimonials
+    const testimonialsToUse = apiTestimonials.length > 0 ? apiTestimonials : fallbackTestimonials;
+
+    // Transform testimonials to component format
+    const transformedTestimonials = apiTestimonials.map(transformApiTestimonial);
+
+    // Split testimonials into two rows for the animation
+    const midPoint = Math.ceil(transformedTestimonials.length / 2);
+    const testimonialsRow1 = transformedTestimonials.slice(0, midPoint);
+    const testimonialsRow2 = transformedTestimonials.slice(midPoint);
 
     return (
         <div
-            className="section-spacing  my-4"
+            className="section-spacing my-4"
             data-aos="fade-up"
             data-aos-duration="1000"
             data-aos-delay="200"
@@ -106,10 +136,6 @@ const Testimonials = () => {
             <div className="container-wrapper">
                 {/* Header */}
                 <div className="text-center mb-16">
-
-
-
-
                     <Heading headOne="Our service" headTwo="Clients Who Believe" headThree="In Results" />
                 </div>
 
@@ -153,39 +179,37 @@ const Testimonials = () => {
                         </div>
                     </div>
                 </div>
-
-
             </div>
 
             <style jsx>{`
-        @keyframes slide-left {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(calc(-382px * 5)); /* -(350px + 32px margin) per card × 5 cards */
-          }
-        }
+                @keyframes slide-left {
+                  0% {
+                    transform: translateX(0);
+                  }
+                  100% {
+                    transform: translateX(calc(-382px * ${testimonialsRow2.length}));
+                  }
+                }
 
-        @keyframes slide-right {
-          0% {
-            transform: translateX(calc(-382px * 5)); /* Start from left */
-          }
-          100% {
-            transform: translateX(0);
-          }
-        }
+                @keyframes slide-right {
+                  0% {
+                    transform: translateX(calc(-382px * ${testimonialsRow1.length}));
+                  }
+                  100% {
+                    transform: translateX(0);
+                  }
+                }
 
-        .animate-slide-left {
-          animation: slide-left 30s linear infinite;
-          width: calc(382px * 15); /* 382px per card × 5 cards × 3 sets */
-        }
+                .animate-slide-left {
+                  animation: slide-left 30s linear infinite;
+                  width: calc(382px * ${testimonialsRow2.length * 3});
+                }
 
-        .animate-slide-right {
-          animation: slide-right 30s linear infinite;
-          width: calc(382px * 15); /* 382px per card × 5 cards × 3 sets */
-        }
-      `}</style>
+                .animate-slide-right {
+                  animation: slide-right 30s linear infinite;
+                  width: calc(382px * ${testimonialsRow1.length * 3});
+                }
+            `}</style>
         </div>
     )
 }

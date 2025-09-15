@@ -6,7 +6,8 @@ import { NewsLetter } from "@/components/HomeComponents/NewsLetter";
 import Footer from "@/components/Footer/Footer";
 import AOSInitializer from "@/common/AOSInitializer";
 import CanvasCursor from "@/common/Cursor";
-import { DataProvider } from "@/store/contextStore"
+import { DataProvider } from "@/context/contextStore"
+import BottomBanner from "@/common/BottomBanner"
 
 
 const geistSans = Geist({
@@ -44,7 +45,8 @@ export default function RootLayout({
           </div>
           {children}
 
-          <NewsLetter />
+          {/* <NewsLetter /> */}
+          <BottomBanner />
           <Footer />
         </DataProvider>
       </body>

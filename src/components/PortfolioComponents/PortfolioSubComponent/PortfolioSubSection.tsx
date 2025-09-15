@@ -1,16 +1,61 @@
 "use client"
-import { portfolioData } from '@/db/PortfolioData';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import React from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
+import { getPortfolios, PortfolioItem } from '@/config/PortfolioApi';
 
 function PortfolioSubSection() {
     const pathname = usePathname();
-    const slug = pathname.split("/").pop() ?? "";
-    const project = portfolioData.find((data) => data.slug.endsWith(slug));
+    const slug = useMemo(() => pathname.split("/").pop() ?? "", [pathname]);
 
-    // If no project is found, show a message
-    if (!project) {
+    const [project, setProject] = useState<PortfolioItem | null>(null);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+        let mounted = true;
+        const fetchAllUntilFound = async () => {
+            setLoading(true);
+            setError(null);
+            setProject(null);
+            try {
+                const normalizedSlug = decodeURIComponent(slug).toLowerCase();
+                let page = 1;
+                const limit = 20;
+                let found: PortfolioItem | undefined;
+                let hasNext = true;
+                let pageGuard = 0;
+                while (!found && hasNext && pageGuard < 50) {
+                    const res = await getPortfolios({ page, limit });
+                    const items = res.data.items || [];
+                    found = items.find((p) => {
+                        const s = (p.slug || "").toLowerCase();
+                        return s === normalizedSlug || s.endsWith(`/${normalizedSlug}`) || s.endsWith(normalizedSlug);
+                    });
+                    hasNext = res.data.pagination?.hasNextPage ?? false;
+                    page += 1;
+                    pageGuard += 1;
+                }
+                if (mounted) setProject(found || null);
+            } catch (e: unknown) {
+                if (mounted) setError(e instanceof Error ? e.message : 'Failed to load project');
+            } finally {
+                if (mounted) setLoading(false);
+            }
+        };
+        fetchAllUntilFound();
+        return () => {
+            mounted = false;
+        };
+    }, [slug]);
+
+    if (loading) {
+        return (
+            <div className="container mx-auto px-4 md:px-8 lg:px-16 py-12 text-center text-black">Loading...</div>
+        );
+    }
+
+    if (error || !project) {
         return (
             <div className="container mx-auto px-4 md:px-8 lg:px-16 py-12 text-center text-black">
                 <h1 className="text-4xl">Project Not Found</h1>
@@ -19,8 +64,7 @@ function PortfolioSubSection() {
         );
     }
 
-
-    const { title, projectScope, techStack, previewImage, mobileDemo, adminPanelImage } = project.item;
+    const { title, projectScopeDescription, techStack, previewImage, mobileDemo, adminPanelImage } = project;
 
     return (
         <div className="container  mx-auto  py-12">
@@ -31,7 +75,7 @@ function PortfolioSubSection() {
                         Project <span style={{ color: "#13a87c" }}>Scope</span>
                     </h1>
                     <p data-aos="fade-right" className="text-lg text-gray-800  max-w-3xl pr-16">
-                        {projectScope.description}
+                        {projectScopeDescription || 'Detailed scope will be available soon.'}
                     </p>
                 </div>
 
@@ -41,9 +85,9 @@ function PortfolioSubSection() {
                         Tech <span style={{ color: "#13a87c" }}>Stack</span>
                     </h1>
                     <div className="flex flex-col flex-wrap justify-center gap-4">
-                        {techStack.map((tech, index) => (
+                        {(techStack || []).map((tech, index) => (
                             <span data-aos="slide-left" key={index} className="py-2 border-b-2 text-lg">
-                                {tech}
+                                {typeof tech === 'string' ? tech : tech.tech}
                             </span>
                         ))}
                     </div>
