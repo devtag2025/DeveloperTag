@@ -139,7 +139,7 @@ export default function ApiDocs() {
             id: 1,
             title: "Get Your API Key",
             description: "Contact us to receive your unique API key for authentication",
-            code: "Contact: adil.rafique.pro@gmail.com"
+            code: "Contact: admin@developertag.com"
         },
         {
             id: 2,
@@ -190,7 +190,7 @@ export default function ApiDocs() {
                         className="mt-8"
                     >
                         <a
-                            href="mailto:adil.rafique.pro@gmail.com?subject=API Access Request"
+                            href="mailto:admin@developertag.com?subject=API Access Request"
                             className="inline-flex items-center gap-2 bg-gradient-to-r from-[#13a87c] to-[#18CB96] text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-2xl transition-all duration-300"
                         >
                             <Key className="w-5 h-5" />
@@ -397,7 +397,7 @@ export default function ApiDocs() {
 
                         <div className="mt-8 pt-8 border-t border-gray-200">
                             <a
-                                href="mailto:adil.rafique.pro@gmail.com?subject=API Enterprise Plan"
+                                href="mailto:admin@developertag.com?subject=API Enterprise Plan"
                                 className="inline-flex items-center gap-2 bg-gradient-to-r from-[#13a87c] to-[#18CB96] text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-2xl transition-all duration-300"
                             >
                                 <Terminal className="w-5 h-5" />

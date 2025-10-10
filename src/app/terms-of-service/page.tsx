@@ -140,7 +140,7 @@ export default function TermsOfService() {
                             If you have any questions about these Terms of Service, please don&apos;t hesitate to contact us.
                         </p>
                         <a
-                            href="mailto:adil.rafique.pro@gmail.com"
+                            href="mailto:admin@developertag.com"
                             className="inline-flex items-center gap-2 bg-gradient-to-r from-[#13a87c] to-[#18CB96] text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-2xl transition-all duration-300"
                         >
                             Contact Us

@@ -158,7 +158,7 @@ export default function PrivacyPolicy() {
                             If you have questions about this Privacy Policy or how we handle your data, please contact our privacy team.
                         </p>
                         <a
-                            href="mailto:adil.rafique.pro@gmail.com"
+                            href="mailto:admin@developertag.com"
                             className="inline-flex items-center gap-2 bg-gradient-to-r from-[#13a87c] to-[#18CB96] text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-2xl transition-all duration-300"
                         >
                             Contact Privacy Team

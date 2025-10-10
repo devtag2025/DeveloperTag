@@ -54,13 +54,22 @@ function Footer() {
                                 <Link href="/service/web-development" className="text-gray-600 hover:text-[#13a87c] transition-colors">Web Development</Link>
                             </li>
                             <li>
-                                <Link href="/service/app-development" className="text-gray-600 hover:text-[#13a87c] transition-colors">App Development</Link>
+                                <Link href="/service/app-development" className="text-gray-600 hover:text-[#13a87c] transition-colors">Mobile App Development</Link>
                             </li>
                             <li>
-                                <Link href="/service/ui-ux-design" className="text-gray-600 hover:text-[#13a87c] transition-colors">UI/UX Design</Link>
+                                <Link href="/service/desktop-development" className="text-gray-600 hover:text-[#13a87c] transition-colors">Desktop Software Development</Link>
                             </li>
                             <li>
-                                <Link href="/service/ai-development" className="text-gray-600 hover:text-[#13a87c] transition-colors">AI Solutions</Link>
+                                <Link href="/service/crm-solutions" className="text-gray-600 hover:text-[#13a87c] transition-colors">CRM Solutions</Link>
+                            </li>
+                            <li>
+                                <Link href="/service/erp-systems" className="text-gray-600 hover:text-[#13a87c] transition-colors">ERP Systems</Link>
+                            </li>
+                            <li>
+                                <Link href="/service/saas-platforms" className="text-gray-600 hover:text-[#13a87c] transition-colors">SaaS Platforms</Link>
+                            </li>
+                            <li>
+                                <Link href="/service/blockchain-applications" className="text-gray-600 hover:text-[#13a87c] transition-colors">Blockchain Applications</Link>
                             </li>
                         </ul>
                     </div>

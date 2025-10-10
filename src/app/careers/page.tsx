@@ -417,7 +417,7 @@ export default function Careers() {
 
                                             <div className="pt-4">
                                                 <a
-                                                    href={`mailto:adil.rafique.pro@gmail.com?subject=Application for ${job.title}`}
+                                                    href={`mailto:admin@developertag.com?subject=Application for ${job.title}`}
                                                     className="inline-flex items-center gap-2 bg-gradient-to-r from-[#13a87c] to-[#18CB96] text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:shadow-2xl transition-all duration-300"
                                                 >
                                                     <Send className="w-4 h-4" />
@@ -450,7 +450,7 @@ export default function Careers() {
                             We&apos;re always looking for talented individuals. Send us your resume and we&apos;ll keep you in mind for future opportunities.
                         </p>
                         <a
-                            href="mailto:adil.rafique.pro@gmail.com?subject=General Application"
+                            href="mailto:admin@developertag.com?subject=General Application"
                             className="inline-flex items-center gap-2 bg-gradient-to-r from-[#13a87c] to-[#18CB96] text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-2xl transition-all duration-300"
                         >
                             <Send className="w-5 h-5" />

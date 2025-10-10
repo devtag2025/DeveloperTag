@@ -298,13 +298,13 @@ const PortfolioShowcase = () => {
                     image: "/assets/portfolio/matw.png",
                     Url: "https://matwproject.org/",
                 },
-                {
-                    name: "Shreedhar Portfolio",
-                    description: "A personal portfolio website showcasing various projects, highlighting skills and accomplishments in web development and design.",
-                    cost: "$3,000",
-                    image: "/portfolio-placeholder-8.jpg",
-                    Url: "https://www.shreedhar-portfolio.netlify.app/"
-                }
+                // {
+                //     name: "Shreedhar Portfolio",
+                //     description: "A personal portfolio website showcasing various projects, highlighting skills and accomplishments in web development and design.",
+                //     cost: "$3,000",
+                //     image: "/portfolio-placeholder-8.jpg",
+                //     Url: "https://www.shreedhar-portfolio.netlify.app/"
+                // }
             ]
         },
         {
@@ -335,28 +335,28 @@ const PortfolioShowcase = () => {
                     name: "Modomines",
                     description: "A mining and quarry management app that streamlines operations, enhances productivity, and ensures compliance within the industry.",
                     cost: "$35,000",
-                    image: "/portfolio-placeholder-11.jpg",
+                    image: "/assets/portfolio/Mobi.png",
                     Url: "https://play.google.com/store/apps/details?id=com.shreedhar_t.modomines&hl=en_US"
                 },
-                {
-                    name: "OneERP Suite",
-                    description: "An ERP software designed for businesses to manage and automate various organizational processes, improving efficiency and decision-making.",
-                    cost: "$40,000",
-                    image: "/portfolio-placeholder-12.jpg",
-                    Url: "https://apps.apple.com/in/app/oneerpsuite/id6471813104a"
-                },
+                // {
+                //     name: "OneERP Suite",
+                //     description: "An ERP software designed for businesses to manage and automate various organizational processes, improving efficiency and decision-making.",
+                //     cost: "$40,000",
+                //     image: "/portfolio-placeholder-12.jpg",
+                //     Url: "https://apps.apple.com/in/app/oneerpsuite/id6471813104a"
+                // },
                 {
                     name: "Smart Trainer",
                     description: "An AI-powered platform that acts as a virtual manager and data analyst, providing real-time quality checks, sales forecasts, and operational insights for businesses.",
                     cost: "$16,000",
-                    image: "/portfolio-placeholder-13.jpg",
+                    image: "/assets/portfolio/smartTrainer.png",
                     Url: "https://smarttrainerapp.com/"
                 },
                 {
                     name: "Xplora",
                     description: "A smartwatch and mobile app designed for children's safety, offering features like GPS tracking, safe zones, and communication tools to keep kids connected securely.",
                     cost: "$21,000",
-                    image: "/assets/portfolio/mobimgs.png",
+                    image: "/assets/portfolio/Xplora.png",
                     Url: "https://xplora.co.uk/"
                 }
             ]
@@ -581,10 +581,10 @@ const PortfolioShowcase = () => {
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                                 <a
-                                    href="mailto:adil.rafique.pro@gmail.com"
+                                    href="mailto:admin@developertag.com"
                                     className="group relative overflow-hidden bg-gradient-to-r from-[#13a87c] to-[#18CB96] text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-2xl transition-all duration-300 flex items-center gap-2"
                                 >
-                                    <span>Email: adil.rafique.pro@gmail.com</span>
+                                    <span>Email: admin@developertag.com</span>
                                     <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                                 </a>
                             </div>

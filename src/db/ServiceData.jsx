@@ -6,13 +6,43 @@ export const servicesHeroData = [
         slug: "web-development",
         heading: "Web Development",
         text: "We create responsive and high-performance websites using modern technologies like React, Next.js, and Tailwind CSS.",
-        image: "/assets/services/web-development.jpg",
+        image: "/assets/Services/web_development.webp",
     },
     {
         slug: "app-development",
         heading: "App Development",
         text: "We develop mobile applications with seamless user experiences, using frameworks like Flutter and React Native.",
-        image: "/assets/services/app-development.jpg",
+        image: "/assets/Services/App_development.jpg",
+    },
+    {
+        slug: "desktop-development",
+        heading: "Desktop Software Development",
+        text: "High-performance desktop applications for Windows, Mac, or Linux, tailored to your specific requirements. From productivity tools to specialized enterprise software.",
+        image: "/assets/Services/desktop-app.webp",
+    },
+    {
+        slug: "crm-solutions",
+        heading: "CRM Solutions",
+        text: "Custom Customer Relationship Management systems to help you stay organized and nurture customer relationships. We design CRMs that integrate with your business processes.",
+        image: "/assets/Services/crmSystem.jpg",
+    },
+    {
+        slug: "erp-systems",
+        heading: "ERP Systems",
+        text: "End-to-end Enterprise Resource Planning solutions that streamline your operations. We develop ERP systems that tie together key business functions for better efficiency.",
+        image: "/assets/Services/erpSystem.jpg",
+    },
+    {
+        slug: "saas-platforms",
+        heading: "SaaS Platforms",
+        text: "Scalable Software-as-a-Service applications ready for the cloud. We build multi-tenant SaaS platforms from the ground up, handling subscription management and security.",
+        image: "/assets/Services/SaasSystem.png",
+    },
+    {
+        slug: "blockchain-applications",
+        heading: "Blockchain Applications",
+        text: "Next-generation software leveraging blockchain technology for security and transparency. Our team develops decentralized apps, smart contracts, and blockchain integrations.",
+        image: "/assets/Services/BlockChainSystem.jpg",
     },
     {
         slug: "ui-ux-design",
@@ -101,6 +131,101 @@ export const serviceBoxData = [
                 title: "Machine Learning Solutions",
                 content:
                     "From predictive analytics to intelligent automation, we implement machine learning models to solve complex problems. Our expertise includes deep learning, recommendation systems, and AI-driven data insights. We help businesses leverage AI for data-driven decision-making, automation, and enhancing customer experiences.",
+                image: "/sev.png",
+            },
+        ],
+    },
+    {
+        slug: "/service/desktop-development",
+        items: [
+            {
+                id: 1,
+                title: "Cross-Platform Desktop Apps",
+                content:
+                    "We develop desktop applications that work seamlessly across Windows, Mac, and Linux using modern frameworks like Electron, Tauri, and .NET. Our solutions ensure consistent performance and user experience across all platforms while maintaining native-like performance and security.",
+                image: "/sev.png",
+            },
+            {
+                id: 2,
+                title: "Enterprise Desktop Solutions",
+                content:
+                    "From productivity tools to specialized enterprise software, we build robust desktop applications tailored to your business needs. Our solutions include data management systems, workflow automation tools, and custom business applications that integrate with your existing infrastructure.",
+                image: "/sev.png",
+            },
+        ],
+    },
+    {
+        slug: "/service/crm-solutions",
+        items: [
+            {
+                id: 1,
+                title: "Custom CRM Development",
+                content:
+                    "We build custom Customer Relationship Management systems tailored to your business processes. Our CRMs integrate seamlessly with your existing tools and provide a central platform for managing leads, sales, customer support, and marketing campaigns with advanced analytics and reporting.",
+                image: "/sev.png",
+            },
+            {
+                id: 2,
+                title: "CRM Integration & Migration",
+                content:
+                    "We help you migrate from legacy systems to modern CRM solutions and integrate with third-party tools like email marketing platforms, accounting software, and e-commerce systems. Our integration services ensure data consistency and workflow automation across all your business tools.",
+                image: "/sev.png",
+            },
+        ],
+    },
+    {
+        slug: "/service/erp-systems",
+        items: [
+            {
+                id: 1,
+                title: "End-to-End ERP Solutions",
+                content:
+                    "We develop comprehensive Enterprise Resource Planning systems that integrate all your business functions including inventory management, accounting, HR, sales, and customer service. Our ERP solutions provide real-time data visibility and streamline operations for better decision-making and efficiency.",
+                image: "/sev.png",
+            },
+            {
+                id: 2,
+                title: "ERP Customization & Integration",
+                content:
+                    "We customize ERP systems to match your specific business requirements and integrate with existing software and databases. Our solutions include workflow automation, custom reporting, and mobile access to ensure your team can work efficiently from anywhere.",
+                image: "/sev.png",
+            },
+        ],
+    },
+    {
+        slug: "/service/saas-platforms",
+        items: [
+            {
+                id: 1,
+                title: "Multi-Tenant SaaS Architecture",
+                content:
+                    "We build scalable Software-as-a-Service platforms with multi-tenant architecture that can serve thousands of users simultaneously. Our solutions include subscription management, user authentication, data isolation, and automated scaling to handle growing user bases efficiently.",
+                image: "/sev.png",
+            },
+            {
+                id: 2,
+                title: "Cloud-Native SaaS Development",
+                content:
+                    "We develop cloud-native SaaS applications with microservices architecture, containerization, and DevOps practices. Our platforms are built for high availability, security, and performance, with features like real-time collaboration, API integrations, and advanced analytics.",
+                image: "/sev.png",
+            },
+        ],
+    },
+    {
+        slug: "/service/blockchain-applications",
+        items: [
+            {
+                id: 1,
+                title: "Smart Contracts & DApps",
+                content:
+                    "We develop decentralized applications (DApps) and smart contracts using blockchain technology for enhanced security and transparency. Our solutions include DeFi applications, NFT marketplaces, supply chain tracking, and identity verification systems built on Ethereum, Polygon, and other blockchain networks.",
+                image: "/sev.png",
+            },
+            {
+                id: 2,
+                title: "Blockchain Integration",
+                content:
+                    "We integrate blockchain technology into existing business systems to enhance security, transparency, and trust. Our services include blockchain consulting, tokenization, cryptocurrency payment integration, and custom blockchain solutions for various industries including finance, healthcare, and logistics.",
                 image: "/sev.png",
             },
         ],
@@ -227,6 +352,156 @@ export const serviceWhyChoose = [
                 title: "App Performance Optimization",
                 icon: <Lightbulb className="text-red-400" size={24} />,
                 content: "Enhancing speed, security, and battery efficiency for a better user experience.",
+            },
+        ],
+    },
+    {
+        slug: "/service/desktop-development",
+        items: [
+            {
+                title: "Cross-Platform Development",
+                icon: <LayoutDashboard className="text-blue-400" size={24} />,
+                content: "Building desktop applications that work seamlessly across Windows, Mac, and Linux.",
+            },
+            {
+                title: "Modern Frameworks",
+                icon: <Code className="text-blue-400" size={24} />,
+                content: "Using Electron, Tauri, and .NET for high-performance desktop solutions.",
+            },
+            {
+                title: "Enterprise Solutions",
+                icon: <Brain className="text-blue-400" size={24} />,
+                content: "Developing robust business applications tailored to your specific needs.",
+            },
+            {
+                title: "System Integration",
+                icon: <Lightbulb className="text-blue-400" size={24} />,
+                content: "Integrating with existing databases, APIs, and business systems.",
+            },
+            {
+                title: "Security & Performance",
+                icon: <Paintbrush className="text-blue-400" size={24} />,
+                content: "Ensuring secure, fast, and reliable desktop applications.",
+            },
+        ],
+    },
+    {
+        slug: "/service/crm-solutions",
+        items: [
+            {
+                title: "Custom CRM Development",
+                icon: <LayoutDashboard className="text-green-400" size={24} />,
+                content: "Building tailored CRM systems that match your business processes.",
+            },
+            {
+                title: "Lead Management",
+                icon: <Brain className="text-green-400" size={24} />,
+                content: "Tracking and managing leads from initial contact to conversion.",
+            },
+            {
+                title: "Sales Automation",
+                icon: <Code className="text-green-400" size={24} />,
+                content: "Automating sales workflows and pipeline management.",
+            },
+            {
+                title: "Customer Support",
+                icon: <Lightbulb className="text-green-400" size={24} />,
+                content: "Centralized customer support and ticket management system.",
+            },
+            {
+                title: "Analytics & Reporting",
+                icon: <Paintbrush className="text-green-400" size={24} />,
+                content: "Advanced analytics and reporting for data-driven decisions.",
+            },
+        ],
+    },
+    {
+        slug: "/service/erp-systems",
+        items: [
+            {
+                title: "Business Process Integration",
+                icon: <LayoutDashboard className="text-purple-400" size={24} />,
+                content: "Integrating all business functions into one cohesive system.",
+            },
+            {
+                title: "Inventory Management",
+                icon: <Brain className="text-purple-400" size={24} />,
+                content: "Real-time inventory tracking and management solutions.",
+            },
+            {
+                title: "Financial Management",
+                icon: <Code className="text-purple-400" size={24} />,
+                content: "Comprehensive accounting and financial reporting systems.",
+            },
+            {
+                title: "HR Management",
+                icon: <Lightbulb className="text-purple-400" size={24} />,
+                content: "Employee management, payroll, and HR workflow automation.",
+            },
+            {
+                title: "Data Analytics",
+                icon: <Paintbrush className="text-purple-400" size={24} />,
+                content: "Business intelligence and analytics for informed decision-making.",
+            },
+        ],
+    },
+    {
+        slug: "/service/saas-platforms",
+        items: [
+            {
+                title: "Multi-Tenant Architecture",
+                icon: <LayoutDashboard className="text-cyan-400" size={24} />,
+                content: "Building scalable SaaS platforms that serve multiple customers efficiently.",
+            },
+            {
+                title: "Subscription Management",
+                icon: <Brain className="text-cyan-400" size={24} />,
+                content: "Automated billing, subscription handling, and payment processing.",
+            },
+            {
+                title: "Cloud-Native Development",
+                icon: <Code className="text-cyan-400" size={24} />,
+                content: "Microservices architecture with containerization and DevOps practices.",
+            },
+            {
+                title: "API Integration",
+                icon: <Lightbulb className="text-cyan-400" size={24} />,
+                content: "Seamless integration with third-party services and APIs.",
+            },
+            {
+                title: "Security & Compliance",
+                icon: <Paintbrush className="text-cyan-400" size={24} />,
+                content: "Enterprise-grade security and compliance with industry standards.",
+            },
+        ],
+    },
+    {
+        slug: "/service/blockchain-applications",
+        items: [
+            {
+                title: "Smart Contract Development",
+                icon: <LayoutDashboard className="text-orange-400" size={24} />,
+                content: "Building secure and efficient smart contracts for various use cases.",
+            },
+            {
+                title: "DApp Development",
+                icon: <Brain className="text-orange-400" size={24} />,
+                content: "Creating decentralized applications with blockchain technology.",
+            },
+            {
+                title: "DeFi Solutions",
+                icon: <Code className="text-orange-400" size={24} />,
+                content: "Developing decentralized finance applications and protocols.",
+            },
+            {
+                title: "NFT Marketplaces",
+                icon: <Lightbulb className="text-orange-400" size={24} />,
+                content: "Building NFT platforms and marketplace solutions.",
+            },
+            {
+                title: "Blockchain Integration",
+                icon: <Paintbrush className="text-orange-400" size={24} />,
+                content: "Integrating blockchain technology into existing business systems.",
             },
         ],
     },

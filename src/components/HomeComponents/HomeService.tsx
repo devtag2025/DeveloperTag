@@ -24,9 +24,9 @@ export function HomeService() {
     const staticServices = [
         {
             _id: "static-1",
-            title: "Website Development",
+            title: "Web Development",
             description: "Custom, responsive websites and web applications that are fast, secure, and SEO-friendly. From elegant marketing sites to complex web portals, we ensure your online presence is modern, engaging, and scalable.",
-            imageUrl: "/assets/Services/website_development.jpg",
+            imageUrl: "/assets/Services/web_development.webp",
             url: "/service/web-development",
             icon: Globe
         },
@@ -42,7 +42,7 @@ export function HomeService() {
             _id: "static-3",
             title: "Desktop Software Development",
             description: "High-performance desktop applications for Windows, Mac, or Linux, tailored to your specific requirements. From productivity tools to specialized enterprise software, we build desktop solutions that are robust, user-friendly, and easy to maintain.",
-            imageUrl: "/assets/Services/desktop_development.png",
+            imageUrl: "/assets/Services/desktop-app.webp",
             url: "/service/desktop-development",
             icon: Monitor
         },
@@ -50,7 +50,7 @@ export function HomeService() {
             _id: "static-4",
             title: "CRM Solutions",
             description: "Custom Customer Relationship Management systems to help you stay organized and nurture customer relationships. We design CRMs that integrate with your business processes, giving your team a central platform to track leads, sales, and support with ease.",
-            imageUrl: "/assets/Services/CRM.jpg",
+            imageUrl: "/assets/Services/crmSystem.jpg",
             url: "/service/crm-solutions",
             icon: Users
         },
@@ -58,7 +58,7 @@ export function HomeService() {
             _id: "static-5",
             title: "ERP Systems",
             description: "End-to-end Enterprise Resource Planning solutions that streamline your operations. We develop ERP systems that tie together key business functions – like inventory, accounting, and HR – into one cohesive platform for better data visibility and efficiency.",
-            imageUrl: "/assets/Services/ERP.jpg",
+            imageUrl: "/assets/Services/erpSystem.jpg",
             url: "/service/erp-systems",
             icon: Database
         },
@@ -66,7 +66,7 @@ export function HomeService() {
             _id: "static-6",
             title: "SaaS Platforms",
             description: "Scalable Software-as-a-Service applications ready for the cloud. We build multi-tenant SaaS platforms from the ground up, handling subscription management, security, and performance, so you can serve users globally with confidence.",
-            imageUrl: "/assets/Services/Saas.jpg",
+            imageUrl: "/assets/Services/SaasSystem.png",
             url: "/service/saas-platforms",
             icon: Cloud
         },
@@ -74,7 +74,7 @@ export function HomeService() {
             _id: "static-7",
             title: "Blockchain Applications",
             description: "Next-generation software leveraging blockchain technology for security and transparency. Our team develops decentralized apps (DApps), smart contracts, and blockchain integrations that bring innovation to industries like finance, supply chain, and more.",
-            imageUrl: "/assets/Services/blockChain.jpg",
+            imageUrl: "/assets/Services/BlockChainSystem.jpg",
             url: "/service/blockchain-applications",
             icon: Network
         }
@@ -202,7 +202,7 @@ export function HomeService() {
                 </motion.div>
 
                 {/* Services Grid */}
-                <div data-aos="fade-up" className="w-full max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                <div data-aos="fade-up" className="w-full max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-6 mb-12">
                     {services.map((service: ServiceType, index: number) => {
                         // For static services, use the icon from the service object
                         
@@ -218,9 +218,9 @@ export function HomeService() {
                         title={service.title}
                         tagline={service.description || 'No description'}
                         imageUrl={getSecureImageUrl(service?.imageUrl || '')}
-                                    url={service.url}
+                        url={service.url}
                         themeFlag={false}
-                        onGetQuote={() => setSelectedServiceTitle(service.title)}
+                        onGetQuote={service.url ? undefined : () => setSelectedServiceTitle(service.title)}
                     />
                             </motion.div>
                         );

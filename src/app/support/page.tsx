@@ -13,7 +13,7 @@ export default function Support() {
             icon: Mail,
             title: "Email Support",
             description: "Get detailed responses to your questions",
-            contact: "adil.rafique.pro@gmail.com",
+            contact: "admin@developertag.com",
             responseTime: "Within 24 hours",
             color: "from-blue-500 to-blue-600"
         },
@@ -287,7 +287,7 @@ export default function Support() {
                             Our team is ready to help. Send us a message and we&apos;ll get back to you as soon as possible.
                         </p>
                         <a
-                            href="mailto:adil.rafique.pro@gmail.com"
+                            href="mailto:admin@developertag.com"
                             className="inline-flex items-center gap-2 bg-gradient-to-r from-[#13a87c] to-[#18CB96] text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-2xl transition-all duration-300"
                         >
                             <Mail className="w-5 h-5" />

@@ -1,7 +1,6 @@
 import AboutHero from '@/components/AboutComponents/AboutHero'
 import AboutIntro from '@/components/AboutComponents/ABoutIntro'
 import { AboutJourney } from '@/components/AboutComponents/AboutJourney'
-import Team from '@/components/AboutComponents/Taam'
 import React from 'react'
 
 function page() {
@@ -11,7 +10,7 @@ function page() {
             <AboutIntro />
             <AboutJourney />
            
-            <Team />
+            {/* <Team /> */}
         </main>
     )
 }
