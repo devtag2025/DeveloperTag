@@ -53,7 +53,7 @@ const AboutHero: React.FC = () => {
 
                             {/* CTA button */}
                             <div className="flex justify-center lg:justify-start pt-4">
-                                <Button mailto="daniyalsohaildev@gmail.com" withArrow variant="light">
+                                <Button mailto="admin@developertag.com" withArrow variant="light">
                                     Let&apos;s Start Your Project
                                 </Button>
                             </div>

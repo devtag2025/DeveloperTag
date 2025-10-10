@@ -41,6 +41,7 @@ function MorePortfolio() {
                                     title={project.item.title}
                                     tagline={project.item.tagLine}
                                     imageUrl={project.item.previewImage}
+                                    slug={project.slug}
                                 />
                             </SwiperSlide>
                         )

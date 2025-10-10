@@ -2,7 +2,7 @@
 import ShimmerButton from '@/common/ShimmerButton';
 import Link from 'next/link';
 import React from 'react';
-import { FaFacebook, FaLinkedin, FaInstagram, FaYoutube } from 'react-icons/fa';
+import { FaLinkedin, FaInstagram } from 'react-icons/fa';
 
 function Footer() {
     return (
@@ -66,7 +66,7 @@ function Footer() {
                     </div>
 
                     {/* Resources */}
-                    <div className="lg:mx-auto text-center lg:text-left">
+                    {/* <div className="lg:mx-auto text-center lg:text-left">
                         <h4 className="text-lg text-gray-900 font-semibold mb-6">Resources</h4>
                         <ul className="text-sm space-y-4">
                             <li>
@@ -79,7 +79,7 @@ function Footer() {
                                 <Link href="/support" className="text-gray-600 hover:text-[#13a87c] transition-colors">Support</Link>
                             </li>
                         </ul>
-                    </div>
+                    </div> */}
 
                     {/* Legal */}
                     <div className="lg:mx-auto text-center lg:text-left">
@@ -102,16 +102,10 @@ function Footer() {
                             © 2025 DeveloperTag, All rights reserved.
                         </span>
                         <div className="flex space-x-4">
-                            <Link href="#" className="w-9 h-9 rounded-full bg-[#13a87c] flex justify-center items-center hover:bg-[#0f8a6b] transition-colors">
-                                <FaFacebook size={18} color="white" />
-                            </Link>
-                            <Link href="#" className="w-9 h-9 rounded-full bg-[#13a87c] flex justify-center items-center hover:bg-[#0f8a6b] transition-colors">
-                                <FaYoutube size={18} color="white" />
-                            </Link>
-                            <Link href="#" className="w-9 h-9 rounded-full bg-[#13a87c] flex justify-center items-center hover:bg-[#0f8a6b] transition-colors">
+                            <Link href="https://www.linkedin.com/company/developertag/" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-[#13a87c] flex justify-center items-center hover:bg-[#0f8a6b] transition-colors">
                                 <FaLinkedin size={18} color="white" />
                             </Link>
-                            <Link href="#" className="w-9 h-9 rounded-full bg-[#13a87c] flex justify-center items-center hover:bg-[#0f8a6b] transition-colors">
+                            <Link href="https://www.instagram.com/developer_tag/" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-[#13a87c] flex justify-center items-center hover:bg-[#0f8a6b] transition-colors">
                                 <FaInstagram size={18} color="white" />
                             </Link>
                         </div>

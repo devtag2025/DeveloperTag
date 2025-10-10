@@ -506,7 +506,7 @@ const ServiceRequestForm: React.FC<FormComponentProps & { showNotification: (typ
 // Schedule Meeting Component
 const ScheduleMeetingComponent: React.FC<FormComponentProps> = ({ onBack, formRef }) => {
     const openCalendly = () => {
-        window.open('https://calendly.com/daniyalsohaildev', '_blank');
+        window.open('https://calendly.com/developertag', '_blank');
     };
 
     return (

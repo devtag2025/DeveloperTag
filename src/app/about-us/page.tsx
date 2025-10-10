@@ -10,6 +10,7 @@ function page() {
             <AboutHero />
             <AboutIntro />
             <AboutJourney />
+           
             <Team />
         </main>
     )

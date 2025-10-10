@@ -1,4 +1,10 @@
+"use client"
+import Image from 'next/image'
+import { useState } from 'react'
+import ContactPopup from './ContactPopup'
+
 const BottomBanner = () => {
+    const [contactPopupOpen, setContactPopupOpen] = useState(false)
     return (
         <section className="relative w-full bg-[var(--background)] !py-16 md:!py-20 flex flex-col items-center">
             {/* Centered container */}
@@ -8,9 +14,11 @@ const BottomBanner = () => {
                     <div className="flex h-full flex-col md:flex-row items-center justify-center md:justify-between !gap-8">
                         {/* Left Side - AI Logo/Icon */}
                         <div className="flex-shrink-0 flex items-center justify-center">
-                            <img
+                            <Image
                                 src="/assets/logo.png"
                                 alt="Company Logo"
+                                width={384}
+                                height={384}
                                 className="!w-60 !h-60 md:!w-64 md:!h-64 lg:!w-80 lg:!h-80 xl:!w-96 xl:!h-96 object-contain"
                             />
                         </div>
@@ -32,7 +40,10 @@ const BottomBanner = () => {
                                 that help brands launch faster and grow with confidence.
                             </p>
                             {/* CTA Button */}
-                            <button className="bg-[var(--appTheme)] text-white !w-52 !rounded-full font-bold text-sm md:text-base !leading-6 flex items-center justify-center !gap-2.5 shadow-lg hover:shadow-xl transition-shadow !py-3.5 !px-6">
+                            <button 
+                                onClick={() => setContactPopupOpen(true)}
+                                className="bg-[var(--appTheme)] text-white !w-52 !rounded-full font-bold text-sm md:text-base !leading-6 flex items-center justify-center !gap-2.5 shadow-lg hover:shadow-xl transition-shadow !py-3.5 !px-6 cursor-pointer hover:scale-105 transform transition-all duration-200"
+                            >
                                 Get a Quote
                                 <svg
                                     className="w-5 h-5"
@@ -53,6 +64,12 @@ const BottomBanner = () => {
                     </div>
                 </div>
             </div>
+            
+            {/* Contact Popup */}
+            <ContactPopup
+                isOpen={contactPopupOpen}
+                onClose={() => setContactPopupOpen(false)}
+            />
         </section>
     );
 };

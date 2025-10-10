@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar"
-import { NewsLetter } from "@/components/HomeComponents/NewsLetter";
 import Footer from "@/components/Footer/Footer";
 import AOSInitializer from "@/common/AOSInitializer";
 import CanvasCursor from "@/common/Cursor";

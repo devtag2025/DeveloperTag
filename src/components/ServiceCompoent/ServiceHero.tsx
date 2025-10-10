@@ -57,7 +57,7 @@ const ServiceHero: React.FC = () => {
 
                     {/* CTA Button */}
                     <div className="flex justify-center pt-4">
-                        <Button mailto="daniyalsohaildev@gmail.com" withArrow variant="light">
+                        <Button mailto="admin@developertag.com" withArrow variant="light">
                             Let&apos;s Start
                         </Button>
                     </div>

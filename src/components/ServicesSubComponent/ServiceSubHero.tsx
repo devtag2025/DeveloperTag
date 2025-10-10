@@ -105,7 +105,7 @@ function ServiceSubHero() {
 
                             {/* CTA button */}
                             <div className="flex justify-center lg:justify-start pt-4">
-                                <Button mailto="daniyalsohaildev@gmail.com" withArrow variant="light">
+                                <Button mailto="admin@developertag.com" withArrow variant="light">
                                     Get a Quote
                                 </Button>
                             </div>
