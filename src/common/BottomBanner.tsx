@@ -13,13 +13,13 @@ const BottomBanner = () => {
                 <div className="w-full features-gradient !rounded-[20px] md:rounded-3xl !px-6 !py-4 md:!px-10 lg:!px-12 md:!py-14 md:!h-[436px]">
                     <div className="flex h-full flex-col md:flex-row items-center justify-center md:justify-between !gap-8">
                         {/* Left Side - AI Logo/Icon */}
-                        <div className="flex-shrink-0 flex items-center justify-center">
+                        <div className="flex-shrink-0 flex items-center justify-center max-w-full">
                             <Image
                                 src="/assets/logo.png"
                                 alt="Company Logo"
-                                width={384}
-                                height={384}
-                                className="!w-60 !h-60 md:!w-64 md:!h-64 lg:!w-80 lg:!h-80 xl:!w-96 xl:!h-96 object-contain"
+                                width={300}
+                                height={300}
+                                className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 object-contain max-w-full"
                             />
                         </div>
                         {/* Right Side - Content */}

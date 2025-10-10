@@ -73,12 +73,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased mobile-no-scroll`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <DataProvider>
           <AOSInitializer />
           <CanvasCursor />
-          <div className="relative w-full flex items-center justify-center">
+          <div className="relative w-full">
             <Navbar />
           </div>
           {children}
