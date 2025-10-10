@@ -44,8 +44,8 @@ export default function Navbar() {
                 ? "bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-100"
                 : "bg-transparent"
                 }`}>
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex items-center justify-between h-16 lg:h-20">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                    <div className="flex items-center justify-between h-16 lg:h-20 w-full">
                         {/* Logo */}
                         <Link href="/" className="flex items-center space-x-2">
                             <div className="relative">
@@ -131,8 +131,8 @@ export default function Navbar() {
 
                 {/* Mobile Menu */}
                 {mobileMenuOpen && (
-                    <div className="lg:hidden bg-white/95 backdrop-blur-md border-t border-gray-100">
-                        <div className="px-4 py-6 space-y-2">
+                    <div className="lg:hidden bg-white/95 backdrop-blur-md border-t border-gray-100 w-full">
+                        <div className="px-4 py-6 space-y-2 w-full max-w-full overflow-hidden">
                             {navigation.map((item) =>
                                 item.dropdown ? (
                                     <div key={item.name} className="space-y-2">
