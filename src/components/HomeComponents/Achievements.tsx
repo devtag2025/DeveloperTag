@@ -1,7 +1,12 @@
+"use client"
 import ShimmerButton from "@/common/ShimmerButton";
+import { useState } from "react";
+import ContactPopup from "@/common/ContactPopup";
 
 
 const Achievements = () => {
+    const [contactPopupOpen, setContactPopupOpen] = useState(false);
+
     return (
         <div className="flex flex-col lg:flex-row justify-between items-center gap-10 px-6 lg:px-20 py-16 ">
             {/* Left Section */}
@@ -57,10 +62,16 @@ const Achievements = () => {
                 </div>
                 <div data-aos="fade-left" className="text-center">
                     <div className="sm:mb-6 mt-8 sm:flex sm:justify-center">
-                        <ShimmerButton btnText={"Get a quote"} />
+                        <ShimmerButton btnText={"Get a quote"} onClick={() => setContactPopupOpen(true)} />
                     </div>
                 </div>
             </div>
+
+            {/* Contact Popup */}
+            <ContactPopup
+                isOpen={contactPopupOpen}
+                onClose={() => setContactPopupOpen(false)}
+            />
         </div>
     );
 };

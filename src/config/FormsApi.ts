@@ -8,6 +8,7 @@ export interface CommonForm {
 
 export interface ServiceRequestForm extends CommonForm {
     serviceType: string;
+    engagementType?: string;
 }
 
 

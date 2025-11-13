@@ -4,7 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar"
 import Footer from "@/components/Footer/Footer";
 import AOSInitializer from "@/common/AOSInitializer";
-import CanvasCursor from "@/common/Cursor";
+// import CanvasCursor from "@/common/Cursor";
 import { DataProvider } from "@/context/contextStore"
 import BottomBanner from "@/common/BottomBanner"
 
@@ -83,7 +83,7 @@ export default function RootLayout({
       >
         <DataProvider>
           <AOSInitializer />
-          <CanvasCursor />
+          {/* <CanvasCursor /> */}
           <div className="relative w-full">
             <Navbar />
           </div>

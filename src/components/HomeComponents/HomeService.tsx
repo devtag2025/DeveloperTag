@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { ServiceCard } from "../ServiceCompoent/ServiceCard";
 import Heading from "@/common/Heading";
 import { useService } from "@/context/contextStore";
-import ServicePopup from "@/common/ServicePopup";
+import ContactPopup from "@/common/ContactPopup";
 import { Globe, Smartphone, Monitor, Users, Database, Cloud, Network, Zap, Target, Award, TrendingUp } from "lucide-react";
 
 interface ServiceType {
@@ -18,7 +18,7 @@ interface ServiceType {
 
 export function HomeService() {
     const serviceData = useService();
-    const [selectedServiceTitle, setSelectedServiceTitle] = useState<string | null>(null);
+    const [contactPopupOpen, setContactPopupOpen] = useState(false);
 
     // Static fallback services
     const staticServices = [
@@ -107,12 +107,36 @@ export function HomeService() {
         }
     ];
 
+    // Define the desired order for services
+    const serviceOrder = [
+        'Web Development',
+        'Mobile App Development',
+        'Desktop Software Development',
+        'CRM Solutions',
+        'ERP Systems',
+        'SaaS Platforms',
+        'Blockchain Applications'
+    ];
+
     // Get services from API response or use static fallback
     const apiServices = serviceData?.data?.items || [];
-    const services = apiServices.length > 0 ? apiServices : staticServices;
+    
+    // Sort API services to match desired order, reverse to fix the order issue
+    const sortedApiServices = [...apiServices].reverse().sort((a: any, b: any) => {
+        const indexA = serviceOrder.indexOf(a.title);
+        const indexB = serviceOrder.indexOf(b.title);
+        // If service not found in order, push to end
+        if (indexA === -1) return 1;
+        if (indexB === -1) return -1;
+        return indexA - indexB;
+    });
 
-    // Helper function to convert HTTP to HTTPS for Cloudinary URLs
-    const getSecureImageUrl = (url: string) => {
+    const services = sortedApiServices.length > 0 ? sortedApiServices : staticServices;
+
+    // Helper function to convert HTTP to HTTPS for Cloudinary URLs and handle heroImage/imageUrl
+    const getSecureImageUrl = (service: any) => {
+        // Handle both heroImage (from API) and imageUrl (from static)
+        const url = service.heroImage || service.imageUrl || '';
         if (url && url.startsWith('http://')) {
             return url.replace('http://', 'https://');
         }
@@ -203,8 +227,9 @@ export function HomeService() {
 
                 {/* Services Grid */}
                 <div data-aos="fade-up" className="w-full max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-6 mb-12">
-                    {services.map((service: ServiceType, index: number) => {
-                        // For static services, use the icon from the service object
+                    {services.map((service: ServiceType | any, index: number) => {
+                        // Construct the URL if it doesn't exist (for API services)
+                        const serviceUrl = service.url || `/service/${service.slug}`;
                         
                         return (
                             <motion.div
@@ -217,10 +242,10 @@ export function HomeService() {
                     <ServiceCard
                         title={service.title}
                         tagline={service.description || 'No description'}
-                        imageUrl={getSecureImageUrl(service?.imageUrl || '')}
-                        url={service.url}
+                        imageUrl={getSecureImageUrl(service)}
+                        url={serviceUrl}
                         themeFlag={false}
-                        onGetQuote={service.url ? undefined : () => setSelectedServiceTitle(service.title)}
+                        onGetQuote={() => setContactPopupOpen(true)}
                     />
                             </motion.div>
                         );
@@ -242,7 +267,7 @@ export function HomeService() {
                             Let&apos;s discuss your project and turn your ideas into powerful digital solutions
                         </p>
                         <button
-                            onClick={() => setSelectedServiceTitle("General Inquiry")}
+                            onClick={() => setContactPopupOpen(true)}
                             className="inline-flex items-center gap-2 bg-gradient-to-r from-[#13a87c] to-[#18CB96] text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-2xl transition-all duration-300"
                         >
                             Get Started Today
@@ -252,12 +277,11 @@ export function HomeService() {
                 </motion.div>
             </div>
 
-            {selectedServiceTitle && (
-                <ServicePopup
-                    onClose={() => setSelectedServiceTitle(null)}
-                    serviceTitle={selectedServiceTitle}
-                />
-            )}
+            {/* Contact Popup */}
+            <ContactPopup
+                isOpen={contactPopupOpen}
+                onClose={() => setContactPopupOpen(false)}
+            />
         </div>
     );
 }

@@ -7,7 +7,7 @@ import Button from '@/common/Button';
 const PortfolioHero: React.FC = () => {
     return (
         <section className="relative w-full bg-white">
-            <div className="w-full px-4 sm:px-6 lg:px-8 py-20 sm:py-32">
+            <div className="w-full px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
                 {/* Background image */}
                 <div
                     className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat opacity-10 z-[1]"
@@ -34,7 +34,7 @@ const PortfolioHero: React.FC = () => {
                 {/* Centered content */}
                 <div className="flex flex-1 w-full flex-col items-center justify-center text-center relative z-10">
                     {/* Badge */}
-                    <div className="inline-flex items-center px-4 py-2 rounded-full border border-[#13a87c] bg-[#13a87c]/5 mb-8">
+                    <div className="inline-flex items-center px-4 py-2 rounded-full border border-[#13a87c] bg-[#13a87c]/5 mb-6">
                         <span className="text-sm font-medium text-[#13a87c]">
                             Our Portfolio
                         </span>
@@ -58,7 +58,7 @@ const PortfolioHero: React.FC = () => {
                     </h1>
 
                     {/* Description */}
-                    <h2 className="mx-auto mt-12 max-w-xl text-lg text-gray-600 leading-7">
+                    <h2 className="mx-auto mt-8 max-w-xl text-lg text-gray-600 leading-7">
                         Discover our collection of successful projects that showcase innovation,
                         creativity, and technical excellence delivered for clients worldwide.
                     </h2>

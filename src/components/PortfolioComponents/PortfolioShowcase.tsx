@@ -431,18 +431,18 @@ const PortfolioShowcase = () => {
     ]
 
     return (
-        <section className="relative w-full bg-white py-16 md:py-24 overflow-hidden">
+        <section className="relative w-full bg-white  overflow-hidden">
             {/* Background Pattern */}
             <div className="absolute inset-0 bg-[size:80px_80px] bg-[linear-gradient(to_right,rgba(0,0,0,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.05)_1px,transparent_1px)] opacity-40" />
 
-            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
                 {/* Header */}
                 <div className="text-center mb-16" data-aos="fade-up">
-                    <div className="inline-flex items-center px-4 py-2 rounded-full border border-[#13a87c] bg-[#13a87c]/5 mb-6">
+                    {/* <div className="inline-flex items-center px-4 py-2 rounded-full border border-[#13a87c] bg-[#13a87c]/5 mb-6">
                         <span className="text-sm font-medium text-[#13a87c]">
                             Proven Results
                         </span>
-                    </div>
+                    </div> */}
                     <Heading 
                         headOne="Transforming" 
                         headTwo="Ideas Into" 
@@ -480,44 +480,53 @@ const PortfolioShowcase = () => {
                         {category.projects.length > 3 ? (
                             <div className="relative">
                                 {/* Slider for categories with >3 projects */}
-                                <Swiper
-                                    modules={[Navigation, Autoplay, EffectCoverflow]}
-                                    spaceBetween={24}
-                                    slidesPerView={1}
-                                    loop={true}
-                                    autoplay={{
-                                        delay: 4000,
-                                        disableOnInteraction: false,
-                                        pauseOnMouseEnter: true,
-                                    }}
-                                    speed={800}
-                                    effect="coverflow"
-                                    coverflowEffect={{
-                                        rotate: 0,
-                                        stretch: 0,
-                                        depth: 100,
-                                        modifier: 1.5,
-                                        slideShadows: false,
-                                    }}
-                                    breakpoints={{
-                                        640: { slidesPerView: 2 },
-                                        1024: { slidesPerView: 3 },
-                                    }}
-                                    onSwiper={(swiper) => setSwiperRef(categoryIndex, swiper)}
-                                    className="!pb-12"
-                                >
-                                    {category.projects.map((project, projectIndex) => (
-                                        <SwiperSlide key={projectIndex}>
-                                            <ProjectCard
-                                                project={project}
-                                                categoryIndex={categoryIndex}
-                                                projectIndex={projectIndex}
-                                                hoveredProject={hoveredProject}
-                                                setHoveredProject={setHoveredProject}
-                                            />
-                                        </SwiperSlide>
-                                    ))}
-                                </Swiper>
+             <Swiper
+  modules={[Navigation, Autoplay, EffectCoverflow]}
+  spaceBetween={32} // ✅ more natural spacing between slides
+  slidesPerView={1}
+  loop={false} // ✅ prevents right-side blank space
+  centeredSlides={false} // ✅ aligns properly to container edges
+  autoplay={{
+    delay: 4000,
+    disableOnInteraction: false,
+    pauseOnMouseEnter: true,
+  }}
+  speed={800}
+  effect="coverflow"
+  coverflowEffect={{
+    rotate: 0,
+    stretch: 0,
+    depth: 100,
+    modifier: 1.2,
+    slideShadows: false,
+  }}
+  breakpoints={{
+    640: { slidesPerView: 2, spaceBetween: 28 }, // ✅ balanced spacing on tablet
+    1024: { slidesPerView: 3, spaceBetween: 32 }, // ✅ roomy look on desktop
+  }}
+  onSwiper={(swiper) => setSwiperRef(categoryIndex, swiper)}
+  className="!pb-12 !px-4 sm:!px-8 lg:!px-12" // ✅ consistent padding on sides
+>
+  {category.projects.map((project, projectIndex) => (
+    <SwiperSlide
+      key={projectIndex}
+      className="flex justify-center items-stretch" // ✅ keeps cards height consistent
+    >
+      <div className="w-full max-w-[360px]"> {/* ✅ limits card width nicely */}
+        <ProjectCard
+          project={project}
+          categoryIndex={categoryIndex}
+          projectIndex={projectIndex}
+          hoveredProject={hoveredProject}
+          setHoveredProject={setHoveredProject}
+        />
+      </div>
+    </SwiperSlide>
+  ))}
+</Swiper>
+
+
+
 
                                 {/* Custom Navigation Buttons */}
                                 <div className="flex items-center justify-center gap-4 mt-6">

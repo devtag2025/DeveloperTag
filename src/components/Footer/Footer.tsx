@@ -1,10 +1,13 @@
 "use client"
 import ShimmerButton from '@/common/ShimmerButton';
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 import { FaLinkedin, FaInstagram } from 'react-icons/fa';
+import ContactPopup from '@/common/ContactPopup';
 
 function Footer() {
+    const [contactPopupOpen, setContactPopupOpen] = useState(false);
+
     return (
         <footer className="w-full bg-gray-50 border-t border-gray-200">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -23,7 +26,7 @@ function Footer() {
                             Trusted in more than 100 countries & 5 million customers. Have any query?
                         </p>
                         <div className="flex justify-center lg:justify-start">
-                            <ShimmerButton btnText={"Get A Quote"} />
+                            <ShimmerButton btnText={"Get A Quote"} onClick={() => setContactPopupOpen(true)} />
                         </div>
                     </div>
 
@@ -121,6 +124,12 @@ function Footer() {
                     </div>
                 </div>
             </div>
+
+            {/* Contact Popup */}
+            <ContactPopup
+                isOpen={contactPopupOpen}
+                onClose={() => setContactPopupOpen(false)}
+            />
         </footer>
     );
 }

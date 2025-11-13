@@ -4,13 +4,11 @@ import React, { useState } from 'react'
 import { ServiceCard } from './ServiceCard'
 import { useService } from '@/context/contextStore'
 import { Service } from '@/config/ServicesApi'
-import dynamic from 'next/dynamic'
-
-const ServicePopup = dynamic(() => import('@/common/ServicePopup'), { ssr: false })
+import ContactPopup from '@/common/ContactPopup'
 
 function AllServices() {
     const serviceData = useService();
-    const [selectedServiceTitle, setSelectedServiceTitle] = useState<string | null>(null)
+    const [contactPopupOpen, setContactPopupOpen] = useState(false)
 
     // Handle loading state
     if (!serviceData) {
@@ -71,17 +69,16 @@ function AllServices() {
                         tagline={service.description || 'No description'}
                         imageUrl={getSecureImageUrl(service?.imageUrl || '')}
                         themeFlag={true}
-                        onGetQuote={() => setSelectedServiceTitle(service.title)}
+                        onGetQuote={() => setContactPopupOpen(true)}
                     />
                 ))}
             </div>
 
-            {selectedServiceTitle && (
-                <ServicePopup
-                    onClose={() => setSelectedServiceTitle(null)}
-                    serviceTitle={selectedServiceTitle}
-                />
-            )}
+            {/* Contact Popup */}
+            <ContactPopup
+                isOpen={contactPopupOpen}
+                onClose={() => setContactPopupOpen(false)}
+            />
         </div>
     )
 }

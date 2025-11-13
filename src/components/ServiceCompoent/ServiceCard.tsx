@@ -114,10 +114,16 @@ export function ServiceCard({ title, tagline, imageUrl, themeFlag, url, onGetQuo
 
                 {/* Get Quote Button */}
                 <motion.button
-                        onClick={onGetQuote}
+                    onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        if (onGetQuote) {
+                            onGetQuote();
+                        }
+                    }}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                        className={`
+                    className={`
                         w-full group/btn inline-flex items-center justify-center gap-2 px-6 py-3 
                         rounded-full font-semibold text-sm transition-all duration-300 
         ${themeFlag
@@ -125,8 +131,8 @@ export function ServiceCard({ title, tagline, imageUrl, themeFlag, url, onGetQuo
                             : "bg-gradient-to-r from-[#13a87c] to-[#18CB96] text-white shadow-lg hover:shadow-2xl"
                             }
       `}
-                    >
-                        <span>Get Quote</span>
+                >
+                    <span>Get Quote</span>
                     <motion.div
                         animate={isHovered ? { x: [0, 5, 0] } : { x: 0 }}
                         transition={{ duration: 0.5, repeat: isHovered ? Infinity : 0 }}

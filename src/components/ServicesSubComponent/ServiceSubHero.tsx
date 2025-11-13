@@ -1,49 +1,35 @@
 "use client"
-import React from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import { Spotlight } from '../ui/spotlight-new'
-import { usePathname } from 'next/navigation';
-import { servicesHeroData } from '@/db/ServiceData';
 import { cn } from "@/lib/utils";
 import Button from '@/common/Button';
+import ContactPopup from '@/common/ContactPopup';
 
-interface ServiceData {
-    slug: string;
-    heading: string;
-    text: string;
-    image: string;
-    category?: string;
-    features?: string[];
+interface ServiceSubHeroProps {
+    service?: {
+        title?: string;
+        description?: string;
+        heroImage?: string;
+    };
 }
 
-function ServiceSubHero() {
-    const pathname = usePathname();
-    const slug = pathname.split("/").pop() ?? "";
-    const serData = servicesHeroData.find((data) => data.slug === slug) as ServiceData | undefined;
-
-    if (!serData) {
-        return (
-            <section className="relative w-full bg-white min-h-screen flex items-center justify-center">
-                <div className="text-center">
-                    <h2 className="text-3xl font-bold text-gray-900">Service Not Found</h2>
-                    <p className="mt-2 text-lg text-gray-600">
-                        The service you are looking for does not exist.
-                    </p>
-                </div>
-            </section>
-        );
-    }
+function ServiceSubHero({ service }: ServiceSubHeroProps) {
+    const [contactPopupOpen, setContactPopupOpen] = useState(false);
+    const title = service?.title || "Our Services";
+    const description = service?.description || "Transform your business with our exceptional services.";
+    const image = service?.heroImage || "/assets/Services/web_development.webp";
 
     return (
-        <section className="relative w-full bg-white">
-            <div className="w-full px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
+        <section className="relative w-full bg-gradient-to-br from-green-50 via-white to-blue-50 min-h-screen">
+            <div className="w-full py-16 sm:py-20 lg:py-8">
                 {/* Grid pattern background */}
                 <div
                     className={cn(
                         "absolute inset-0 w-full h-full top-0",
-                        "bg-[size:80px_80px]",
-                        "bg-[linear-gradient(to_right,rgba(0,0,0,0.1)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.1)_1px,transparent_1px)]",
-                        "opacity-60 z-[1]"
+                        "bg-[size:60px_60px]",
+                        "bg-[linear-gradient(to_right,rgba(19,168,124,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(19,168,124,0.05)_1px,transparent_1px)]",
+                        "opacity-40 z-[1]"
                     )}
                 />
 
@@ -52,25 +38,21 @@ function ServiceSubHero() {
                     <Spotlight />
                 </div>
 
-                <div className="max-w-7xl mx-auto">
-                    {/* Main content container */}
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center mt-12">
-
-                        {/* Left side content */}
-                        <div className="space-y-6 text-center lg:text-left relative z-10">
-                            {/* Service badge */}
-                            <div className="inline-flex items-center px-4 py-2 rounded-full border border-[#13a87c] bg-[#13a87c]/5">
-                                <span className="text-sm font-medium text-[#13a87c]">
-                                    {serData?.category || "Our Services"}
+                <div className="w-full relative z-10  px-4 sm:px-6 lg:px-28">
+                    <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-8 lg:gap-16 items-center min-h-[80vh]">
+                        {/* Left side - Content */}
+                        <div className="space-y-8 text-center lg:text-left order-2 lg:order-1">
+                            {/* Service Category Badge */}
+                            <div className="inline-flex items-center px-4 py-2 rounded-full border-2 border-[#13a87c] bg-[#13a87c]/10 backdrop-blur-sm">
+                                <span className="text-sm font-semibold text-[#13a87c] tracking-wide">
+                                    Our Services
                                 </span>
                             </div>
 
-
-                            {/* Service Headline */}
-                            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                                {serData.heading.split(' ').map((word, index) => {
-                                    // Make the last word or specific keywords green
-                                    const isLastWord = index === serData.heading.split(' ').length - 1;
+                            {/* Service Title */}
+                            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-[0.9] tracking-tight">
+                                {title.split(' ').map((word, index) => {
+                                    const isLastWord = index === title.split(' ').length - 1;
                                     const isKeyword = ['Development', 'Design', 'Solutions', 'Services'].includes(word);
 
                                     if (isLastWord || isKeyword) {
@@ -84,87 +66,53 @@ function ServiceSubHero() {
                                 })}
                             </h1>
 
-                            {/* Service Description */}
-                            <p className="text-lg text-gray-600 leading-relaxed max-w-lg mx-auto lg:mx-0">
-                                {serData.text}
+                            {/* Description */}
+                            <p className="text-lg sm:text-xl text-gray-700 leading-relaxed max-w-2xl mx-auto lg:mx-0 font-medium">
+                                {description}
                             </p>
 
-                            {/* Additional service features */}
-                            {serData?.features && (
-                                <div className="flex flex-wrap gap-3 justify-center lg:justify-start">
-                                    {serData.features.slice(0, 3).map((feature: string, index: number) => (
-                                        <span
-                                            key={index}
-                                            className="px-3 py-1 text-sm bg-gray-100 text-gray-700 rounded-full"
-                                        >
-                                            {feature}
-                                        </span>
-                                    ))}
-                                </div>
-                            )}
-
                             {/* CTA button */}
-                            <div className="flex justify-center lg:justify-start pt-4">
-                                <Button mailto="admin@developertag.com" withArrow variant="light">
+                            <div className="flex justify-center lg:justify-start pt-2">
+                                <Button onClick={() => setContactPopupOpen(true)} withArrow variant="light">
                                     Get a Quote
                                 </Button>
                             </div>
                         </div>
 
-                        {/* Right side visual/content */}
-                        <div className="relative">
-                            <div className="relative w-full max-w-lg mx-auto lg:max-w-none">
-                                {/* Service visual container */}
-                                <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-[#13a87c]/10 to-[#18CB96]/20">
-
-                                    {/* If you have a service image/video */}
-                                    {serData.image ? (
-                                        <div style={{ aspectRatio: '16/10' }} className="relative w-full">
-                                            <Image
-                                                src={serData.image}
-                                                alt={serData.heading}
-                                                fill
-                                                className="object-cover"
-                                                sizes="(max-width: 1024px) 100vw, 600px"
-                                                priority={false}
-                                            />
-                                        </div>
-                                    ) : (
-                                        /* Placeholder visual */
-                                        <div
-                                            className="w-full flex items-center justify-center bg-gradient-to-br from-[#13a87c] to-[#18CB96] text-white"
-                                            style={{ aspectRatio: '16/10' }}
-                                        >
-                                            <div className="text-center p-8">
-                                                <div className="w-16 h-16 mx-auto mb-4 bg-white/20 rounded-full flex items-center justify-center">
-                                                    <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
-                                                        <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V4zm1 0v12h12V4H4z" clipRule="evenodd" />
-                                                        <path fillRule="evenodd" d="M8 8a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" clipRule="evenodd" />
-                                                        <path fillRule="evenodd" d="M8 12a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" clipRule="evenodd" />
-                                                    </svg>
-                                                </div>
-                                                <h3 className="text-xl font-semibold mb-2">
-                                                    {serData?.category || "Service"}
-                                                </h3>
-                                                <p className="text-white/90 text-sm">
-                                                    Professional Solutions
-                                                </p>
-                                            </div>
-                                        </div>
-                                    )}
+                        {/* Right side - Image */}
+                        <div className="relative order-1 lg:order-2 pr-0 lg:pr-4">
+                            <div className="relative w-full">
+                                <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br from-[#13a87c]/10 to-[#18CB96]/20 p-2">
+                                    <div style={{ aspectRatio: '16/10' }} className="relative w-full rounded-2xl overflow-hidden">
+                                        <Image
+                                            src={image}
+                                            alt={title}
+                                            fill
+                                            className="object-cover"
+                                            sizes="(max-width: 1024px) 100vw, 800px"
+                                            priority={true}
+                                        />
+                                    </div>
 
                                     {/* Overlay gradient */}
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent pointer-events-none" />
+                                    <div className="absolute inset-2 rounded-2xl bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
                                 </div>
 
-                                {/* Decorative elements */}
-                                <div className="absolute -top-4 -right-4 w-20 h-20 bg-[#13a87c]/10 rounded-full blur-xl" />
-                                <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-[#18CB96]/10 rounded-full blur-2xl" />
+                                {/* Enhanced decorative elements */}
+                                <div className="absolute -top-8 -right-8 w-32 h-32 bg-gradient-to-br from-[#13a87c]/20 to-[#18CB96]/20 rounded-full blur-3xl" />
+                                <div className="absolute -bottom-8 -left-8 w-40 h-40 bg-gradient-to-tr from-[#18CB96]/20 to-[#13a87c]/20 rounded-full blur-3xl" />
+                                <div className="absolute top-1/2 -right-4 w-24 h-24 bg-gradient-to-l from-[#13a87c]/15 to-transparent rounded-full blur-2xl" />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            {/* Contact Popup */}
+            <ContactPopup
+                isOpen={contactPopupOpen}
+                onClose={() => setContactPopupOpen(false)}
+            />
         </section>
     );
 }

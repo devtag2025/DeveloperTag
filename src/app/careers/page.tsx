@@ -417,7 +417,7 @@ export default function Careers() {
 
                                             <div className="pt-4">
                                                 <a
-                                                    href={`mailto:admin@developertag.com?subject=Application for ${job.title}`}
+                                                    href={`mailto:careergrowth@developertag.com?subject=Application for ${job.title}`}
                                                     className="inline-flex items-center gap-2 bg-gradient-to-r from-[#13a87c] to-[#18CB96] text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:shadow-2xl transition-all duration-300"
                                                 >
                                                     <Send className="w-4 h-4" />

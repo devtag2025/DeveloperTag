@@ -1,210 +1,80 @@
 'use client'
-import React from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
-import Heading from '@/common/Heading'
-import { Star, Quote, Sparkles } from 'lucide-react'
-
-// API testimonial structure
-// interface ApiTestimonial {
-//     _id: string;
-//     content: string;
-//     name: string;
-//     title: string;
-//     testimonialImg?: string;
-//     createdAt: string;
-//     updatedAt: string;
-// }
-
-// Enhanced testimonials organized by category
-const testimonialCategories = [
-    {
-        category: "Software Engineering SaaS",
-        icon: "💻",
-        color: "from-blue-500 to-cyan-500",
-        testimonials: [
-        {
-            _id: "1",
-                content: "I was blown away by how effortlessly the team turned our complex ideas into a seamless SaaS product. They didn't just deliver software they delivered peace of mind.",
-                name: "John Miller",
-                title: "",
-            createdAt: "2024-01-01T00:00:00.000Z",
-            updatedAt: "2024-01-01T00:00:00.000Z"
-        },
-        {
-            _id: "2",
-                content: "From day one, their passion for building something meaningful showed. Our SaaS platform is now the backbone of our business, and we couldn't be happier.",
-                name: "Sophia Lee",
-                title: "",
-            createdAt: "2024-01-01T00:00:00.000Z",
-            updatedAt: "2024-01-01T00:00:00.000Z"
-        },
-        {
-            _id: "3",
-                content: "They took our vision seriously and brought it to life with precision and care. The launch went off without a hitch thanks to their incredible dedication.",
-                name: "David Kim",
-                title: "",
-            createdAt: "2024-01-01T00:00:00.000Z",
-            updatedAt: "2024-01-01T00:00:00.000Z"
-            }
-        ]
-        },
-    {
-        category: "Desktop Development",
-        icon: "🖥️",
-        color: "from-purple-500 to-pink-500",
-        testimonials: [
-        {
-            _id: "4",
-                content: "The desktop app they crafted feels like it was made just for us intuitive, fast, and reliable. It's rare to find a team that truly listens and delivers beyond expectations.",
-                name: "Emma Johnson",
-                title: "",
-            createdAt: "2024-01-01T00:00:00.000Z",
-            updatedAt: "2024-01-01T00:00:00.000Z"
-        },
-        {
-            _id: "5",
-                content: "I'm impressed by their attention to detail and commitment to quality. Our new desktop software runs smoother than anything we've had before.",
-                name: "Michael Brown",
-                title: "",
-            createdAt: "2024-01-01T00:00:00.000Z",
-            updatedAt: "2024-01-01T00:00:00.000Z"
-        },
-        {
-            _id: "6",
-                content: "They didn't just build software; they built trust. Every update improved efficiency within our teams noticeably.",
-                name: "Olivia Davis",
-                title: "",
-                createdAt: "2024-01-01T00:00:00.000Z",
-                updatedAt: "2024-01-01T00:00:00.000Z"
-            }
-        ]
-    },
-    {
-        category: "App Development",
-        icon: "📱",
-        color: "from-green-500 to-emerald-500",
-        testimonials: [
-            {
-                _id: "7",
-                content: "Watching users engage with the app we created together has been thrilling beautiful design paired with flawless function. Couldn't ask for more!",
-                name: "Liam Smith",
-                title: "",
-                createdAt: "2024-01-01T00:00:00.000Z",
-                updatedAt: "2024-01-01T00:00:00.000Z"
-            },
-            {
-                _id: "8",
-                content: "The app's launch was nerve-wracking until this team took control fast delivery, smart solutions, and an app that customers love.",
-                name: "Isabella Rodriguez",
-                title: "",
-                createdAt: "2024-01-01T00:00:00.000Z",
-                updatedAt: "2024-01-01T00:00:00.000Z"
-            },
-            {
-                _id: "9",
-                content: "Their creativity turned my rough ideas into a polished app that feels alive every feature works smoothly and intuitively.",
-                name: "Noah Wilson",
-                title: "",
-                createdAt: "2024-01-01T00:00:00.000Z",
-                updatedAt: "2024-01-01T00:00:00.000Z"
-            }
-        ]
-    },
-    {
-        category: "CRM Development",
-        icon: "🤝",
-        color: "from-orange-500 to-red-500",
-        testimonials: [
-            {
-                _id: "10",
-                content: "Our sales team actually enjoys using the CRM now! It's tailored perfectly to how we work simple yet powerful.",
-                name: "Mia Anderson",
-                title: "",
-                createdAt: "2024-01-01T00:00:00.000Z",
-                updatedAt: "2024-01-01T00:00:00.000Z"
-            },
-            {
-                _id: "11",
-                content: "Integrating their CRM was the smartest move we made this year it connected all our tools seamlessly and boosted customer happiness too.",
-                name: "James Thompson",
-                title: "",
-                createdAt: "2024-01-01T00:00:00.000Z",
-                updatedAt: "2024-01-01T00:00:00.000Z"
-            },
-            {
-                _id: "12",
-                content: "What I appreciate most is their ongoing support — they treat your product like their own baby and keep making it better every day.",
-                name: "Ava Robinson",
-                title: "",
-                createdAt: "2024-01-01T00:00:00.000Z",
-                updatedAt: "2024-01-01T00:00:00.000Z"
-            }
-        ]
-    },
-    {
-        category: "AI/ML Development",
-        icon: "🤖",
-        color: "from-indigo-500 to-purple-500",
-        testimonials: [
-            {
-                _id: "13",
-                content: "The AI models they built didn't just crunch numbers; they told stories that helped us make smarter business moves overnight.",
-                name: "Ethan Harris",
-                title: "",
-                createdAt: "2024-01-01T00:00:00.000Z",
-                updatedAt: "2024-01-01T00:00:00.000Z"
-            },
-            {
-                _id: "14",
-                content: "Machine learning isn't easy to get right but these folks nailed it ROI showed up faster than expected!",
-                name: "Charlotte Clark",
-                title: "",
-                createdAt: "2024-01-01T00:00:00.000Z",
-                updatedAt: "2024-01-01T00:00:00.000Z"
-            },
-            {
-                _id: "15",
-                content: "Automating tedious tasks freed up my team's time so we could focus on innovation instead exactly what we needed.",
-                name: "Benjamin Lewis",
-                title: "",
-                createdAt: "2024-01-01T00:00:00.000Z",
-                updatedAt: "2024-01-01T00:00:00.000Z"
-            }
-        ]
-    },
-    {
-        category: "ERP Development",
-        icon: "🏢",
-        color: "from-teal-500 to-blue-500",
-        testimonials: [
-            {
-                _id: "16",
-                content: "Our departments were all over the place until this custom ERP brought everything under one roof smooth operations have never felt so good.",
-                name: "Amelia Walker",
-                title: "",
-                createdAt: "2024-01-01T00:00:00.000Z",
-                updatedAt: "2024-01-01T00:00:00.000Z"
-            },
-            {
-                _id: "17",
-                content: "ERP rollout was surprisingly stress-free thanks to their clear communication and expert handling every step of the way.",
-                name: "William Hall",
-                title: "",
-            createdAt: "2024-01-01T00:00:00.000Z",
-            updatedAt: "2024-01-01T00:00:00.000Z"
-            }
-        ]
-    }
-];
+import { Star, Quote, Sparkles, ChevronLeft, ChevronRight } from 'lucide-react'
+import { useTestimonial } from '@/context/contextStore'
+import type { Testimonial as TestimonialType } from '@/config/TestimonialApi'
+import ContactPopup from '@/common/ContactPopup'
 
 const Testimonials = () => {
+    const [contactPopupOpen, setContactPopupOpen] = useState(false);
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [cardsToShow, setCardsToShow] = useState(3);
+    const [direction, setDirection] = useState(0);
+    const sliderRef = useRef(null);
+    
+    // Get testimonials from API via context
+    const testimonialData = useTestimonial();
+    const testimonials = testimonialData?.data?.items || [];
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth < 768) {
+                setCardsToShow(1);
+            } else if (window.innerWidth < 1024) {
+                setCardsToShow(2);
+            } else {
+                setCardsToShow(3);
+            }
+        };
+
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    useEffect(() => {
+        if (testimonials.length === 0) return;
+        
+        const timer = setInterval(() => {
+            handleNext();
+        }, 5000);
+        return () => clearInterval(timer);
+    }, [currentIndex, cardsToShow, testimonials.length]);
+
+    const handlePrevious = () => {
+        if (testimonials.length === 0) return;
+        setDirection(-1);
+        setCurrentIndex((prev) => (prev === 0 ? testimonials.length - cardsToShow : prev - 1));
+    };
+
+    const handleNext = () => {
+        if (testimonials.length === 0) return;
+        setDirection(1);
+        setCurrentIndex((prev) => (prev >= testimonials.length - cardsToShow ? 0 : prev + 1));
+    };
+
+    const visibleTestimonials = testimonials.slice(currentIndex, currentIndex + cardsToShow);
+    if (visibleTestimonials.length < cardsToShow && testimonials.length > 0) {
+        visibleTestimonials.push(...testimonials.slice(0, cardsToShow - visibleTestimonials.length));
+    }
+
+    // Loading state
+    if (testimonials.length === 0) {
+        return (
+            <div className="relative w-full bg-gradient-to-br from-[#dcf3ec] via-white to-[#f0f9f6] py-16 md:py-24 overflow-hidden">
+                <div className="text-center text-gray-600">Loading testimonials...</div>
+            </div>
+        );
+    }
+
     return (
-        <div className="relative w-full bg-gradient-to-br from-[#dcf3ec] via-white to-[#f0f9f6] py-16 md:py-24 overflow-hidden z-50">
+        <div className="relative w-full bg-gradient-to-br from-[#dcf3ec] via-white to-[#f0f9f6] py-16 md:py-24 overflow-hidden">
             {/* Background Pattern */}
-            <div className="absolute inset-0 w-full h-full bg-[size:80px_80px] bg-[linear-gradient(to_right,rgba(19,168,124,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(19,168,124,0.05)_1px,transparent_1px)] opacity-60 z-[51]" />
+            <div className="absolute inset-0 w-full h-full bg-[size:80px_80px] bg-[linear-gradient(to_right,rgba(19,168,124,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(19,168,124,0.05)_1px,transparent_1px)] opacity-60" />
             
             {/* Floating Decorative Elements */}
-            <div className="absolute inset-0 overflow-hidden z-[51]">
+            <div className="absolute inset-0 overflow-hidden">
                 {[...Array(8)].map((_, i) => {
                     const positions = [
                         { left: '10%', top: '20%' },
@@ -217,7 +87,7 @@ const Testimonials = () => {
                         { left: '90%', top: '15%' }
                     ];
 
-    return (
+                    return (
                         <motion.div
                             key={i}
                             className="absolute w-3 h-3 bg-[#13a87c]/20 rounded-full"
@@ -238,7 +108,7 @@ const Testimonials = () => {
                 })}
             </div>
 
-            <div className="relative z-[52] w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
@@ -253,89 +123,101 @@ const Testimonials = () => {
                             Client Testimonials
                         </span>
                     </div>
-                    <Heading headOne="Our service" headTwo="Clients Who Believe" headThree="In Results" />
+                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+                        <span className="text-[#13a87c]">Our service</span> Clients Who Believe <span className="text-[#13a87c]">In Results</span>
+                    </h2>
                 </motion.div>
 
-                {/* Categorized Testimonials */}
-                <div className="space-y-16">
-                    {testimonialCategories.map((category, categoryIndex) => (
-                        <motion.div
-                            key={category.category}
-                            initial={{ opacity: 0, y: 50 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.8, delay: categoryIndex * 0.2 }}
-                            className="relative"
-                        >
-                            {/* Category Header */}
-                            <div className="text-center mb-12">
-                                <div className="inline-flex items-center gap-3 mb-4">
-                                    <div className="text-4xl">{category.icon}</div>
-                                    <h3 className="text-2xl lg:text-3xl font-bold text-gray-900">
-                                        {category.category}
-                                    </h3>
-                     </div>
-                                <div className={`w-24 h-1 bg-gradient-to-r ${category.color} rounded-full mx-auto`}></div>
-                </div>
+                {/* Slider Container */}
+                <div className="relative">
+                    {/* Navigation Buttons - Fixed positioning to show completely */}
+                    <button
+                        onClick={handlePrevious}
+                        className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-14 h-14 rounded-full bg-white shadow-xl hover:shadow-2xl border-2 border-[#13a87c]/20 hover:border-[#13a87c] flex items-center justify-center text-[#13a87c] hover:bg-[#13a87c] hover:text-white transition-all duration-300 hover:scale-110"
+                        aria-label="Previous testimonials"
+                    >
+                        <ChevronLeft className="w-7 h-7" />
+                    </button>
 
-                            {/* Testimonials Grid */}
-                            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                                {category.testimonials.map((testimonial, index) => (
-                     <motion.div
-                                        key={testimonial._id}
-                                        initial={{ opacity: 0, y: 30 }}
-                         whileInView={{ opacity: 1, y: 0 }}
-                         viewport={{ once: true }}
-                                        transition={{ duration: 0.6, delay: index * 0.1 }}
-                                        whileHover={{ 
-                                            scale: 1.02,
-                                            transition: { duration: 0.3 }
-                                        }}
-                                        className="group relative p-8 rounded-3xl bg-white/80 backdrop-blur-sm border border-gray-200/50 hover:border-[#13a87c]/30 hover:shadow-2xl hover:shadow-[#13a87c]/10 transition-all duration-500"
-                                    >
-                                        {/* Background Gradient */}
-                                        <div className={`absolute inset-0 bg-gradient-to-br ${category.color} opacity-0 group-hover:opacity-5 rounded-3xl transition-opacity duration-500`} />
-                                        
-                                        {/* Quote Icon */}
-                                        <div className="absolute top-6 right-6 opacity-20 group-hover:opacity-40 transition-opacity duration-300">
-                                            <Quote className="w-8 h-8 text-gray-400" />
+                    <button
+                        onClick={handleNext}
+                        className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-14 h-14 rounded-full bg-white shadow-xl hover:shadow-2xl border-2 border-[#13a87c]/20 hover:border-[#13a87c] flex items-center justify-center text-[#13a87c] hover:bg-[#13a87c] hover:text-white transition-all duration-300 hover:scale-110"
+                        aria-label="Next testimonials"
+                    >
+                        <ChevronRight className="w-7 h-7" />
+                    </button>
+
+                    {/* Cards Grid */}
+                    <div ref={sliderRef} className="overflow-hidden px-2">
+                        <motion.div
+                            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+                            key={currentIndex}
+                            initial={{ x: direction > 0 ? 300 : -300, opacity: 0.5 }}
+                            animate={{ x: 0, opacity: 1 }}
+                            transition={{ 
+                                duration: 0.8, 
+                                ease: [0.34, 1.56, 0.64, 1], // smooth spring-like easing
+                                opacity: { duration: 0.4 }
+                            }}
+                            style={{ willChange: "transform" }}
+                        >
+                            {visibleTestimonials.map((testimonial: TestimonialType, index: number) => (
+                                <div
+                                    key={`${testimonial._id}-${index}`}
+                                    className="group relative p-8 rounded-3xl bg-white border border-gray-200/50 hover:border-[#13a87c]/50 hover:shadow-2xl hover:shadow-[#13a87c]/5 transition-all duration-300"
+                                >
+                                    {/* Quote Icon - Reduced opacity and fixed position */}
+                                    <div className="absolute top-4 right-4 opacity-10">
+                                        <Quote className="w-12 h-12 text-gray-300" />
+                                    </div>
+                                    
+                                    {/* Content */}
+                                    <div className="relative z-10">
+                                        {/* Stars */}
+                                        <div className="flex items-center gap-1 mb-4">
+                                            {[...Array(5)].map((_, i) => (
+                                                <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                                            ))}
                                         </div>
                                         
-                                        {/* Content */}
-                                        <div className="relative z-10">
-                                            {/* Stars */}
-                                            <div className="flex items-center gap-1 mb-4">
-                                                {[...Array(5)].map((_, i) => (
-                                                    <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                                    ))}
-                                </div>
-                                            
-                                            {/* Testimonial Text */}
-                                            <blockquote className="text-gray-700 text-base leading-relaxed mb-6 italic">
-                                                &quot;{testimonial.content}&quot;
-                                            </blockquote>
-                                            
-                                            {/* Author */}
-                                            <div className="flex items-center gap-4">
-                                                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#13a87c] to-[#18CB96] flex items-center justify-center text-white font-semibold text-lg">
-                                                    {testimonial.name.charAt(0)}
-                                                </div>
-                                                <div>
-                                                    <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
-                                                    {testimonial.title && (
-                                                        <p className="text-sm text-gray-600">{testimonial.title}</p>
-                                                    )}
-                                                </div>
+                                        {/* Testimonial Text */}
+                                        <blockquote className="text-gray-700 text-base leading-relaxed mb-6 italic min-h-[140px]">
+                                            &quot;{testimonial.content}&quot;
+                                        </blockquote>
+                                        
+                                        {/* Author */}
+                                        <div className="flex items-center gap-4">
+                                            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#13a87c] to-[#18CB96] flex items-center justify-center text-white font-semibold text-lg flex-shrink-0">
+                                                {testimonial.name.charAt(0)}
                                             </div>
-                                            
-                                            {/* Accent Line */}
-                                            <div className={`w-8 h-0.5 bg-gradient-to-r ${category.color} rounded-full mt-4 group-hover:w-12 transition-all duration-300`} />
+                                            <div className="flex-1">
+                                                <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
+                                                {testimonial.category && (
+                                                    <p className="text-xs font-medium text-[#13a87c] mt-1">{testimonial.category}</p>
+                                                )}
+                                            </div>
                                         </div>
-                                    </motion.div>
+                                    </div>
+                                </div>
                             ))}
-                        </div>
-                     </motion.div>
-                    ))}
+                        </motion.div>
+                    </div>
+
+                    {/* Dots Indicator */}
+                    <div className="flex justify-center gap-2 mt-12">
+                        {Array.from({ length: Math.ceil(testimonials.length / cardsToShow) }).map((_, index) => (
+                            <button
+                                key={index}
+                                onClick={() => setCurrentIndex(index * cardsToShow)}
+                                className={`h-2 rounded-full transition-all duration-300 ${
+                                    Math.floor(currentIndex / cardsToShow) === index
+                                        ? 'w-8 bg-[#13a87c]' 
+                                        : 'w-2 bg-gray-300 hover:bg-gray-400'
+                                }`}
+                                aria-label={`Go to slide ${index + 1}`}
+                            />
+                        ))}
+                    </div>
                 </div>
 
                 {/* Bottom CTA */}
@@ -353,9 +235,9 @@ const Testimonials = () => {
                         <p className="text-gray-700 mb-6 max-w-2xl mx-auto">
                             Let&apos;s create something extraordinary together. Our clients trust us to bring their visions to life with cutting-edge technology and expert craftsmanship.
                         </p>
-                        <a 
-                            href="mailto:admin@developertag.com?subject=Get a Quote - Testimonial Page Inquiry"
-                            className="inline-flex items-center gap-2 bg-gradient-to-r from-[#13a87c] to-[#18CB96] text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-2xl transition-all duration-300"
+                        <button 
+                            onClick={() => setContactPopupOpen(true)}
+                            className="inline-flex items-center gap-2 bg-gradient-to-r from-[#13a87c] to-[#18CB96] text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer"
                         >
                             <span>Start Your Project</span>
                             <motion.div
@@ -365,10 +247,16 @@ const Testimonials = () => {
                             >
                                 →
                             </motion.div>
-                        </a>
+                        </button>
                     </div>
                 </motion.div>
             </div>
+
+            {/* Contact Popup */}
+            <ContactPopup
+                isOpen={contactPopupOpen}
+                onClose={() => setContactPopupOpen(false)}
+            />
         </div>
     );
 };

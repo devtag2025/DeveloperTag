@@ -15,6 +15,7 @@ interface ServiceRequestForm {
 interface ContactPopupProps {
     isOpen: boolean;
     onClose: () => void;
+    preselectedEngagementType?: string | null;
 }
 
 interface FormComponentProps {
@@ -32,6 +33,7 @@ interface RenderSelectedFormProps {
     option: string;
     onBack: () => void;
     formRef: React.MutableRefObject<HTMLDivElement | null>;
+    preselectedEngagementType?: string | null;
 }
 
 interface NotificationPopupProps {
@@ -85,8 +87,8 @@ const NotificationPopup: React.FC<NotificationPopupProps> = ({ isOpen, type, tit
 };
 
 // Initial popup that shows the three options
-const ContactPopup: React.FC<ContactPopupProps> = ({ isOpen, onClose }) => {
-    const [selectedOption, setSelectedOption] = useState<string | null>(null);
+const ContactPopup: React.FC<ContactPopupProps> = ({ isOpen, onClose, preselectedEngagementType }) => {
+    const [selectedOption, setSelectedOption] = useState<string | null>(preselectedEngagementType ? 'service' : null);
     const [notification, setNotification] = useState<{
         isOpen: boolean;
         type: 'success' | 'error';
@@ -172,7 +174,11 @@ const ContactPopup: React.FC<ContactPopupProps> = ({ isOpen, onClose }) => {
                 "-=0.1"
             );
         }
-    }, [isOpen]);
+        // Auto-select service option if engagement type is preselected
+        if (isOpen && preselectedEngagementType && !selectedOption) {
+            setSelectedOption('service');
+        }
+    }, [isOpen, preselectedEngagementType, selectedOption]);
 
     if (!isOpen) return null;
 
@@ -205,6 +211,7 @@ const ContactPopup: React.FC<ContactPopupProps> = ({ isOpen, onClose }) => {
                             onBack={(): void => setSelectedOption(null)}
                             formRef={getFormRef(selectedOption)}
                             showNotification={showNotification}
+                            preselectedEngagementType={preselectedEngagementType}
                         />
                     ) : (
                         <div className="px-6 pb-8">
@@ -315,7 +322,7 @@ const OptionButton: React.FC<OptionButtonProps> = ({ label, onClick, description
 };
 
 // Render the appropriate form based on the selected option
-const RenderSelectedForm: React.FC<RenderSelectedFormProps & { showNotification: (type: 'success' | 'error', title: string, message: string) => void }> = ({ option, onBack, formRef, showNotification }) => {
+const RenderSelectedForm: React.FC<RenderSelectedFormProps & { showNotification: (type: 'success' | 'error', title: string, message: string) => void }> = ({ option, onBack, formRef, showNotification, preselectedEngagementType }) => {
     useEffect(() => {
         if (formRef.current) {
             gsap.fromTo(formRef.current,
@@ -327,7 +334,7 @@ const RenderSelectedForm: React.FC<RenderSelectedFormProps & { showNotification:
 
     switch (option) {
         case 'service':
-            return <ServiceRequestForm onBack={onBack} formRef={formRef} showNotification={showNotification} />;
+            return <ServiceRequestForm onBack={onBack} formRef={formRef} showNotification={showNotification} preselectedEngagementType={preselectedEngagementType} />;
         case 'meeting':
             return <ScheduleMeetingComponent onBack={onBack} formRef={formRef} />;
         case 'question':
@@ -338,7 +345,7 @@ const RenderSelectedForm: React.FC<RenderSelectedFormProps & { showNotification:
 };
 
 // Service Request Form
-const ServiceRequestForm: React.FC<FormComponentProps & { showNotification: (type: 'success' | 'error', title: string, message: string) => void }> = ({ onBack, formRef, showNotification }) => {
+const ServiceRequestForm: React.FC<FormComponentProps & { showNotification: (type: 'success' | 'error', title: string, message: string) => void; preselectedEngagementType?: string | null }> = ({ onBack, formRef, showNotification, preselectedEngagementType }) => {
     const services = [
         'Web Development',
         'App Development',
@@ -371,11 +378,12 @@ const ServiceRequestForm: React.FC<FormComponentProps & { showNotification: (typ
         setIsSubmitting(true);
 
         try {
-            const contactData: ServiceRequestForm = {
+            const contactData: ServiceRequestForm & { engagementType?: string } = {
                 name: formData.name,
                 email: formData.email,
                 serviceType: formData.serviceType,
-                description: formData.description
+                description: formData.description,
+                ...(preselectedEngagementType && { engagementType: preselectedEngagementType })
             };
 
             const response = await submitServiceRequest(contactData);
@@ -410,7 +418,14 @@ const ServiceRequestForm: React.FC<FormComponentProps & { showNotification: (typ
                         <path d="M19 12H5M12 19l-7-7 7-7" />
                     </svg>
                 </button>
-                <h2 className="text-2xl font-bold">Request a Service</h2>
+                <div>
+                    <h2 className="text-2xl font-bold">
+                        {preselectedEngagementType ? `Request ${preselectedEngagementType}` : 'Request a Service'}
+                    </h2>
+                    {preselectedEngagementType && (
+                        <p className="text-sm text-gray-600 mt-1">Let's discuss your {preselectedEngagementType.toLowerCase()} needs</p>
+                    )}
+                </div>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">

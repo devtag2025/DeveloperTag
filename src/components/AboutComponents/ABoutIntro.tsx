@@ -1,9 +1,11 @@
 "use client";
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Users, Globe, Briefcase, Award } from 'lucide-react';
+import ContactPopup from '@/common/ContactPopup';
 
 function AboutIntro() {
+    const [contactPopupOpen, setContactPopupOpen] = useState(false);
     const stats = [
         {
             icon: Briefcase,
@@ -123,9 +125,9 @@ function AboutIntro() {
                             viewport={{ once: true }}
                             transition={{ duration: 0.8, delay: 0.4 }}
                         >
-                             <a 
-                                 href="mailto:admin@developertag.com?subject=Get a Quote - About Page Inquiry"
-                                 className="group relative overflow-hidden bg-gradient-to-r from-[#13a87c] to-[#18CB96] text-white px-5 py-2.5 rounded-full font-medium shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2 inline-block text-sm w-fit"
+                             <button 
+                                 onClick={() => setContactPopupOpen(true)}
+                                 className="group relative overflow-hidden bg-gradient-to-r from-[#13a87c] to-[#18CB96] text-white px-5 py-2.5 rounded-full font-medium shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2 inline-block text-sm w-fit cursor-pointer"
                              >
                                  <span>Get a Quote</span>
                                  <motion.div
@@ -135,7 +137,7 @@ function AboutIntro() {
                                  >
                                      →
                                  </motion.div>
-                             </a>
+                             </button>
                         </motion.div>
                     </div>
 
@@ -211,6 +213,12 @@ function AboutIntro() {
                     </div>
                 </div>
             </div>
+
+            {/* Contact Popup */}
+            <ContactPopup
+                isOpen={contactPopupOpen}
+                onClose={() => setContactPopupOpen(false)}
+            />
         </section>
     );
 }

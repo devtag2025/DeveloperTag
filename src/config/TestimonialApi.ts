@@ -6,7 +6,8 @@ export interface Testimonial {
     _id: string;
     content: string;
     name: string;
-    title: string;
+    // title: string;
+    category?: string;
     createdAt: string;
     updatedAt: string;
 }
@@ -35,24 +36,30 @@ export interface ApiParams {
     search?: string;
 }
 
-export const getTestimonials = async (params?: ApiParams): Promise<TestimonialResponse> => {
+export const getTestimonials = async () => {
     try {
-        const queryParams = new URLSearchParams();
-        if (params?.page) queryParams.append('page', params.page.toString());
-        if (params?.limit) queryParams.append('limit', params.limit.toString());
-        if (params?.search) queryParams.append('search', params.search);
-
-        const url = `/testimonials/all-testimonial${queryParams.toString() ? `?${queryParams.toString()}` : ''}`;
-        const response = await API.get(url);
-        return response.data;
+      const response = await fetch(
+        "https://developer-tag-backend-wz59.vercel.app/api/v1/testimonials/all-testimonial",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          
+        }
+      );
+  
+      if (!response.ok) {
+        const errData = await response.json().catch(() => ({}));
+        throw new Error(errData.message || `Request failed with status ${response.status}`);
+      }
+  
+      const data = await response.json();
+      return data;
     } catch (error: unknown) {
-        const err = error as { response?: { data?: { message?: string } }; message?: string };
-        console.error(
-            "Error fetching testimonials:",
-            err.response?.data || err.message
-        );
-        throw new Error(
-            err.response?.data?.message || "Failed to load testimonials."
-        );
+      const err = error as Error;
+      console.error("Error fetching testimonials:", err.message);
+      throw new Error("Failed to load testimonials.");
     }
-};
+  };
+  

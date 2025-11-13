@@ -1,7 +1,7 @@
 "use client";
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import { getTestimonials } from '../config/TestimonialApi';
-import { getPortfolios } from '../config/PortfolioApi';
+import { getPortfoliosGroupedByCategory } from '../config/PortfolioApi';
 import { getServices } from '../config/ServicesApi';
 
 const DataContext = createContext();
@@ -19,7 +19,7 @@ export const DataProvider = ({ children }) => {
             console.log("Raw testimonial API response:", testimonialResponse);
 
             // Fetching portfolio data
-            const portfolioResponse = await getPortfolios();
+            const portfolioResponse = await getPortfoliosGroupedByCategory();
             setPortfolioData(portfolioResponse);
             console.log("Portfolio data is --> ", portfolioResponse);
 
