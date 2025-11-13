@@ -1,5 +1,7 @@
 // testimonialApi.ts
 
+import API from "./AxiosConfig";
+
 export interface Testimonial {
     _id: string;
     content: string;
@@ -34,30 +36,14 @@ export interface ApiParams {
     search?: string;
 }
 
-export const getTestimonials = async () => {
+export const getTestimonials = async (): Promise<TestimonialResponse> => {
     try {
-      const response = await fetch(
-        "https://developer-tag-backend-wz59.vercel.app/api/v1/testimonials/all-testimonial",
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          
-        }
-      );
-  
-      if (!response.ok) {
-        const errData = await response.json().catch(() => ({}));
-        throw new Error(errData.message || `Request failed with status ${response.status}`);
-      }
-  
-      const data = await response.json();
-      return data;
+        const response = await API.get("/testimonials/all-testimonial");
+        return response.data;
     } catch (error: unknown) {
-      const err = error as Error;
-      console.error("Error fetching testimonials:", err.message);
-      throw new Error("Failed to load testimonials.");
+        const err = error as { response?: { data?: { message?: string } }; message?: string };
+        console.error("Error fetching testimonials:", err.response?.data || err.message);
+        throw new Error(err.response?.data?.message || "Failed to load testimonials.");
     }
-  };
+};
   
