@@ -90,9 +90,10 @@ export const getServiceBySlugServer = async (slug: string): Promise<SingleServic
         
         const data = await response.json();
         return data;
-    } catch (error: any) {
-        console.error("Error fetching service by slug:", error);
-        throw new Error(error.message || "Failed to load service.");
+    } catch (error: unknown) {
+        const err = error as { message?: string };
+        console.error("Error fetching service by slug:", err.message || error);
+        throw new Error(err.message || "Failed to load service.");
     }
 };
 

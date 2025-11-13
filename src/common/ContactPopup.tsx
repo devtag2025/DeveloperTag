@@ -422,8 +422,8 @@ const ServiceRequestForm: React.FC<FormComponentProps & { showNotification: (typ
                     <h2 className="text-2xl font-bold">
                         {preselectedEngagementType ? `Request ${preselectedEngagementType}` : 'Request a Service'}
                     </h2>
-                    {preselectedEngagementType && (
-                        <p className="text-sm text-gray-600 mt-1">Let's discuss your {preselectedEngagementType.toLowerCase()} needs</p>
+                        {preselectedEngagementType && (
+                        <p className="text-sm text-gray-600 mt-1">Let&apos;s discuss your {preselectedEngagementType.toLowerCase()} needs</p>
                     )}
                 </div>
             </div>

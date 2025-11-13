@@ -1,7 +1,5 @@
 // testimonialApi.ts
 
-import API from "./AxiosConfig";
-
 export interface Testimonial {
     _id: string;
     content: string;

@@ -33,7 +33,7 @@ function AllServices() {
         console.log(`AllServices - Service ${index}:`, service);
         console.log(`- Title: "${service.title}"`);
         console.log(`- Description: "${service.description}"`);
-        console.log(`- ImageUrl: "${service.imageUrl}"`);
+        console.log(`- HeroImage: "${service.heroImage}"`);
         console.log(`- Has description: ${!!service.description}`);
     });
 
@@ -67,7 +67,7 @@ function AllServices() {
                         key={service._id || index}
                         title={service.title}
                         tagline={service.description || 'No description'}
-                        imageUrl={getSecureImageUrl(service?.imageUrl || '')}
+                        imageUrl={getSecureImageUrl(service?.heroImage || '')}
                         themeFlag={true}
                         onGetQuote={() => setContactPopupOpen(true)}
                     />

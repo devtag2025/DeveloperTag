@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Box, Lock, Settings, Sparkles, Clock } from "lucide-react";
+import { Box, Lock, Sparkles, Clock } from "lucide-react";
 import ContactPopup from "@/common/ContactPopup";
 
 export function ChooseTeam() {

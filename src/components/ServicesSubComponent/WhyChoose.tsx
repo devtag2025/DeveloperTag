@@ -1,5 +1,4 @@
 "use client"
-import Heading from "@/common/Heading";
 
 interface WhyChooseProps {
     service?: {
@@ -15,7 +14,6 @@ interface WhyChooseProps {
 
 export default function WhyChoose({ service }: WhyChooseProps) {
     // Use service data if available
-    const sectionTitle = service?.whyChooseSection?.title || "Why Choose DeveloperTag";
     const items = service?.whyChooseSection?.items || [];
 
     if (!items || items.length === 0) {

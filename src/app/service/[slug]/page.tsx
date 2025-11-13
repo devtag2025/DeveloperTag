@@ -17,9 +17,9 @@ async function ServiceDetailPage({ params }: PageProps) {
     try {
         const response = await getServiceBySlugServer(slug);
         service = response.data;
-    } catch (err: any) {
+    } catch (err: unknown) {
         console.error('Error fetching service:', err);
-        error = err.message || 'Failed to load service';
+        error = (err as { message?: string })?.message || 'Failed to load service';
     }
 
     if (error || !service) {
