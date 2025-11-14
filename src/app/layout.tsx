@@ -19,6 +19,8 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://developertag.com";
+
 export const metadata: Metadata = {
   title: "DeveloperTag - Design, Web & App Development",
   description: "We build modern websites, mobile apps, and scalable digital products that help brands launch faster and grow with confidence. Transform your ideas into cutting-edge digital solutions.",
@@ -30,13 +32,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://developertag.com",
+    url: baseUrl,
     title: "DeveloperTag - Design, Web & App Development",
     description: "We build modern websites, mobile apps, and scalable digital products that help brands launch faster and grow with confidence.",
     siteName: "DeveloperTag",
     images: [
       {
-        url: "/assets/logo.png",
+        url: `${baseUrl}/assets/logo.png`,
         width: 1200,
         height: 630,
         alt: "DeveloperTag - Design, Web & App Development",
@@ -47,12 +49,14 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "DeveloperTag - Design, Web & App Development",
     description: "We build modern websites, mobile apps, and scalable digital products that help brands launch faster and grow with confidence.",
-    images: ["/assets/logo.png"],
+    images: [`${baseUrl}/assets/logo.png`],
   },
   icons: {
     icon: [
       { url: "/assets/logo.png", sizes: "32x32", type: "image/png" },
       { url: "/assets/logo.png", sizes: "16x16", type: "image/png" },
+      { url: "/assets/logo.png", sizes: "192x192", type: "image/png" },
+      { url: "/assets/logo.png", sizes: "512x512", type: "image/png" },
     ],
     apple: [
       { url: "/assets/logo.png", sizes: "180x180", type: "image/png" },
@@ -72,12 +76,6 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <head>
-        <link rel="icon" href="/assets/logo.png" sizes="32x32" type="image/png" />
-        <link rel="icon" href="/assets/logo.png" sizes="16x16" type="image/png" />
-        <link rel="apple-touch-icon" href="/assets/logo.png" />
-        <link rel="shortcut icon" href="/assets/logo.png" />
-      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
