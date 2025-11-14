@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import { Star, Quote, Sparkles, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useTestimonial } from '@/context/contextStore'
@@ -33,14 +33,11 @@ const Testimonials = () => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    useEffect(() => {
+    const handleNext = useCallback(() => {
         if (testimonials.length === 0) return;
-        
-        const timer = setInterval(() => {
-            handleNext();
-        }, 5000);
-        return () => clearInterval(timer);
-    }, [currentIndex, cardsToShow, testimonials.length]);
+        setDirection(1);
+        setCurrentIndex((prev) => (prev >= testimonials.length - cardsToShow ? 0 : prev + 1));
+    }, [testimonials.length, cardsToShow]);
 
     const handlePrevious = () => {
         if (testimonials.length === 0) return;
@@ -48,11 +45,14 @@ const Testimonials = () => {
         setCurrentIndex((prev) => (prev === 0 ? testimonials.length - cardsToShow : prev - 1));
     };
 
-    const handleNext = () => {
+    useEffect(() => {
         if (testimonials.length === 0) return;
-        setDirection(1);
-        setCurrentIndex((prev) => (prev >= testimonials.length - cardsToShow ? 0 : prev + 1));
-    };
+        
+        const timer = setInterval(() => {
+            handleNext();
+        }, 5000);
+        return () => clearInterval(timer);
+    }, [handleNext, testimonials.length]);
 
     const visibleTestimonials = testimonials.slice(currentIndex, currentIndex + cardsToShow);
     if (visibleTestimonials.length < cardsToShow && testimonials.length > 0) {

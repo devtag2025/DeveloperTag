@@ -19,18 +19,18 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://developertag.com";
-
 export const metadata: Metadata = {
   title: "DeveloperTag - Design, Web & App Development",
   description: "We build modern websites, mobile apps, and scalable digital products that help brands launch faster and grow with confidence. Transform your ideas into cutting-edge digital solutions.",
-   icons: {
-    icon: '/icon.png',
-  },
   keywords: "web development, app development, mobile apps, website design, digital solutions, software development, UI/UX design, custom software, DeveloperTag",
   authors: [{ name: "DeveloperTag" }],
   manifest: "/manifest.json",
   viewport: "width=device-width, initial-scale=1",
+  icons: {
+    icon: '/icon.png',
+  }
+  // Icons are handled by file-based system (icon.png, apple-icon.png in app directory)
+  // Next.js automatically serves these files, so no need to specify in metadata
 };
 
 export default function RootLayout({
