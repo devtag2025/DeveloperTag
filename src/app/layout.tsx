@@ -24,45 +24,11 @@ const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://developertag.com";
 export const metadata: Metadata = {
   title: "DeveloperTag - Design, Web & App Development",
   description: "We build modern websites, mobile apps, and scalable digital products that help brands launch faster and grow with confidence. Transform your ideas into cutting-edge digital solutions.",
+   icons: {
+    icon: '/icon.png',
+  },
   keywords: "web development, app development, mobile apps, website design, digital solutions, software development, UI/UX design, custom software, DeveloperTag",
   authors: [{ name: "DeveloperTag" }],
-  creator: "DeveloperTag",
-  publisher: "DeveloperTag",
-  robots: "index, follow",
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: baseUrl,
-    title: "DeveloperTag - Design, Web & App Development",
-    description: "We build modern websites, mobile apps, and scalable digital products that help brands launch faster and grow with confidence.",
-    siteName: "DeveloperTag",
-    images: [
-      {
-        url: `${baseUrl}/assets/logo.png`,
-        width: 1200,
-        height: 630,
-        alt: "DeveloperTag - Design, Web & App Development",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "DeveloperTag - Design, Web & App Development",
-    description: "We build modern websites, mobile apps, and scalable digital products that help brands launch faster and grow with confidence.",
-    images: [`${baseUrl}/assets/logo.png`],
-  },
-  icons: {
-    icon: [
-      { url: "/assets/logo.png", sizes: "32x32", type: "image/png" },
-      { url: "/assets/logo.png", sizes: "16x16", type: "image/png" },
-      { url: "/assets/logo.png", sizes: "192x192", type: "image/png" },
-      { url: "/assets/logo.png", sizes: "512x512", type: "image/png" },
-    ],
-    apple: [
-      { url: "/assets/logo.png", sizes: "180x180", type: "image/png" },
-    ],
-    shortcut: "/assets/logo.png",
-  },
   manifest: "/manifest.json",
   viewport: "width=device-width, initial-scale=1",
 };
