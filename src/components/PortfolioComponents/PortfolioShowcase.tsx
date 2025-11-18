@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -11,6 +11,7 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/effect-coverflow'
 import type { Swiper as SwiperType } from 'swiper'
+import { getPortfoliosGroupedByCategory, PortfolioCategory } from '@/config/PortfolioApi'
 
 interface Project {
     name: string
@@ -230,205 +231,59 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     )
 }
 
+// Category descriptions mapping (moved outside component to avoid dependency warning)
+const categoryDescriptions: { [key: string]: string } = {
+    'Custom Software Solutions': 'Tailored solutions designed to address specific business needs',
+    'Web Development': 'General websites, company sites, or informative platforms',
+    'E-commerce': 'Websites primarily focused on selling products or services online',
+    'App Development': 'Mobile or desktop applications designed for various platforms',
+    'Content Management System': 'Platforms enabling easy management and publishing of content',
+    'Desktop Applications': 'Standalone applications intended for desktop environments',
+    'Software as a Service (SaaS)': 'Platforms providing software solutions through the cloud'
+}
+
 const PortfolioShowcase = () => {
     const [hoveredProject, setHoveredProject] = useState<string | null>(null)
     const [swiperRefs, setSwiperRefs] = useState<{ [key: number]: SwiperType | null }>({})
+    const [portfolioData, setPortfolioData] = useState<Category[]>([])
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState<string | null>(null)
+
+    useEffect(() => {
+        const fetchPortfolios = async () => {
+            try {
+                setLoading(true)
+                setError(null)
+                const response = await getPortfoliosGroupedByCategory()
+                
+                // Map API response to component format
+                const mappedData: Category[] = (response.data?.categories || []).map((category: PortfolioCategory) => ({
+                    title: category.title,
+                    description: categoryDescriptions[category.title] || category.title,
+                    projects: category.projects.map(project => ({
+                        name: project.name,
+                        description: project.description,
+                        cost: project.cost,
+                        image: project.image,
+                        Url: project.url
+                    }))
+                }))
+                
+                setPortfolioData(mappedData)
+            } catch (err) {
+                console.error('Failed to fetch portfolios:', err)
+                setError('Failed to load portfolios. Please try again later.')
+            } finally {
+                setLoading(false)
+            }
+        }
+
+        fetchPortfolios()
+    }, [])
 
     const setSwiperRef = (index: number, swiper: SwiperType) => {
         setSwiperRefs(prev => ({ ...prev, [index]: swiper }))
     }
-
-    const portfolioData: Category[] = [
-        {
-            title: "Custom Software Solutions",
-            description: "Tailored solutions designed to address specific business needs",
-            projects: [
-                {
-                    name: "Zirtue",
-                    description: "A relationship-based lending platform that enables users to lend and borrow money securely with friends and family, promoting transparency and accountability.",
-                    cost: "$15,000",
-                    image: "/assets/portfolio/zirtue.png",
-                    Url: "https://www.zirtue.com",
-                },
-                {
-                    name: "Future Farm",
-                    description: "A business transformation platform focused on corporate sustainability and innovation, helping organizations adapt to future challenges.",
-                    cost: "$11,000",
-                    image: "/assets/portfolio/futurefarm.png",
-                    Url: "https://www.futurefarm.io",
-                },
-                {
-                    name: "RevBits",
-                    description: "A cybersecurity company offering advanced security solutions to protect enterprises from evolving cyber threats.",
-                    cost: "$20,000",
-                    image: "/assets/portfolio/revbits.png",
-                    Url: "https://www.revbits.com/",
-                },
-                {
-                    name: "IgniteTech - FogBugz",
-                    description: "A software project management system designed for agile teams, providing tools for bug tracking, issue tracking, and project planning.",
-                    cost: "$17,000",
-                    image: "/assets/portfolio/fogBugs.png",
-                    Url: "https://ignitetech.ai/software-library/fogbugz/",
-                },
-                {
-                    name: "Ekentech",
-                    description: "A provider of investigative background check technology, offering solutions tailored to various industries to enhance hiring processes.",
-                    cost: "$19,900",
-                    image: "/assets/portfolio/ekentech.png",
-                    Url: "https://www.ekentech.com/",
-                }
-            ]
-        },
-        {
-            title: "Web Development",
-            description: "General websites, company sites, or informative platforms",
-            projects: [
-                {
-                    name: "Africa Health",
-                    description: "A healthcare-focused platform delivering news and insights on medical advancements and health issues across Africa.",
-                    cost: "$12,000",
-                    image: "/assets/portfolio/africanHealth.png",
-                    Url: "https://africa-health.com/",
-                },
-                {
-                    name: "MATW Project",
-                    description: "A charity organization dedicated to supporting humanitarian projects worldwide, focusing on sustainable development and aid.",
-                    cost: "$8,000",
-                    image: "/assets/portfolio/matw.png",
-                    Url: "https://matwproject.org/",
-                },
-                // {
-                //     name: "Shreedhar Portfolio",
-                //     description: "A personal portfolio website showcasing various projects, highlighting skills and accomplishments in web development and design.",
-                //     cost: "$3,000",
-                //     image: "/portfolio-placeholder-8.jpg",
-                //     Url: "https://www.shreedhar-portfolio.netlify.app/"
-                // }
-            ]
-        },
-        {
-            title: "E-commerce",
-            description: "Websites primarily focused on selling products or services online",
-            projects: [
-                {
-                    name: "Idillionaire",
-                    description: "An online store offering inspirational products, books, and merchandise aimed at personal development and enlightenment.",
-                    cost: "$5,000",
-                    image: "/assets/portfolio/idillionare.png",
-                    Url: "https://idillionaire.com//"
-                },
-                {
-                    name: "Positively Vibe",
-                    description: "A lifestyle and wellness e-commerce brand providing a range of products to promote positive living and well-being.",
-                    cost: "$7,000",
-                    image: "/assets/portfolio/postivelyVibes.png",
-                    Url: "https://www.positivelyvibe.com/"
-                }
-            ]
-        },
-        {
-            title: "App Development",
-            description: "Mobile or desktop applications designed for various platforms",
-            projects: [
-                {
-                    name: "Modomines",
-                    description: "A mining and quarry management app that streamlines operations, enhances productivity, and ensures compliance within the industry.",
-                    cost: "$35,000",
-                    image: "/assets/portfolio/Mobi.png",
-                    Url: "https://play.google.com/store/apps/details?id=com.shreedhar_t.modomines&hl=en_US"
-                },
-                // {
-                //     name: "OneERP Suite",
-                //     description: "An ERP software designed for businesses to manage and automate various organizational processes, improving efficiency and decision-making.",
-                //     cost: "$40,000",
-                //     image: "/portfolio-placeholder-12.jpg",
-                //     Url: "https://apps.apple.com/in/app/oneerpsuite/id6471813104a"
-                // },
-                {
-                    name: "Smart Trainer",
-                    description: "An AI-powered platform that acts as a virtual manager and data analyst, providing real-time quality checks, sales forecasts, and operational insights for businesses.",
-                    cost: "$16,000",
-                    image: "/assets/portfolio/smartTrainer.png",
-                    Url: "https://smarttrainerapp.com/"
-                },
-                {
-                    name: "Xplora",
-                    description: "A smartwatch and mobile app designed for children's safety, offering features like GPS tracking, safe zones, and communication tools to keep kids connected securely.",
-                    cost: "$21,000",
-                    image: "/assets/portfolio/Xplora.png",
-                    Url: "https://xplora.co.uk/"
-                }
-            ]
-        },
-        {
-            title: "Content Management System",
-            description: "Platforms enabling easy management and publishing of content",
-            projects: [
-                {
-                    name: "Join Reflect",
-                    description: "A platform that simplifies the process of finding the right therapist, offering personalized matches, dedicated concierge support, and quality assurance for mental health services.",
-                    cost: "$10,000",
-                    image: "/assets/portfolio/joinreflect.png",
-                    Url: "https://joinreflect.com/"
-                },
-                {
-                    name: "HealthDesk AI",
-                    description: "An AI-powered CRM and chatbot solution for fitness and wellness businesses, providing lead generation, client engagement, and automated administrative support.",
-                    cost: "$18,700",
-                    image: "/assets/portfolio/healthdesk.png",
-                    Url: "https://healthdesk.ai/"
-                }
-            ]
-        },
-        {
-            title: "Desktop Applications",
-            description: "Standalone applications intended for desktop environments",
-            projects: [
-                {
-                    name: "FogBugz",
-                    description: "A comprehensive software project management tool offering features like time tracking, task management, and bug tracking to streamline development workflows.",
-                    cost: "$8,000",
-                    image: "/assets/portfolio/fogBugs.png",
-                    Url: "https://ignitetech.ai/softwarelibrary/fogbugz/"
-                }
-            ]
-        },
-        {
-            title: "Software as a Service (SaaS)",
-            description: "Platforms providing software solutions through the cloud",
-            projects: [
-                {
-                    name: "Fed",
-                    description: "A comprehensive SaaS platform designed to streamline business operations and enhance productivity.",
-                    cost: "$23,000",
-                    image: "/assets/portfolio/fed.png",
-                    Url: "https://www.fed.com/"
-                },
-                {
-                    name: "Tudo",
-                    description: "A SaaS platform offering business management and automation tools, helping organizations optimize operations and improve efficiency.",
-                    cost: "$25,000",
-                    image: "/assets/portfolio/tudo.png",
-                    Url: "https://tudo.app/"
-                },
-                {
-                    name: "WowInvest",
-                    description: "A financial investment and portfolio management platform providing tools for tracking investments, analyzing performance, and making informed financial decisions.",
-                    cost: "$19,000",
-                    image: "/assets/portfolio/wowinvest.png",
-                    Url: "https://wowinvest.swehold.com"
-                },
-                {
-                    name: "WowBridge",
-                    description: "A platform focused on bridge investment and management, offering resources and tools for investors in bridge projects.",
-                    cost: "$6,800",
-                    image: "/assets/portfolio/wowbridge.png",
-                    Url: "https://wowbridge.swehold.com/"
-                }
-            ]
-        }
-    ]
 
     return (
         <section className="relative w-full bg-white  overflow-hidden">
@@ -455,8 +310,30 @@ const PortfolioShowcase = () => {
                   
                 </div>
 
+                {/* Loading State */}
+                {loading && (
+                    <div className="text-center py-20">
+                        <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-[#13a87c] mb-4"></div>
+                        <p className="text-gray-600">Loading portfolios...</p>
+                    </div>
+                )}
+
+                {/* Error State */}
+                {error && (
+                    <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6 max-w-2xl mx-auto">
+                        {error}
+                    </div>
+                )}
+
+                {/* Empty State */}
+                {!loading && !error && portfolioData.length === 0 && (
+                    <div className="text-center py-20">
+                        <p className="text-gray-600 text-lg">No portfolio projects available at the moment.</p>
+                    </div>
+                )}
+
                 {/* Portfolio Categories */}
-                {portfolioData.map((category, categoryIndex) => (
+                {!loading && !error && portfolioData.length > 0 && portfolioData.map((category, categoryIndex) => (
                     <div 
                         key={categoryIndex} 
                         className="mb-20"

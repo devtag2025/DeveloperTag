@@ -1,11 +1,33 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Briefcase, MapPin, Clock, DollarSign, Users, Rocket, Heart, Code, Coffee, Zap, Award, TrendingUp, Send, ChevronRight } from 'lucide-react'
 import Heading from '@/common/Heading'
+import { getActiveCareers, CareerPosition } from '@/config/CareerApi'
 
 export default function Careers() {
-    const [selectedJob, setSelectedJob] = useState<number | null>(null)
+    const [selectedJob, setSelectedJob] = useState<string | null>(null)
+    const [careers, setCareers] = useState<CareerPosition[]>([])
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState<string | null>(null)
+
+    useEffect(() => {
+        const fetchCareers = async () => {
+            try {
+                setLoading(true)
+                const response = await getActiveCareers()
+                setCareers(response.data || [])
+                setError(null)
+            } catch (err) {
+                console.error('Failed to fetch careers:', err)
+                setError('Failed to load career positions. Please try again later.')
+            } finally {
+                setLoading(false)
+            }
+        }
+
+        fetchCareers()
+    }, [])
 
     const benefits = [
         {
@@ -46,146 +68,6 @@ export default function Careers() {
         }
     ]
 
-    const openPositions = [
-        {
-            id: 1,
-            title: "Senior Full Stack Developer",
-            department: "Engineering",
-            location: "Remote / Lahore, Pakistan",
-            type: "Full-time",
-            experience: "5+ years",
-            description: "We're looking for an experienced Full Stack Developer to join our engineering team. You'll work on cutting-edge web applications using React, Next.js, Node.js, and MongoDB.",
-            requirements: [
-                "5+ years of experience in full-stack development",
-                "Expert knowledge of React, Next.js, and Node.js",
-                "Strong understanding of RESTful APIs and database design",
-                "Experience with MongoDB or similar NoSQL databases",
-                "Excellent problem-solving and communication skills"
-            ],
-            responsibilities: [
-                "Design and develop scalable web applications",
-                "Collaborate with designers and product managers",
-                "Write clean, maintainable, and well-documented code",
-                "Mentor junior developers and conduct code reviews",
-                "Participate in architectural decisions"
-            ]
-        },
-        {
-            id: 2,
-            title: "Mobile App Developer (React Native)",
-            department: "Engineering",
-            location: "Remote / Lahore, Pakistan",
-            type: "Full-time",
-            experience: "3+ years",
-            description: "Join our mobile team to build beautiful, high-performance iOS and Android applications using React Native and modern mobile development practices.",
-            requirements: [
-                "3+ years of experience with React Native",
-                "Published apps on App Store and Google Play",
-                "Knowledge of native iOS/Android development is a plus",
-                "Experience with Redux, MobX, or similar state management",
-                "Understanding of mobile UI/UX best practices"
-            ],
-            responsibilities: [
-                "Develop and maintain React Native applications",
-                "Implement pixel-perfect UI designs",
-                "Optimize app performance and user experience",
-                "Integrate with RESTful APIs and third-party services",
-                "Write automated tests and ensure code quality"
-            ]
-        },
-        {
-            id: 3,
-            title: "UI/UX Designer",
-            department: "Design",
-            location: "Remote / Lahore, Pakistan",
-            type: "Full-time",
-            experience: "3+ years",
-            description: "We're seeking a talented UI/UX Designer to create exceptional user experiences for web and mobile applications. You'll work closely with our development team to bring designs to life.",
-            requirements: [
-                "3+ years of experience in UI/UX design",
-                "Proficiency in Figma, Adobe XD, or similar tools",
-                "Strong portfolio demonstrating web and mobile design work",
-                "Understanding of user research and usability testing",
-                "Knowledge of design systems and component libraries"
-            ],
-            responsibilities: [
-                "Create user flows, wireframes, and high-fidelity mockups",
-                "Design intuitive and visually appealing interfaces",
-                "Conduct user research and usability testing",
-                "Collaborate with developers to ensure design implementation",
-                "Maintain and evolve design systems"
-            ]
-        },
-        {
-            id: 4,
-            title: "DevOps Engineer",
-            department: "Engineering",
-            location: "Remote / Lahore, Pakistan",
-            type: "Full-time",
-            experience: "4+ years",
-            description: "Help us build and maintain robust infrastructure and deployment pipelines. You'll work with modern cloud technologies and automation tools.",
-            requirements: [
-                "4+ years of DevOps/Infrastructure experience",
-                "Strong knowledge of AWS, Azure, or Google Cloud",
-                "Experience with Docker, Kubernetes, and CI/CD pipelines",
-                "Proficiency in scripting (Bash, Python, etc.)",
-                "Understanding of security best practices"
-            ],
-            responsibilities: [
-                "Design and maintain cloud infrastructure",
-                "Implement and optimize CI/CD pipelines",
-                "Monitor system performance and ensure high availability",
-                "Automate deployment and scaling processes",
-                "Implement security measures and backup strategies"
-            ]
-        },
-        {
-            id: 5,
-            title: "Junior Frontend Developer",
-            department: "Engineering",
-            location: "Lahore, Pakistan",
-            type: "Full-time",
-            experience: "1-2 years",
-            description: "Start your career with us! We're looking for passionate junior developers who want to learn and grow in a supportive environment.",
-            requirements: [
-                "1-2 years of experience with HTML, CSS, and JavaScript",
-                "Basic knowledge of React or similar frameworks",
-                "Understanding of responsive design principles",
-                "Good communication and teamwork skills",
-                "Eagerness to learn and grow"
-            ],
-            responsibilities: [
-                "Develop responsive web interfaces under guidance",
-                "Collaborate with senior developers on projects",
-                "Write clean and maintainable code",
-                "Participate in code reviews and learning sessions",
-                "Contribute to team discussions and improvements"
-            ]
-        },
-        {
-            id: 6,
-            title: "Project Manager",
-            department: "Management",
-            location: "Remote / Lahore, Pakistan",
-            type: "Full-time",
-            experience: "4+ years",
-            description: "Lead client projects from inception to delivery. You'll coordinate with clients, manage timelines, and ensure successful project outcomes.",
-            requirements: [
-                "4+ years of project management experience in tech",
-                "Strong understanding of software development lifecycle",
-                "Excellent communication and stakeholder management",
-                "Experience with Agile/Scrum methodologies",
-                "PMP or similar certification is a plus"
-            ],
-            responsibilities: [
-                "Manage multiple client projects simultaneously",
-                "Define project scope, timelines, and deliverables",
-                "Coordinate with development teams and clients",
-                "Track progress and ensure on-time delivery",
-                "Identify and mitigate project risks"
-            ]
-        }
-    ]
 
     const values = [
         {
@@ -335,101 +217,124 @@ export default function Careers() {
                         <p className="text-gray-600">Find your perfect role and apply today</p>
                     </motion.div>
 
-                    <div className="space-y-6">
-                        {openPositions.map((job, index) => (
-                            <motion.div
-                                key={job.id}
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.05 }}
-                                className="bg-white rounded-2xl border-2 border-gray-200 overflow-hidden hover:border-[#13a87c] hover:shadow-xl transition-all duration-300"
-                            >
-                                <button
-                                    onClick={() => setSelectedJob(selectedJob === job.id ? null : job.id)}
-                                    className="w-full p-6 text-left hover:bg-gray-50 transition-colors"
+                    {loading && (
+                        <div className="text-center py-12">
+                            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-[#13a87c]"></div>
+                            <p className="mt-4 text-gray-600">Loading career positions...</p>
+                        </div>
+                    )}
+
+                    {error && (
+                        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6">
+                            {error}
+                        </div>
+                    )}
+
+                    {!loading && !error && careers.length === 0 && (
+                        <div className="text-center py-12">
+                            <Briefcase className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+                            <h3 className="text-xl font-bold text-gray-900 mb-2">No Open Positions</h3>
+                            <p className="text-gray-600">We don&apos;t have any open positions at the moment. Check back later or send us your resume!</p>
+                        </div>
+                    )}
+
+                    {!loading && !error && careers.length > 0 && (
+                        <div className="space-y-6">
+                            {careers.map((job, index) => (
+                                <motion.div
+                                    key={job._id}
+                                    initial={{ opacity: 0, y: 30 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: index * 0.05 }}
+                                    className="bg-white rounded-2xl border-2 border-gray-200 overflow-hidden hover:border-[#13a87c] hover:shadow-xl transition-all duration-300"
                                 >
-                                    <div className="flex items-start justify-between gap-4 flex-wrap">
-                                        <div className="flex-1">
-                                            <h3 className="text-xl font-bold text-gray-900 mb-2">{job.title}</h3>
-                                            <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600">
-                                                <span className="flex items-center gap-1">
-                                                    <Briefcase className="w-4 h-4" />
-                                                    {job.department}
-                                                </span>
-                                                <span className="flex items-center gap-1">
-                                                    <MapPin className="w-4 h-4" />
-                                                    {job.location}
-                                                </span>
-                                                <span className="flex items-center gap-1">
-                                                    <Clock className="w-4 h-4" />
-                                                    {job.type}
-                                                </span>
-                                                <span className="flex items-center gap-1">
-                                                    <Code className="w-4 h-4" />
-                                                    {job.experience}
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <span className="text-[#13a87c] font-semibold text-sm">
-                                            {selectedJob === job.id ? 'Hide Details' : 'View Details'}
-                                        </span>
-                                    </div>
-                                </button>
-
-                                {selectedJob === job.id && (
-                                    <motion.div
-                                        initial={{ height: 0, opacity: 0 }}
-                                        animate={{ height: "auto", opacity: 1 }}
-                                        exit={{ height: 0, opacity: 0 }}
-                                        transition={{ duration: 0.3 }}
-                                        className="border-t border-gray-200 p-6 bg-gray-50"
+                                    <button
+                                        onClick={() => setSelectedJob(selectedJob === job._id ? null : job._id)}
+                                        className="w-full p-6 text-left hover:bg-gray-50 transition-colors"
                                     >
-                                        <div className="space-y-6">
-                                            <div>
-                                                <h4 className="font-bold text-gray-900 mb-2">About the Role</h4>
-                                                <p className="text-gray-700">{job.description}</p>
+                                        <div className="flex items-start justify-between gap-4 flex-wrap">
+                                            <div className="flex-1">
+                                                <h3 className="text-xl font-bold text-gray-900 mb-2">{job.title}</h3>
+                                                <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600">
+                                                    <span className="flex items-center gap-1">
+                                                        <MapPin className="w-4 h-4" />
+                                                        {job.location}
+                                                    </span>
+                                                    <span className="flex items-center gap-1">
+                                                        <Clock className="w-4 h-4" />
+                                                        {job.type}
+                                                    </span>
+                                                    <span className="flex items-center gap-1">
+                                                        <Code className="w-4 h-4" />
+                                                        {job.experience}
+                                                    </span>
+                                                </div>
                                             </div>
-
-                                            <div>
-                                                <h4 className="font-bold text-gray-900 mb-3">Requirements</h4>
-                                                <ul className="space-y-2">
-                                                    {job.requirements.map((req, idx) => (
-                                                        <li key={idx} className="flex items-start gap-2 text-gray-700">
-                                                            <ChevronRight className="w-4 h-4 text-[#13a87c] flex-shrink-0 mt-0.5" />
-                                                            <span>{req}</span>
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            </div>
-
-                                            <div>
-                                                <h4 className="font-bold text-gray-900 mb-3">Responsibilities</h4>
-                                                <ul className="space-y-2">
-                                                    {job.responsibilities.map((resp, idx) => (
-                                                        <li key={idx} className="flex items-start gap-2 text-gray-700">
-                                                            <ChevronRight className="w-4 h-4 text-[#13a87c] flex-shrink-0 mt-0.5" />
-                                                            <span>{resp}</span>
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            </div>
-
-                                            <div className="pt-4">
-                                                <a
-                                                    href={`mailto:careergrowth@developertag.com?subject=Application for ${job.title}`}
-                                                    className="inline-flex items-center gap-2 bg-gradient-to-r from-[#13a87c] to-[#18CB96] text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:shadow-2xl transition-all duration-300"
-                                                >
-                                                    <Send className="w-4 h-4" />
-                                                    Apply for this Position
-                                                </a>
-                                            </div>
+                                            <span className="text-[#13a87c] font-semibold text-sm">
+                                                {selectedJob === job._id ? 'Hide Details' : 'View Details'}
+                                            </span>
                                         </div>
-                                    </motion.div>
-                                )}
-                            </motion.div>
-                        ))}
-                    </div>
+                                    </button>
+
+                                    {selectedJob === job._id && (
+                                        <motion.div
+                                            initial={{ height: 0, opacity: 0 }}
+                                            animate={{ height: "auto", opacity: 1 }}
+                                            exit={{ height: 0, opacity: 0 }}
+                                            transition={{ duration: 0.3 }}
+                                            className="border-t border-gray-200 p-6 bg-gray-50"
+                                        >
+                                            <div className="space-y-6">
+                                                <div>
+                                                    <h4 className="font-bold text-gray-900 mb-2">About the Role</h4>
+                                                    <p className="text-gray-700">{job.description}</p>
+                                                </div>
+
+                                                {job.requirements && job.requirements.length > 0 && (
+                                                    <div>
+                                                        <h4 className="font-bold text-gray-900 mb-3">Requirements</h4>
+                                                        <ul className="space-y-2">
+                                                            {job.requirements.map((req, idx) => (
+                                                                <li key={idx} className="flex items-start gap-2 text-gray-700">
+                                                                    <ChevronRight className="w-4 h-4 text-[#13a87c] flex-shrink-0 mt-0.5" />
+                                                                    <span>{req}</span>
+                                                                </li>
+                                                            ))}
+                                                        </ul>
+                                                    </div>
+                                                )}
+
+                                                {job.responsibilities && job.responsibilities.length > 0 && (
+                                                    <div>
+                                                        <h4 className="font-bold text-gray-900 mb-3">Responsibilities</h4>
+                                                        <ul className="space-y-2">
+                                                            {job.responsibilities.map((resp, idx) => (
+                                                                <li key={idx} className="flex items-start gap-2 text-gray-700">
+                                                                    <ChevronRight className="w-4 h-4 text-[#13a87c] flex-shrink-0 mt-0.5" />
+                                                                    <span>{resp}</span>
+                                                                </li>
+                                                            ))}
+                                                        </ul>
+                                                    </div>
+                                                )}
+
+                                                <div className="pt-4">
+                                                    <a
+                                                        href={`mailto:careergrowth@developertag.com?subject=Application for ${encodeURIComponent(job.title)}`}
+                                                        className="inline-flex items-center gap-2 bg-gradient-to-r from-[#13a87c] to-[#18CB96] text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:shadow-2xl transition-all duration-300"
+                                                    >
+                                                        <Send className="w-4 h-4" />
+                                                        Apply for this Position
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                </motion.div>
+                            ))}
+                        </div>
+                    )}
                 </div>
             </section>
 
