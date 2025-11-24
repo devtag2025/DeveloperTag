@@ -1,12 +1,33 @@
 "use client"
 import ShimmerButton from '@/common/ShimmerButton';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { FaLinkedin, FaInstagram } from 'react-icons/fa';
 import ContactPopup from '@/common/ContactPopup';
+import { useServicesForNavigation } from '@/hooks/useServicesForNavigation';
+
+// Static fallback services (used if API fails or during loading)
+const staticServices = [
+    { name: "Web Development", href: "/service/web-development" },
+    { name: "Mobile App Development", href: "/service/app-development" },
+    { name: "Desktop Software Development", href: "/service/desktop-development" },
+    { name: "CRM Solutions", href: "/service/crm-solutions" },
+    { name: "ERP Systems", href: "/service/erp-systems" },
+    { name: "SaaS Platforms", href: "/service/saas-platforms" },
+    { name: "Blockchain Applications", href: "/service/blockchain-applications" },
+];
 
 function Footer() {
     const [contactPopupOpen, setContactPopupOpen] = useState(false);
+    const { services: dynamicServices } = useServicesForNavigation();
+
+    // Use dynamic services if available, otherwise fallback to static
+    const serviceItems = useMemo(() => {
+        if (dynamicServices.length > 0) {
+            return dynamicServices
+        }
+        return staticServices
+    }, [dynamicServices]);
 
     return (
         <footer className="w-full bg-gray-50 border-t border-gray-200">
@@ -53,27 +74,13 @@ function Footer() {
                     <div className="lg:mx-auto text-center lg:text-left">
                         <h4 className="text-lg text-gray-900 font-semibold mb-6">Services</h4>
                         <ul className="text-sm space-y-4">
-                            <li>
-                                <Link href="/service/web-development" className="text-gray-600 hover:text-[#13a87c] transition-colors">Web Development</Link>
-                            </li>
-                            <li>
-                                <Link href="/service/app-development" className="text-gray-600 hover:text-[#13a87c] transition-colors">Mobile App Development</Link>
-                            </li>
-                            <li>
-                                <Link href="/service/desktop-development" className="text-gray-600 hover:text-[#13a87c] transition-colors">Desktop Software Development</Link>
-                            </li>
-                            <li>
-                                <Link href="/service/crm-solutions" className="text-gray-600 hover:text-[#13a87c] transition-colors">CRM Solutions</Link>
-                            </li>
-                            <li>
-                                <Link href="/service/erp-systems" className="text-gray-600 hover:text-[#13a87c] transition-colors">ERP Systems</Link>
-                            </li>
-                            <li>
-                                <Link href="/service/saas-platforms" className="text-gray-600 hover:text-[#13a87c] transition-colors">SaaS Platforms</Link>
-                            </li>
-                            <li>
-                                <Link href="/service/blockchain-applications" className="text-gray-600 hover:text-[#13a87c] transition-colors">Blockchain Applications</Link>
-                            </li>
+                            {serviceItems.map((service) => (
+                                <li key={service.href}>
+                                    <Link href={service.href} className="text-gray-600 hover:text-[#13a87c] transition-colors">
+                                        {service.name}
+                                    </Link>
+                                </li>
+                            ))}
                         </ul>
                     </div>
 

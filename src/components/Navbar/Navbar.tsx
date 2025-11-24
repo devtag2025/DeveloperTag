@@ -1,37 +1,50 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
 import { Bars3Icon, XMarkIcon, ChevronDownIcon } from "@heroicons/react/24/outline"
 import Link from "next/link"
 import Image from "next/image"
 import Logo from "../../../public/assets/logo.png"
 import ContactPopup from "@/common/ContactPopup"
+import { useServicesForNavigation } from "@/hooks/useServicesForNavigation"
 
-// Navigation Links
-const navigation = [
-    { name: "Home", href: "/" },
-    { name: "About", href: "/about-us" },
-    {
-        name: "Services",
-        href: "/service",
-        dropdown: true,
-        items: [
-            { name: "Web Development", href: "/service/web-development" },
-            { name: "Mobile App Development", href: "/service/app-development" },
-            { name: "Desktop Software Development", href: "/service/desktop-development" },
-            { name: "CRM Solutions", href: "/service/crm-solutions" },
-            { name: "ERP Systems", href: "/service/erp-systems" },
-            { name: "SaaS Platforms", href: "/service/saas-platforms" },
-            { name: "Blockchain Applications", href: "/service/blockchain-applications" },
-        ],
-    },
-    { name: "Portfolio", href: "/portfolio" },
+// Static fallback services (used if API fails or during loading)
+const staticServices = [
+    { name: "Web Development", href: "/service/web-development" },
+    { name: "Mobile App Development", href: "/service/app-development" },
+    { name: "Desktop Software Development", href: "/service/desktop-development" },
+    { name: "CRM Solutions", href: "/service/crm-solutions" },
+    { name: "ERP Systems", href: "/service/erp-systems" },
+    { name: "SaaS Platforms", href: "/service/saas-platforms" },
+    { name: "Blockchain Applications", href: "/service/blockchain-applications" },
 ]
 
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false)
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const [contactPopupOpen, setContactPopupOpen] = useState(false)
+    const { services: dynamicServices, isLoading: servicesLoading } = useServicesForNavigation()
+
+    // Use dynamic services if available, otherwise fallback to static
+    const serviceItems = useMemo(() => {
+        if (dynamicServices.length > 0) {
+            return dynamicServices
+        }
+        return staticServices
+    }, [dynamicServices])
+
+    // Build navigation with dynamic services
+    const navigation = useMemo(() => [
+        { name: "Home", href: "/" },
+        { name: "About", href: "/about-us" },
+        {
+            name: "Services",
+            href: "/service",
+            dropdown: true,
+            items: serviceItems,
+        },
+        { name: "Portfolio", href: "/portfolio" },
+    ], [serviceItems])
 
     useEffect(() => {
         const handleScroll = () => {
