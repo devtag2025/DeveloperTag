@@ -23,7 +23,7 @@ export default function Navbar() {
     const [scrolled, setScrolled] = useState(false)
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const [contactPopupOpen, setContactPopupOpen] = useState(false)
-    const { services: dynamicServices, isLoading: servicesLoading } = useServicesForNavigation()
+    const { services: dynamicServices } = useServicesForNavigation()
 
     // Use dynamic services if available, otherwise fallback to static
     const serviceItems = useMemo(() => {
