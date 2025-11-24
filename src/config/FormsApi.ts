@@ -11,6 +11,14 @@ export interface ServiceRequestForm extends CommonForm {
     engagementType?: string;
 }
 
+export interface ContactForm {
+    firstName: string;
+    lastName: string;
+    email: string;
+    phoneNumber?: string;
+    message: string;
+}
+
 
 
 export interface NewsletterForm {
@@ -49,6 +57,15 @@ export const submitServiceRequest = async (data: ServiceRequestForm) => {
 export const submitQuestion = async (data: CommonForm) => {
     try {
         const res = await API.post("/forms/question", data);
+        return res.data;
+    } catch (error) {
+        handleApiError(error as ApiError);
+    }
+};
+
+export const submitContact = async (data: ContactForm) => {
+    try {
+        const res = await API.post("/forms/contact", data);
         return res.data;
     } catch (error) {
         handleApiError(error as ApiError);
