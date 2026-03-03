@@ -80,7 +80,7 @@ export const getServices = async (params?: ApiParams): Promise<ServiceResponse> 
 export const getServiceBySlugServer = async (slug: string): Promise<SingleServiceResponse> => {
     try {
         // Use the same base URL as AxiosConfig for consistency
-        const baseURL = process.env.NEXT_PUBLIC_API_URL || "https://developer-tag-backend-wz59.vercel.app/api/v1";
+        const baseURL = process.env.NEXT_PUBLIC_API_URL || "https://developer-tag-backend.vercel.app/api/v1";
         // Slug should be URL-safe already (e.g., "web-development"), no need to encode
         const url = `${baseURL}/services/slug/${slug}`;
         

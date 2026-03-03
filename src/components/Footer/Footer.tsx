@@ -118,7 +118,7 @@ function Footer() {
                 <div className="py-6 border-t border-gray-200">
                     <div className="flex items-center justify-center flex-col lg:justify-between lg:flex-row space-y-4 lg:space-y-0">
                         <span className="text-sm text-gray-600">
-                            © 2025 DeveloperTag, All rights reserved.
+                            © 2026 DeveloperTag, All rights reserved.
                         </span>
                         <div className="flex space-x-4">
                             <Link href="https://www.linkedin.com/company/developertag/" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-[#13a87c] flex justify-center items-center hover:bg-[#0f8a6b] transition-colors">
