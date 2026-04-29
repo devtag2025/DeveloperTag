@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { ServiceCard } from "../ServiceCompoent/ServiceCard";
 import Heading from "@/common/Heading";
@@ -18,69 +18,78 @@ interface ServiceType {
     slug?: string;
 }
 
+const STATIC_SERVICES = [
+    {
+        _id: "static-1",
+        title: "Web Development",
+        description: "Custom, responsive websites and web applications that are fast, secure, and SEO-friendly. From elegant marketing sites to complex web portals, we ensure your online presence is modern, engaging, and scalable.",
+        imageUrl: "/assets/Services/web_development.webp",
+        url: "/service/web-development",
+        icon: Globe
+    },
+    {
+        _id: "static-2",
+        title: "Mobile App Development",
+        description: "Intuitive iOS and Android applications built for performance and great user experience. We develop both native and cross-platform mobile apps that engage your users and expand your reach on any device.",
+        imageUrl: "/assets/Services/App_development.jpg",
+        url: "/service/app-development",
+        icon: Smartphone
+    },
+    {
+        _id: "static-3",
+        title: "Desktop Software Development",
+        description: "High-performance desktop applications for Windows, Mac, or Linux, tailored to your specific requirements. From productivity tools to specialized enterprise software, we build desktop solutions that are robust, user-friendly, and easy to maintain.",
+        imageUrl: "/assets/Services/desktop-app.webp",
+        url: "/service/desktop-development",
+        icon: Monitor
+    },
+    {
+        _id: "static-4",
+        title: "CRM Solutions",
+        description: "Custom Customer Relationship Management systems to help you stay organized and nurture customer relationships. We design CRMs that integrate with your business processes, giving your team a central platform to track leads, sales, and support with ease.",
+        imageUrl: "/assets/Services/crmSystem.jpg",
+        url: "/service/crm-solutions",
+        icon: Users
+    },
+    {
+        _id: "static-5",
+        title: "ERP Systems",
+        description: "End-to-end Enterprise Resource Planning solutions that streamline your operations. We develop ERP systems that tie together key business functions – like inventory, accounting, and HR – into one cohesive platform for better data visibility and efficiency.",
+        imageUrl: "/assets/Services/erpSystem.jpg",
+        url: "/service/erp-systems",
+        icon: Database
+    },
+    {
+        _id: "static-6",
+        title: "SaaS Platforms",
+        description: "Scalable Software-as-a-Service applications ready for the cloud. We build multi-tenant SaaS platforms from the ground up, handling subscription management, security, and performance, so you can serve users globally with confidence.",
+        imageUrl: "/assets/Services/SaasSystem.png",
+        url: "/service/saas-platforms",
+        icon: Cloud
+    },
+    {
+        _id: "static-7",
+        title: "Blockchain Applications",
+        description: "Next-generation software leveraging blockchain technology for security and transparency. Our team develops decentralized apps (DApps), smart contracts, and blockchain integrations that bring innovation to industries like finance, supply chain, and more.",
+        imageUrl: "/assets/Services/BlockChainSystem.jpg",
+        url: "/service/blockchain-applications",
+        icon: Network
+    }
+];
+
+const SERVICE_ORDER = [
+    'Web Development',
+    'Mobile App Development',
+    'Desktop Software Development',
+    'CRM Solutions',
+    'ERP Systems',
+    'SaaS Platforms',
+    'Blockchain Applications'
+];
+
 export function HomeService() {
     const serviceData = useService();
     const [contactPopupOpen, setContactPopupOpen] = useState(false);
-
-    // Static fallback services
-    const staticServices = [
-        {
-            _id: "static-1",
-            title: "Web Development",
-            description: "Custom, responsive websites and web applications that are fast, secure, and SEO-friendly. From elegant marketing sites to complex web portals, we ensure your online presence is modern, engaging, and scalable.",
-            imageUrl: "/assets/Services/web_development.webp",
-            url: "/service/web-development",
-            icon: Globe
-        },
-        {
-            _id: "static-2",
-            title: "Mobile App Development",
-            description: "Intuitive iOS and Android applications built for performance and great user experience. We develop both native and cross-platform mobile apps that engage your users and expand your reach on any device.",
-            imageUrl: "/assets/Services/App_development.jpg",
-            url: "/service/app-development",
-            icon: Smartphone
-        },
-        {
-            _id: "static-3",
-            title: "Desktop Software Development",
-            description: "High-performance desktop applications for Windows, Mac, or Linux, tailored to your specific requirements. From productivity tools to specialized enterprise software, we build desktop solutions that are robust, user-friendly, and easy to maintain.",
-            imageUrl: "/assets/Services/desktop-app.webp",
-            url: "/service/desktop-development",
-            icon: Monitor
-        },
-        {
-            _id: "static-4",
-            title: "CRM Solutions",
-            description: "Custom Customer Relationship Management systems to help you stay organized and nurture customer relationships. We design CRMs that integrate with your business processes, giving your team a central platform to track leads, sales, and support with ease.",
-            imageUrl: "/assets/Services/crmSystem.jpg",
-            url: "/service/crm-solutions",
-            icon: Users
-        },
-        {
-            _id: "static-5",
-            title: "ERP Systems",
-            description: "End-to-end Enterprise Resource Planning solutions that streamline your operations. We develop ERP systems that tie together key business functions – like inventory, accounting, and HR – into one cohesive platform for better data visibility and efficiency.",
-            imageUrl: "/assets/Services/erpSystem.jpg",
-            url: "/service/erp-systems",
-            icon: Database
-        },
-        {
-            _id: "static-6",
-            title: "SaaS Platforms",
-            description: "Scalable Software-as-a-Service applications ready for the cloud. We build multi-tenant SaaS platforms from the ground up, handling subscription management, security, and performance, so you can serve users globally with confidence.",
-            imageUrl: "/assets/Services/SaasSystem.png",
-            url: "/service/saas-platforms",
-            icon: Cloud
-        },
-        {
-            _id: "static-7",
-            title: "Blockchain Applications",
-            description: "Next-generation software leveraging blockchain technology for security and transparency. Our team develops decentralized apps (DApps), smart contracts, and blockchain integrations that bring innovation to industries like finance, supply chain, and more.",
-            imageUrl: "/assets/Services/BlockChainSystem.jpg",
-            url: "/service/blockchain-applications",
-            icon: Network
-        }
-    ];
 
     const values = [
         {
@@ -109,31 +118,17 @@ export function HomeService() {
         }
     ];
 
-    // Define the desired order for services
-    const serviceOrder = [
-        'Web Development',
-        'Mobile App Development',
-        'Desktop Software Development',
-        'CRM Solutions',
-        'ERP Systems',
-        'SaaS Platforms',
-        'Blockchain Applications'
-    ];
-
-    // Get services from API response or use static fallback
-    const apiServices = serviceData?.data?.items || [];
-    
-    // Sort API services to match desired order, reverse to fix the order issue
-    const sortedApiServices = [...apiServices].reverse().sort((a: ServiceType, b: ServiceType) => {
-        const indexA = serviceOrder.indexOf(a.title);
-        const indexB = serviceOrder.indexOf(b.title);
-        // If service not found in order, push to end
-        if (indexA === -1) return 1;
-        if (indexB === -1) return -1;
-        return indexA - indexB;
-    });
-
-    const services = sortedApiServices.length > 0 ? sortedApiServices : staticServices;
+    const services = useMemo(() => {
+        const apiServices: ServiceType[] = serviceData?.data?.items || [];
+        if (apiServices.length === 0) return STATIC_SERVICES;
+        return [...apiServices].sort((a, b) => {
+            const indexA = SERVICE_ORDER.indexOf(a.title);
+            const indexB = SERVICE_ORDER.indexOf(b.title);
+            if (indexA === -1) return 1;
+            if (indexB === -1) return -1;
+            return indexA - indexB;
+        });
+    }, [serviceData]);
 
     // Helper function to convert HTTP to HTTPS for Cloudinary URLs and handle heroImage/imageUrl
     const getSecureImageUrl = (service: ServiceType) => {

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useMemo } from "react"
+import { useState, useEffect, useMemo, useRef } from "react"
 import { Bars3Icon, XMarkIcon, ChevronDownIcon } from "@heroicons/react/24/outline"
 import Link from "next/link"
 import Image from "next/image"
@@ -23,6 +23,8 @@ export default function Navbar() {
     const [scrolled, setScrolled] = useState(false)
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const [contactPopupOpen, setContactPopupOpen] = useState(false)
+    const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false)
+    const servicesDropdownCloseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
     const { services: dynamicServices } = useServicesForNavigation()
 
     // Use dynamic services if available, otherwise fallback to static
@@ -52,6 +54,12 @@ export default function Navbar() {
         }
         window.addEventListener("scroll", handleScroll)
         return () => window.removeEventListener("scroll", handleScroll)
+    }, [])
+
+    useEffect(() => {
+        return () => {
+            if (servicesDropdownCloseTimerRef.current) clearTimeout(servicesDropdownCloseTimerRef.current)
+        }
     }, [])
 
     return (
@@ -84,26 +92,72 @@ export default function Navbar() {
                         <div className="hidden lg:flex items-center space-x-1">
                             {navigation.map((item) =>
                                 item.dropdown ? (
-                                    <div key={item.name} className="relative group">
-                                        <Link href={item.href} className={`relative z-20 flex items-center px-4 py-2 rounded-lg font-medium transition-all duration-300 ${scrolled || mobileMenuOpen
-                                            ? "text-[#13a87c] hover:text-[#13a87c] hover:bg-gray-50"
-                                            : "text-[#13a87c] hover:text-[#18CB96] hover:bg-white/10"
-                                            }`}>
+                                    <div key={item.name} className="relative">
+                                        <Link
+                                            href={item.href}
+                                            className={`flex items-center px-4 py-2 rounded-lg font-medium transition-all duration-300 ${scrolled || mobileMenuOpen
+                                                ? "text-[#13a87c] hover:text-[#13a87c] hover:bg-gray-50"
+                                                : "text-[#13a87c] hover:text-[#18CB96] hover:bg-white/10"
+                                                }`}
+                                            onMouseEnter={() => {
+                                                if (servicesDropdownCloseTimerRef.current) {
+                                                    clearTimeout(servicesDropdownCloseTimerRef.current)
+                                                    servicesDropdownCloseTimerRef.current = null
+                                                }
+                                                setServicesDropdownOpen(true)
+                                            }}
+                                            onMouseLeave={() => {
+                                                servicesDropdownCloseTimerRef.current = setTimeout(() => {
+                                                    setServicesDropdownOpen(false)
+                                                    servicesDropdownCloseTimerRef.current = null
+                                                }, 180)
+                                            }}
+                                        >
                                             {item.name}
-                                            <ChevronDownIcon className="ml-1 h-4 w-4 transition-transform group-hover:rotate-180" />
+                                            <ChevronDownIcon className={`ml-1 h-4 w-4 transition-transform duration-200 ${servicesDropdownOpen ? "rotate-180" : ""}`} />
                                         </Link>
 
-                                        {/* Modern Dropdown */}
-                                        <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-64 opacity-0 invisible pointer-events-none group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto transition-all duration-300 transform group-hover:translate-y-1 z-10">
+                                        {/* Invisible bridge — must match dropdown width/position so diagonal mouse movement stays covered */}
+                                        {servicesDropdownOpen && (
+                                            <div
+                                                className="absolute top-full left-1/2 -translate-x-1/2 w-64 h-2 z-[199]"
+                                                aria-hidden
+                                                onMouseEnter={() => {
+                                                    if (servicesDropdownCloseTimerRef.current) {
+                                                        clearTimeout(servicesDropdownCloseTimerRef.current)
+                                                        servicesDropdownCloseTimerRef.current = null
+                                                    }
+                                                    setServicesDropdownOpen(true)
+                                                }}
+                                            />
+                                        )}
+                                        {/* Dropdown */}
+                                        <div
+                                            className={`absolute top-full left-1/2 -translate-x-1/2 pt-2 w-64 z-[200] transition-all duration-200 ease-out ${servicesDropdownOpen ? "opacity-100 visible translate-y-0 pointer-events-auto" : "opacity-0 invisible -translate-y-2 pointer-events-none"}`}
+                                            onMouseEnter={() => {
+                                                if (servicesDropdownCloseTimerRef.current) {
+                                                    clearTimeout(servicesDropdownCloseTimerRef.current)
+                                                    servicesDropdownCloseTimerRef.current = null
+                                                }
+                                                setServicesDropdownOpen(true)
+                                            }}
+                                            onMouseLeave={() => {
+                                                servicesDropdownCloseTimerRef.current = setTimeout(() => {
+                                                    setServicesDropdownOpen(false)
+                                                    servicesDropdownCloseTimerRef.current = null
+                                                }, 180)
+                                            }}
+                                        >
                                             <div className="bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden">
                                                 <div className="py-2">
                                                     {item.items.map((subItem) => (
                                                         <Link
                                                             key={subItem.name}
                                                             href={subItem.href}
+                                                            onClick={() => setServicesDropdownOpen(false)}
                                                             className="flex items-center px-4 py-3 text-gray-700 hover:bg-gradient-to-r hover:from-[#13a87c]/10 hover:to-[#18CB96]/10 hover:text-[#13a87c] transition-all duration-200"
                                                         >
-                                                            <div className="w-2 h-2 rounded-full bg-[#13a87c]/30 mr-3"></div>
+                                                            <div className="w-2 h-2 rounded-full bg-[#13a87c]/30 mr-3 flex-shrink-0"></div>
                                                             <span className="font-medium">{subItem.name}</span>
                                                         </Link>
                                                     ))}
