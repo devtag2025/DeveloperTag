@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar"
@@ -25,12 +25,14 @@ export const metadata: Metadata = {
   keywords: "web development, app development, mobile apps, website design, digital solutions, software development, UI/UX design, custom software, DeveloperTag",
   authors: [{ name: "DeveloperTag" }],
   manifest: "/manifest.json",
-  viewport: "width=device-width, initial-scale=1",
   icons: {
     icon: '/icon.png',
-  }
-  // Icons are handled by file-based system (icon.png, apple-icon.png in app directory)
-  // Next.js automatically serves these files, so no need to specify in metadata
+  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({
