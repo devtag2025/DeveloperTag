@@ -1,7 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
+import ContactPopup from "@/common/ContactPopup";
 import {
     Globe,
     Smartphone,
@@ -16,7 +18,6 @@ import {
 } from "lucide-react";
 
 const PRIMARY = "#13a87c";
-const PRIMARY_DARK = "#0b6b54";
 
 interface ServiceCardData {
     _id: string;
@@ -146,12 +147,12 @@ const ServiceCard = ({ service }: { service: ServiceCardData }) => {
     );
 };
 
-const CTACard = () => (
+const CTACard = ({ onGetQuote }: { onGetQuote: () => void }) => (
     <motion.div variants={fadeUp} className="h-full sm:col-span-2 lg:col-span-1">
-        <a
-            href="mailto:admin@developertag.com"
-            className="group relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-[1.75rem] p-7 text-white transition-transform duration-300 hover:-translate-y-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 sm:flex-row sm:items-center sm:p-8 lg:flex-col lg:items-start"
-            style={{ backgroundImage: `linear-gradient(135deg, ${PRIMARY} 0%, ${PRIMARY_DARK} 100%)` }}
+        <button
+            type="button"
+            onClick={onGetQuote}
+            className="group relative flex h-full w-full flex-col justify-between gap-6 overflow-hidden rounded-[1.75rem] bg-gradient-to-br from-[#13a87c] to-[#18CB96] p-7 text-left text-white transition-transform duration-300 hover:-translate-y-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 sm:flex-row sm:items-center sm:p-8 lg:flex-col lg:items-start"
         >
             <span className="absolute -right-16 -top-16 h-48 w-48 rounded-full bg-white/10 blur-3xl" />
 
@@ -163,27 +164,35 @@ const CTACard = () => (
                 <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white transition-transform duration-300 group-hover:rotate-45">
                     <ArrowUpRight className="h-5 w-5" style={{ color: PRIMARY }} />
                 </span>
-                <span className="text-sm font-semibold text-white/90">Let&apos;s talk</span>
+                <span className="text-sm font-semibold text-white/90">Get a quote</span>
             </div>
-        </a>
+        </button>
     </motion.div>
 );
 
 const OurServices = () => {
     const shouldReduceMotion = useReducedMotion();
+    const [contactPopupOpen, setContactPopupOpen] = useState(false);
 
     return (
-        <section className="relative w-full mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20">
-            <div className="mx-auto w-full max-w-7xl">
+        <section className="relative w-full px-4 py-16 sm:py-20 md:px-8 lg:px-16">
+            <div className="mx-auto w-full max-w-6xl">
                 <motion.div
                     initial={shouldReduceMotion ? undefined : "hidden"}
                     whileInView={shouldReduceMotion ? undefined : "visible"}
                     viewport={{ once: true, amount: 0.4 }}
                     variants={fadeUp}
-                    className="mx-auto max-w-2xl text-center"
+                    className="mx-auto flex max-w-2xl flex-col items-center text-center"
                 >
-                    <h2 className="text-[2rem] font-extrabold leading-tight text-slate-900 sm:text-4xl md:text-[2.75rem]">
-                        What are you looking to get done?
+                    <div className="mb-6 inline-flex items-center rounded-full border border-[#13a87c] bg-[#13a87c]/5 px-4 py-2">
+                        <span className="text-sm font-medium text-[#13a87c]">
+                            Our Services
+                        </span>
+                    </div>
+
+                    <h2 className="text-4xl font-bold text-slate-900 md:text-5xl">
+                        What are you looking to get{" "}
+                        <span className="text-[#13a87c]">done</span>?
                     </h2>
                     <p className="mt-4 text-base leading-relaxed text-slate-500 sm:text-lg">
                         Pick the service that matches where you are today — each one
@@ -201,9 +210,14 @@ const OurServices = () => {
                     {SERVICES.map((service) => (
                         <ServiceCard key={service._id} service={service} />
                     ))}
-                    <CTACard />
+                    <CTACard onGetQuote={() => setContactPopupOpen(true)} />
                 </motion.div>
             </div>
+
+            <ContactPopup
+                isOpen={contactPopupOpen}
+                onClose={() => setContactPopupOpen(false)}
+            />
         </section>
     );
 };
