@@ -23,7 +23,7 @@ const images = [
 
 const ClientsSlider = () => {
     return (
-        <div className="clients w-full py-6 mt-8">
+        <div className="clients w-full">
             <Swiper
                 modules={[Autoplay]}
                 loop={true}
