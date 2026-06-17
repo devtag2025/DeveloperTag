@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Button from "@/common/Button";
 import { cn } from "@/lib/utils";
 import { Spotlight } from "../ui/spotlight-new";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence } from "framer-motion";
 
 // Rotating accent phrases (green part — Expert Development wala)
 const ACCENT_PHRASES = [
@@ -21,7 +21,7 @@ const HeroSection = () => {
 
     useEffect(() => {
         const id = setInterval(() => {
-            setAccentIndex((prev) => (prev + 1) % ACCENT_PHRASES.length);
+            setAccentIndex((prev: number) => (prev + 1) % ACCENT_PHRASES.length);
         }, ROTATE_INTERVAL_MS);
         return () => clearInterval(id);
     }, []);
