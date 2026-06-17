@@ -3,6 +3,8 @@ import HeroSection from "@/components/HomeComponents/HeroSection";
 import { HomeService } from "@/components/HomeComponents/HomeService";
 // import FAQ from "@/components/HomeComponents/FAQ";
 import IndustriesWeServe from "@/components/HomeComponents/Industries";
+import Testimonials from "@/components/HomeComponents/Testimonial";
+import OurServices from "@/components/HomeComponents/OurServices";
 
 
 export default function Home() {
@@ -12,6 +14,8 @@ export default function Home() {
         <HeroSection />
         <IndustriesWeServe />
         <HomeService />
+        <OurServices />
+        <Testimonials />
         <ClientsSlider />
        
         {/* <FAQ /> */}

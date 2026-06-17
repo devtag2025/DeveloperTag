@@ -1,127 +1,182 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import Button from "@/common/Button";
-import { cn } from "@/lib/utils";
-import { Spotlight } from "../ui/spotlight-new";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 
-// Rotating accent phrases (green part — Expert Development wala)
+const PRIMARY = "#13a87c";
+
 const ACCENT_PHRASES = [
-    "Expert Development",
-    "AI Solutions",
-    "Digital Innovation",
-    "Scalable Software",
-    "Future-Ready Tech",
+    "EXPERT DEVELOPMENT",
+    "AI-POWERED SOLUTIONS",
+    "DIGITAL INNOVATION",
+    "SCALABLE SOFTWARE",
+    "FUTURE-READY TECH",
 ];
-const ROTATE_INTERVAL_MS = 2800;
+
+const ROTATE_INTERVAL_MS = 3000;
+
+const FLOATING_TAGS = [
+    {
+        id: "ai-solutions",
+        label: "AI Solutions",
+        dotColor: PRIMARY,
+        positionClass: "top-[20%] left-0 sm:-left-[12%]",
+        align: "left" as const,
+        duration: 5,
+        delay: 0,
+    },
+    {
+        id: "scalable-systems",
+        label: "Scalable Systems",
+        dotColor: "#3b82f6",
+        positionClass: "top-[8%] right-0 sm:-right-[6%]",
+        align: "right" as const,
+        duration: 5.5,
+        delay: 0.6,
+    },
+    {
+        id: "web-app-dev",
+        label: "Web & App Development",
+        dotColor: "#8b5cf6",
+        positionClass: "bottom-[22%] left-0 sm:-left-[14%]",
+        align: "left" as const,
+        duration: 6,
+        delay: 1.2,
+    },
+    {
+        id: "modern-ui-ux",
+        label: "Modern UI/UX",
+        dotColor: "#f59e0b",
+        positionClass: "bottom-[6%] right-0 sm:-right-[5%] sm:bottom-[10%]",
+        align: "right" as const,
+        duration: 5.8,
+        delay: 0.3,
+    },
+];
+
+const FloatingTag = ({
+    label,
+    dotColor,
+    align,
+    duration,
+    delay,
+    positionClass,
+    shouldReduceMotion,
+}: (typeof FLOATING_TAGS)[number] & { shouldReduceMotion: boolean | null }) => (
+    <motion.div
+        animate={shouldReduceMotion ? undefined : { y: [0, -6, 0] }}
+        transition={{ duration, repeat: Infinity, ease: "easeInOut", delay }}
+        className={`absolute z-20 flex items-center gap-0 ${positionClass} ${align === "right" ? "flex-row-reverse" : ""}`}
+    >
+        <div className="flex items-center gap-2.5 rounded-full bg-white px-2 py-1 sm:px-4 sm:py-2.5 shadow-[0_4px_24px_rgba(15,23,42,0.08)]">
+            <span
+                className="h-2 w-2 shrink-0 rounded-full"
+                style={{ backgroundColor: dotColor }}
+            />
+            <span className="whitespace-nowrap text-[10px] font-medium text-slate-700 sm:text-xs">
+                {label}
+            </span>
+        </div>
+        <div className="hidden h-px w-6 bg-slate-300 sm:block" />
+        <div className="hidden h-1.5 w-1.5 shrink-0 rounded-full bg-slate-300 sm:block" />
+    </motion.div>
+);
 
 const HeroSection = () => {
     const [accentIndex, setAccentIndex] = useState(0);
+    const shouldReduceMotion = useReducedMotion();
 
     useEffect(() => {
         const id = setInterval(() => {
-            setAccentIndex((prev: number) => (prev + 1) % ACCENT_PHRASES.length);
+            setAccentIndex((prev) => (prev + 1) % ACCENT_PHRASES.length);
         }, ROTATE_INTERVAL_MS);
+
         return () => clearInterval(id);
     }, []);
 
     return (
-        <section className="relative w-full bg-white overflow-hidden">
-            <div className="w-full px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
-                <div
-                    className={cn(
-                        "absolute inset-0 w-full h-full top-0",
-                        "bg-[size:80px_80px]",
-                        "bg-[linear-gradient(to_right,rgba(0,0,0,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.06)_1px,transparent_1px)]",
-                        "opacity-70 z-[1]"
-                    )}
-                />
-
-                <div className="absolute inset-0 z-[2] pointer-events-none">
-                    <Spotlight />
-                </div>
-
-                {/* Subtle gradient for comprehensive feel */}
-                <div
-                    className="absolute inset-0 z-0 bg-gradient-to-br from-[#13a87c]/05 via-transparent to-[#18CB96]/08"
-                    aria-hidden
-                />
-
-                <div className="relative z-10 max-w-7xl mx-auto">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center mt-8 sm:mt-12">
-                        {/* Left: Copy */}
-                        <div className="space-y-6 text-center lg:text-left">
-                            {/* Welcome badge */}
-                            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#13a87c] bg-[#13a87c]/5">
-                                <span className="relative flex h-2 w-2">
-                                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#13a87c] opacity-60" />
-                                    <span className="relative inline-flex h-2 w-2 rounded-full bg-[#13a87c]" />
-                                </span>
-                                <span className="text-sm font-medium text-[#13a87c]">
-                                    Welcome To DeveloperTag
-                                </span>
-                            </div>
-
-                            {/* Headline — "Where innovative" static, green part rotates */}
-                            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight min-h-[1.15em] sm:min-h-[1.1em]">
-                                <span className="block text-gray-900">
-                                    Where innovative ideas meet{" "}
-                                </span>
-                                <span className="block mt-0.5 min-h-[1.05em]">
-                                    <AnimatePresence mode="wait" initial={false}>
-                                        <motion.span
-                                            key={accentIndex}
-                                            initial={{ opacity: 0, y: 10 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            exit={{ opacity: 0, y: -10 }}
-                                            transition={{ duration: 0.35 }}
-                                            className="block text-[#13a87c]"
-                                        >
-                                            {ACCENT_PHRASES[accentIndex]}
-                                        </motion.span>
-                                    </AnimatePresence>
-                                </span>
-                            </h1>
-
-                            <p className="text-lg text-gray-600 leading-relaxed max-w-lg mx-auto lg:mx-0">
-                                Transforming innovative ideas into cutting-edge digital solutions that drive business growth and success.
-                            </p>
-
-                            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-2">
-                                <Button mailto="admin@developertag.com" withArrow variant="light">
-                                    Let&apos;s Start
-                                </Button>
-                            </div>
-
-                            <p className="text-xs text-gray-400 flex items-center justify-center lg:justify-start gap-2">
-                                <span className="inline-block w-4 h-px bg-gray-300" />
-                                Enterprise-grade · Trusted by teams worldwide
-                            </p>
-                        </div>
-
-                        {/* Right: Video */}
-                        <div className="relative order-first lg:order-none">
-                            <div className="relative w-full max-w-lg mx-auto lg:max-w-none">
-                                <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-gray-100 border border-gray-100">
-                                    <video
-                                        autoPlay
-                                        loop
-                                        muted
-                                        playsInline
-                                        className="w-full h-auto object-cover"
-                                        style={{ aspectRatio: "16/10" }}
+        <section className="relative w-full px-4 py-6 sm:px-6 sm:py-8">
+            <div className="relative mx-auto w-full max-w-7xl overflow-hidden rounded-[2rem] bg-[#EAFFF6] px-6 py-12 sm:rounded-[2.5rem] sm:px-8 sm:py-14 lg:px-12">
+                <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-8 xl:gap-16">
+                    <div className="space-y-8 text-left md:pl-20 lg:pr-4 ">
+                        <motion.h1
+                            initial={{ opacity: 0, y: 16 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5 }}
+                            className="text-[2.25rem] font-extrabold leading-[1.12] text-slate-900 sm:text-5xl md:text-[3.5rem]"
+                        >
+                            WHERE INNOVATIVE <br />
+                            IDEAS MEET{" "}
+                            <span className="block min-h-[1.2em]">
+                                <AnimatePresence mode="wait">
+                                    <motion.span
+                                        key={accentIndex}
+                                        initial={{ opacity: 0, y: 10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -10 }}
+                                        transition={{ duration: 0.35 }}
+                                        className="block font-extrabold"
+                                        style={{ color: PRIMARY }}
                                     >
-                                        <source src="/assets/bg.mp4" type="video/mp4" />
-                                        Your browser does not support the video tag.
-                                    </video>
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent pointer-events-none" />
-                                </div>
-                                <div className="absolute -top-4 -right-4 w-20 h-20 bg-[#13a87c]/10 rounded-full blur-xl pointer-events-none" />
-                                <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-[#18CB96]/10 rounded-full blur-2xl pointer-events-none" />
-                            </div>
-                        </div>
+                                        {ACCENT_PHRASES[accentIndex]}
+                                    </motion.span>
+                                </AnimatePresence>
+                            </span>
+                        </motion.h1>
+
+                        <motion.p
+                            initial={{ opacity: 0, y: 16 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: 0.1 }}
+                            className="max-w-lg text-base leading-relaxed text-slate-500 sm:text-lg"
+                        >
+                            Transforming ambitious concepts into world-class digital solutions.
+                        </motion.p>
+
+                        <motion.div
+                            initial={{ opacity: 0, y: 16 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: 0.2 }}
+                        >
+                            <Button
+                                mailto="admin@developertag.com"
+                                animated={false}
+                                className="!inline-flex !items-center !justify-center !border-0 !bg-[#51A97C] !text-white hover:!text-white rounded-full px-8 py-3.5 text-base font-semibold shadow-none transition-colors duration-200 hover:!bg-[#45966d]"
+                            >
+                                Let&apos;s Start
+                            </Button>
+                        </motion.div>
                     </div>
+
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.96 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.6, delay: 0.15 }}
+                        className="flex justify-center"
+                    >
+                        <div className="relative aspect-square w-full max-w-[240px] sm:max-w-[300px] lg:max-w-[360px]">
+                            <div className="relative h-full w-full">
+                                <Image
+                                    src="/assets/sphere-world-bg.png"
+                                    alt="DeveloperTag technology ecosystem"
+                                    fill
+                                    sizes="(max-width: 640px) 340px, (max-width: 1024px) 420px, 540px"
+                                    className="object-contain object-center"
+                                    priority
+                                />
+                            </div>
+
+                            {FLOATING_TAGS.map((tag) => (
+                                <FloatingTag
+                                    key={tag.id}
+                                    {...tag}
+                                    shouldReduceMotion={shouldReduceMotion}
+                                />
+                            ))}
+                        </div>
+                    </motion.div>
                 </div>
             </div>
         </section>
