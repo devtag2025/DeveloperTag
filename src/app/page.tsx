@@ -5,6 +5,7 @@ import { HomeService } from "@/components/HomeComponents/HomeService";
 import IndustriesWeServe from "@/components/HomeComponents/Industries";
 import Achievements from "@/components/HomeComponents/Achievements";
 import Testimonials from "@/components/HomeComponents/Testimonial";
+import OurServices from "@/components/HomeComponents/OurServices";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
         <ClientsSlider />
         <IndustriesWeServe />
         <HomeService />
+        <OurServices />
         <Achievements />
         <Testimonials />
         {/* <FAQ /> */}
